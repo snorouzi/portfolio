@@ -27,7 +27,7 @@ export default function Hero() {
                 Explore My Projects
               </Link>
               <Link to="/about" className="hero-link hero-link-secondary">
-                View Resume
+                Know me
               </Link>
               <a href="mailto:saeednorouzi98@gmail.com" className="hero-link hero-link-quiet">
                 Get in touch
