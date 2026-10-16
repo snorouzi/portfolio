@@ -6,6 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Personal portfolio" />
     <title>Personal Portfolio</title>
+    <!-- Theme is initialized before React mounts to avoid a flash of the wrong theme -->
+    <script type="module">
+      const THEME_STORAGE_KEY = 'portfolio-theme';
+
+      const getInitialTheme = () => {
+        try {
+          const saved = localStorage.getItem(THEME_STORAGE_KEY);
+          if (saved === 'light' || saved === 'dark') {
+            return saved;
+          }
+        } catch {
+          // localStorage unavailable; fall through to system preference
+        }
+
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+
+      const theme = getInitialTheme();
+      const root = document.documentElement;
+      root.setAttribute('data-theme', theme);
+      root.style.colorScheme = theme;
+    </script>
   </head>
   <body>
     <div id="root"></div>

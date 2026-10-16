@@ -1,3 +1,82 @@
+/*
+  ==========================================================================
+  1. Design tokens and theme colors
+     CSS custom properties are the single source of truth for theme-dependent
+     values. Light theme is the default; the dark theme overrides tokens via
+     [data-theme="dark"].
+  ==========================================================================
+*/
+
+:root {
+  /* Color tokens — light theme */
+  --color-background: #ffffff;
+  --color-surface: #f8f6fc;
+  --color-text: #211a2b;
+  --color-text-secondary: #6f687a;
+  --color-text-muted: #918aa3;
+
+  --color-accent: #7041c4;
+  --color-accent-hover: #5e32ab;
+  --color-accent-soft: #f0e9fc;
+  --color-accent-inverse: #3b1a8a;
+
+  --color-border: #e8e2f0;
+  --color-border-hover: #d8cfdd;
+  --color-focus-ring: #7041c4;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+
+  /* Layout */
+  --container-width: 1160px;
+  --container-padding-x: 1.5rem;
+  --header-height: 72px;
+  --header-height-mobile: 56px;
+  --section-gap: 3rem;
+  --section-heading-gap: 1.5rem;
+
+  /* Z-index */
+  --z-header: 20;
+}
+
+[data-theme='dark'] {
+  /* Color tokens — dark theme */
+  --color-background: #15121b;
+  --color-surface: #1e1927;
+  --color-text: #f5f0fa;
+  --color-text-secondary: #b2a9c0;
+  --color-text-muted: #867b97;
+
+  --color-accent: #b69af5;
+  --color-accent-hover: #c7b2ff;
+  --color-accent-soft: #302440;
+  --color-accent-inverse: #4a2e8a;
+
+  --color-border: #362d43;
+  --color-border-hover: #4a4059;
+  --color-focus-ring: #b69af5;
+}
+
+html {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/*
+  ==========================================================================
+  2. Global reset and box-sizing
+  ==========================================================================
+*/
+
 *,
 *::before,
 *::after {
@@ -13,21 +92,34 @@ body,
 
 body {
   margin: 0;
+  padding: 0;
   font-family:
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
     Roboto,
+    'Helvetica Neue',
+    Arial,
     sans-serif;
   font-size: 16px;
-  line-height: 1.5;
-  color: #0f172a;
-  background: #ffffff;
+  font-weight: 400;
+  line-height: 1.56;
+  color: var(--color-text);
+  background: var(--color-background);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
 }
+
+/*
+  ==========================================================================
+  3. Base document and typography styles
+  ==========================================================================
+*/
 
 h1,
 h2,
@@ -36,15 +128,352 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-weight: 500;
-  color: #0f172a;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2.25rem);
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.5vw + 0.3rem, 1.75rem);
 }
 
 p {
   margin: 0;
 }
 
+p + p,
+h2 + p,
+h3 + p {
+  margin-top: 0.75rem;
+}
+
+ul,
+ol {
+  margin: 0 0 1rem 1.5rem;
+  padding: 0;
+  color: var(--color-text);
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+/*
+  ==========================================================================
+  4. Links and interactive elements
+  ==========================================================================
+*/
+
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.ink {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--color-accent);
+}
+
+.ink:hover {
+  text-decoration-color: var(--color-accent-hover);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+/*
+  ==========================================================================
+  5. Reusable layout utilities
+  ==========================================================================
+*/
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-x);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page > main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
+}
+
+.section-heading {
+  margin-bottom: var(--section-heading-gap);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+/*
+  ==========================================================================
+  6. Focus and accessibility styles
+  ==========================================================================
+*/
+
+:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-surface),
+    0 0 0 6px var(--color-focus-ring);
+}
+
+/*
+  ==========================================================================
+  7. Reduced-motion handling
+  ==========================================================================
+*/
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    transition: none !important;
+  }
+}
+
+/*
+  ==========================================================================
+  9. Header component
+  ==========================================================================
+*/
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  height: var(--header-height);
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+  color: var(--color-text);
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+}
+
+.nav-link[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+.nav-link[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.menu-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: transparent;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.menu-button:hover {
+  border-color: var(--color-accent);
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.mobile-menu.nav-links {
+  flex-direction: column;
+  padding: 1rem var(--container-padding-x);
+  gap: 0;
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.mobile-link {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  padding: 0.75rem 0;
+  transition: color var(--transition-fast);
+}
+
+.mobile-link:hover {
+  color: var(--color-text);
+}
+
+.mobile-link[aria-current='page'] {
+  color: var(--color-accent);
+}
+
+/*
+  ==========================================================================
+  8. Responsive foundations
+  ==========================================================================
+*/
+
+@media (max-width: 640px) {
+  :root {
+    --container-padding-x: 1rem;
+    --section-gap: 2rem;
+    --section-heading-gap: 1.25rem;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 10vw, 2.25rem);
+  }
+
+  h2 {
+    font-size: clamp(1.25rem, 8vw, 1.75rem);
+  }
+
+  .header {
+    height: var(--header-height-mobile);
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+
+  .mobile-menu.nav-links.open {
+    display: flex;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --section-gap: 2.5rem;
+  }
 }

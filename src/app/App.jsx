@@ -1,5 +1,10 @@
-import { env } from '../config/env';
+import { ThemeProvider } from '../context/ThemeContext';
+import { Router } from './router';
 
 export default function App() {
-  return <h1>{env.appName}</h1>;
+  return (
+    <ThemeProvider>
+      <Router />
+    </ThemeProvider>
+  );
 }
