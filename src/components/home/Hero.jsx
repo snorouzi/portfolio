@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import portrait from '../../assets/images/profile-pic.jpg';
 
 export default function Hero() {
   return (
@@ -37,43 +38,23 @@ export default function Hero() {
           <div className="hero-portrait">
             {/*
               REPLACEMENT POINT
-              Replace the inline SVG placeholder below with your profile photograph without
-              changing the page structure. The simplest replacement is:
-
-              <img
-                src="/assets/images/profile-placeholder.svg"
-                alt="Portrait of Saeed Norouzi"
-                className="portrait-image"
-              />
-
-              Keep the .portrait wrapper (4:5 aspect ratio, border, background) so the reserved
-              space stays stable and the placeholder looks intentional until the real image is in
-              place. The asset lives at src/assets/images/profile-placeholder.svg.
+              To replace this photograph later, swap the file at src/assets/images/profile-pic.jpg
+              with an optimized image. Keep it portrait (recommended 4:5 aspect ratio) so the
+              reserved .portrait wrapper (border, background, overflow-hidden) keeps the space
+              stable without layout shift. The <figure> keeps an accessible label for the image.
             */}
             <figure
               className="portrait"
-              aria-label="Portrait placeholder — to be replaced with a profile photograph"
+              aria-label="Portrait of Saeed Norouzi"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 200 250"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect
-                  width="200"
-                  height="250"
-                  rx="14"
-                  fill="var(--color-surface)"
-                  stroke="var(--color-border)"
-                  strokeWidth="1"
-                />
-                <circle cx="100" cy="72" r="31" fill="var(--color-text-muted)" />
-                <path
-                  d="M64 142 Q64 205 100 215 Q136 205 136 142 Z"
-                  fill="var(--color-text-muted)"
-                />
-              </svg>
+              <img
+                src={portrait}
+                alt="Portrait of Saeed Norouzi"
+                width="800"
+                height="1000"
+                decoding="async"
+                loading="eager"
+              />
             </figure>
           </div>
         </div>
