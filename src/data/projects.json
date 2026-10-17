@@ -107,18 +107,6 @@
       },
       "gallery": [
         {
-          "type": "screenshot",
-          "src": "/images/projects/reservation-system/cover.png",
-          "alt": "MS Ticketing Service API cover",
-          "caption": "The cover image for the Tractor FC Ticket Sales Platform project."
-        },
-        {
-          "type": "architecture",
-          "src": "/images/projects/reservation-system/architecture.png",
-          "alt": "System architecture diagram",
-          "caption": "MS Ticketing Service API architecture diagram"
-        },
-        {
           "type": "diagram",
           "src": "/images/projects/reservation-system/booking-flow.png",
           "alt": "Booking workflow diagram",
@@ -270,7 +258,14 @@
         "image": "/images/projects/ms-kyc-service/architecture.png",
         "imageAlt": "MS KYC Service API architecture diagram"
       },
-      "gallery": []
+      "gallery": [
+        {
+          "type": "other",
+          "src": "/images/projects/ms-kyc-service/swagger.png",
+          "alt": "Tractor FC KYC system swagger Doc",
+          "caption": "Interactive Swagger documentation for exploring and testing the Tractor FC KYC System API endpoints."
+        }
+      ]
     },
     "links": {
       "repository": null,
@@ -387,16 +382,10 @@
       ],
       "architecture": {
         "description": "A modular NestJS service organized into feature modules (News, Tags, Gallery, Match, Ads, Ticketing, FileManager, Analytics, Auth, Admin, Health) over shared core infrastructure (config, database, redis, logger, observability, swagger). Integrations include MongoDB (primary store), Elasticsearch (search), Redis (caching/rate limiting), RabbitMQ (events), AWS S3 (media), and Sentry (observability). Event-driven side effects use a transactional outbox. See architecture-prompt.md for an image generation prompt.",
-        "image": "/images/projects/ms-content-management-api/architecture.png",
+        "image": "/images/projects/ms-content-management/architecture.png",
         "imageAlt": "MS Content Management API architecture diagram"
       },
       "gallery": [
-        {
-          "type": "screenshot",
-          "src": "/images/projects/ms-content-management/cover.png",
-          "alt": "Tractor FC website content management project cover",
-          "caption": "An overview of the content management system developed for Tractor FC."
-        },
         {
           "type": "screenshot",
           "src": "/images/projects/ms-content-management/gallery-list.png",

@@ -1,8 +1,16 @@
 import { useEffect, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import projectsData from '../data/projects.json';
-import { ProjectCardImage } from '../components/projects/ProjectCard';
+import ChallengeList from '../components/projects/ChallengeList';
+import FeatureList from '../components/projects/FeatureList';
+import Gallery from '../components/projects/Gallery';
+import ProjectCardImage, { ProjectTechTags } from '../components/projects/ProjectCard';
+import ProjectLinks from '../components/projects/ProjectLinks';
+import ProjectMeta from '../components/projects/ProjectMeta';
+import ProjectNotFound from '../components/projects/ProjectNotFound';
+import ProjectSectionHeading from '../components/projects/ProjectSectionHeading';
+import ResponsibilityList from '../components/projects/ResponsibilityList';
 import { env } from '../config/env';
+import projectsData from '../data/projects.json';
 
 /**
  * Resolve a project by slug from the data file.
@@ -12,6 +20,19 @@ import { env } from '../config/env';
  */
 function findProjectBySlug(slug) {
   return projectsData.find((project) => project.slug === slug);
+}
+
+/**
+ * Returns true when one text substantially duplicates another (one is contained
+ * within the other after trimming), so we never repeat the same paragraph.
+ *
+ * @param {string} a
+ * @param {string} b
+ * @returns {boolean}
+ */
+function isDuplicated(a, b) {
+  if (!a || !b) return false;
+  return a.includes(b) || b.includes(a);
 }
 
 export default function ProjectDetailPage() {
@@ -26,24 +47,25 @@ export default function ProjectDetailPage() {
   }, [project]);
 
   if (!project) {
-    return (
-      <main>
-        <section className="section section-heading">
-          <div className="container">
-            <h1>Project not found</h1>
-            <p>The project you are looking for does not exist.</p>
-            <p>
-              <Link to="/projects">View all projects</Link>
-            </p>
-          </div>
-        </section>
-      </main>
-    );
+    return <ProjectNotFound />;
   }
 
-  const description = project.tagline?.trim() || project.description?.trim() || '';
+  const description = project.description?.trim() || '';
+  const overview = project.details?.overview?.trim() || '';
   const techList = Array.isArray(project.technologies) ? project.technologies : [];
   const details = project.details || {};
+  const features = Array.isArray(details.features) ? details.features : [];
+  const responsibilities = Array.isArray(details.responsibilities) ? details.responsibilities : [];
+  const challenges = Array.isArray(details.technicalChallenges) ? details.technicalChallenges : [];
+  const gallery = Array.isArray(details.gallery) ? details.gallery : [];
+  const architecture = details.architecture || {};
+  const archDescription = architecture.description?.trim() || '';
+  const archImage = architecture.image;
+  const cardImage = project.card?.image;
+
+  // Decide which overview paragraphs to render, avoiding verbatim duplication.
+  const showDescription = description && !isDuplicated(description, overview);
+  const showOverview = overview && !isDuplicated(overview, description);
 
   return (
     <main>
@@ -57,40 +79,114 @@ export default function ProjectDetailPage() {
 
           <header className="project-detail-header">
             <h1 className="project-detail-title">{project.title}</h1>
-            {description && <p className="project-detail-tagline">{description}</p>}
+            <ProjectMeta project={project} />
           </header>
 
-          <ProjectCardImage project={project} className="project-detail-figure" />
+          <ProjectCardImage project={project} showTech={false} className="project-detail-figure" />
 
           {techList.length > 0 && (
             <section
               className="project-detail-section"
               aria-labelledby="project-detail-tech-heading"
             >
-              <h2 id="project-detail-tech-heading" className="project-detail-section-title">
-                Technologies
-              </h2>
-              <ul className="project-detail-tech-list">
-                {techList.map((tech) => (
-                  <li key={tech} className="project-detail-tech-tag">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
+              <ProjectSectionHeading id="project-detail-tech-heading" title="Technologies" />
+              <ProjectTechTags project={project} max={techList.length} />
             </section>
           )}
 
-          {details.overview && (
+          {(showDescription || showOverview) && (
             <section
               className="project-detail-section"
               aria-labelledby="project-detail-overview-heading"
             >
-              <h2 id="project-detail-overview-heading" className="project-detail-section-title">
-                Overview
-              </h2>
-              <p className="project-detail-text">{details.overview}</p>
+              <ProjectSectionHeading id="project-detail-overview-heading" title="Overview" />
+              {showDescription && <p className="project-detail-text">{description}</p>}
+              {showOverview && <p className="project-detail-text">{overview}</p>}
             </section>
           )}
+
+          {features.length > 0 && (
+            <section
+              className="project-detail-section"
+              aria-labelledby="project-detail-features-heading"
+            >
+              <ProjectSectionHeading id="project-detail-features-heading" title="Key Features" />
+              <FeatureList features={features} />
+            </section>
+          )}
+
+          {responsibilities.length > 0 && (
+            <section
+              className="project-detail-section"
+              aria-labelledby="project-detail-responsibilities-heading"
+            >
+              <ProjectSectionHeading
+                id="project-detail-responsibilities-heading"
+                title="Responsibilities"
+              />
+              <ResponsibilityList responsibilities={responsibilities} />
+            </section>
+          )}
+
+          {(archDescription || archImage) && (
+            <section
+              className="project-detail-section"
+              aria-labelledby="project-detail-architecture-heading"
+            >
+              <ProjectSectionHeading
+                id="project-detail-architecture-heading"
+                title="Architecture"
+              />
+              {archDescription && <p className="project-detail-text">{archDescription}</p>}
+              {archImage && (
+                <figure className="project-architecture-figure">
+                  <ProjectCardImage
+                    project={{
+                      title: project.title,
+                      card: { image: archImage, imageAlt: architecture.imageAlt },
+                    }}
+                    className="project-architecture-image"
+                  />
+                  {architecture.imageAlt && (
+                    <figcaption className="project-architecture-caption">
+                      {architecture.imageAlt}
+                    </figcaption>
+                  )}
+                </figure>
+              )}
+            </section>
+          )}
+
+          {challenges.length > 0 && (
+            <section
+              className="project-detail-section"
+              aria-labelledby="project-detail-challenges-heading"
+            >
+              <ProjectSectionHeading
+                id="project-detail-challenges-heading"
+                title="Technical Challenges"
+              />
+              <ChallengeList challenges={challenges} />
+            </section>
+          )}
+
+          {gallery.length > 0 && (
+            <section
+              className="project-detail-section"
+              aria-labelledby="project-detail-gallery-heading"
+            >
+              <ProjectSectionHeading id="project-detail-gallery-heading" title="Gallery" />
+              <Gallery gallery={gallery} cardImage={cardImage} archImage={archImage} />
+            </section>
+          )}
+
+          <section
+            className="project-detail-section"
+            aria-labelledby="project-detail-links-heading"
+          >
+            <ProjectSectionHeading id="project-detail-links-heading" title="Links" />
+            <ProjectLinks links={project.links} />
+          </section>
         </div>
       </section>
     </main>

@@ -11,11 +11,7 @@ export default function Hero() {
 
             <h1 id="hero-heading">Hi, I'm Saeed Norouzi.</h1>
 
-            <p className="hero-specialization">
-              Building scalable, reliable <span className="hero-accent">backend systems</span>.
-            </p>
-
-            <p className="hero-intro">A software developer driven by curiosity and code. </p>
+            <p className="hero-intro">A software developer driven by curiosity and code.</p>
 
             <div className="hero-actions">
               <Link to="/projects" className="hero-button hero-button-primary">

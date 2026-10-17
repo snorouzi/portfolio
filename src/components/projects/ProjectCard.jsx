@@ -6,11 +6,11 @@ const MAX_TECHNOLOGIES = 4;
 /**
  * Renders the technology tag list for a project.
  *
- * @param {{ project: import('../../lib/projectTypes').Project }} props
+ * @param {{ project: import('../../lib/projectTypes').Project, max?: number, moreLabel?: string }} props
  */
-export function ProjectTechTags({ project }) {
+export function ProjectTechTags({ project, max = MAX_TECHNOLOGIES, moreLabel } = {}) {
   const technologies = Array.isArray(project.technologies) ? project.technologies : [];
-  const visible = technologies.slice(0, MAX_TECHNOLOGIES);
+  const visible = max > 0 ? technologies.slice(0, max) : technologies;
   const remaining = technologies.length - visible.length;
 
   return (
@@ -22,13 +22,12 @@ export function ProjectTechTags({ project }) {
       ))}
       {remaining > 0 && (
         <li className="project-tech-tag project-tech-tag-more" aria-label={`${remaining} more`}>
-          +{remaining}
+          {moreLabel ?? `+${remaining}`}
         </li>
       )}
     </ul>
   );
 }
-
 /**
  * Renders the project card image with a graceful fallback when the asset is
  * missing or fails to load.
@@ -63,9 +62,9 @@ export function ProjectCardImage({ project, className }) {
  * A single, reusable project card. Renders the image, title, short description,
  * and technology tags, and links to the project detail page.
  *
- * @param {{ project: import('../../lib/projectTypes').Project }} props
+ * @param {{ project: import('../../lib/projectTypes').Project, showTech?: boolean }} props
  */
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, showTech = true }) {
   const description = project.tagline?.trim() || project.description?.trim() || '';
 
   return (
@@ -81,7 +80,7 @@ export default function ProjectCard({ project }) {
 
         {description && <p className="project-card-tagline">{description}</p>}
 
-        <ProjectTechTags project={project} />
+        {showTech && <ProjectTechTags project={project} />}
       </div>
     </article>
   );
