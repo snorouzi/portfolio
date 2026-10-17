@@ -1121,6 +1121,11 @@ button {
 .project-link {
   font-size: 0.95rem;
   font-weight: 500;
+  text-decoration: none;
+}
+
+.back-to-projects {
+  text-decoration: none;
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -1158,4 +1163,150 @@ button {
   .project-challenge-item {
     padding: 1rem;
   }
+}
+
+/* ---- Image Lightbox ---- */
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border: none;
+  background: transparent;
+  z-index: 9999;
+  display: block;
+}
+
+.image-lightbox::backdrop {
+  display: none;
+}
+
+.image-lightbox__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(21, 18, 27, 0.85);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+[data-theme='light'] .image-lightbox__backdrop {
+  background: rgba(33, 26, 43, 0.75);
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 0;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.image-lightbox__close:hover {
+  background: var(--color-surface);
+  border-color: var(--color-border-hover);
+}
+
+.image-lightbox__close:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.image-lightbox__close svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
+}
+
+.image-lightbox__content {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.image-lightbox__image {
+  max-width: 100%;
+  max-height: calc(100vh - 4rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 640px) {
+  .image-lightbox__backdrop {
+    padding: 1rem;
+  }
+
+  .image-lightbox__close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .image-lightbox__image {
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+.image-lightbox-trigger {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.image-lightbox-trigger:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+.project-gallery-item-button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.project-gallery-item-button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
 }

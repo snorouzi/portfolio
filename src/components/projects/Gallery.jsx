@@ -42,7 +42,7 @@ function resolveGalleryAsset(entry, cardImage, archImage) {
  *   archImage?: string
  * }} props
  */
-export default function Gallery({ gallery, cardImage, archImage }) {
+export default function Gallery({ gallery, cardImage, archImage, onImageClick, imageRefs }) {
   if (!Array.isArray(gallery) || gallery.length === 0) {
     return null;
   }
@@ -63,17 +63,34 @@ export default function Gallery({ gallery, cardImage, archImage }) {
       {entries.map((entry, index) => {
         const typeLabel = GALLERY_TYPE_LABELS[entry.type] || GALLERY_TYPE_LABELS.other;
         const alt = entry.alt?.trim() || `${typeLabel} ${index + 1}`;
+        const key = entry.src || index;
 
         return (
-          <figure key={entry.src || index} className="project-gallery-item">
-            <img
-              src={entry.assetUrl}
-              alt={alt}
-              loading="lazy"
-              decoding="async"
-              width="1200"
-              height="800"
-            />
+          <figure key={key} className="project-gallery-item">
+            <button
+              type="button"
+              className="project-gallery-item-button image-lightbox-trigger"
+              ref={(el) => {
+                if (imageRefs && entry.src) {
+                  imageRefs.current[entry.src] = el;
+                }
+              }}
+              onClick={() => {
+                if (onImageClick) {
+                  onImageClick(entry.src, alt);
+                }
+              }}
+              aria-label="View gallery image in full size"
+            >
+              <img
+                src={entry.assetUrl}
+                alt={alt}
+                loading="lazy"
+                decoding="async"
+                width="1200"
+                height="800"
+              />
+            </button>
             <figcaption className="project-gallery-caption">
               <span className="project-gallery-type">{typeLabel}</span>
               {entry.caption && (

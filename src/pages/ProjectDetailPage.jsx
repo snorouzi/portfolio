@@ -1,8 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ChallengeList from '../components/projects/ChallengeList';
 import FeatureList from '../components/projects/FeatureList';
 import Gallery from '../components/projects/Gallery';
+import ImageLightbox from '../components/projects/ImageLightbox';
 import ProjectCardImage, { ProjectTechTags } from '../components/projects/ProjectCard';
 import ProjectLinks from '../components/projects/ProjectLinks';
 import ProjectMeta from '../components/projects/ProjectMeta';
@@ -39,6 +40,10 @@ export default function ProjectDetailPage() {
   const { slug } = useParams();
 
   const project = useMemo(() => findProjectBySlug(slug ?? ''), [slug]);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState({ src: null, alt: '' });
+  const architectureImageRef = useRef(null);
+  const galleryImageRefs = useRef({});
 
   useEffect(() => {
     document.title = project
@@ -46,10 +51,23 @@ export default function ProjectDetailPage() {
       : `Project not found | ${env.appName}`;
   }, [project]);
 
+  const [triggerElement, setTriggerElement] = useState(null);
+
   if (!project) {
     return <ProjectNotFound />;
   }
 
+  const handleOpenImage = (src, alt, element) => {
+    if (!src) return;
+    setSelectedImage({ src, alt: alt || '' });
+    setTriggerElement(element || document.activeElement);
+    setLightboxOpen(true);
+  };
+
+  const handleCloseLightbox = () => {
+    setLightboxOpen(false);
+    setTriggerElement(null);
+  };
   const description = project.description?.trim() || '';
   const overview = project.details?.overview?.trim() || '';
   const techList = Array.isArray(project.technologies) ? project.technologies : [];
@@ -72,7 +90,7 @@ export default function ProjectDetailPage() {
       <section className="section">
         <div className="container">
           <nav className="project-detail-back" aria-label="Back to projects">
-            <Link to="/projects" className="hero-link hero-link-secondary">
+            <Link to="/projects" className="hero-link hero-link-secondary back-to-projects">
               Back to projects
             </Link>
           </nav>
@@ -82,7 +100,12 @@ export default function ProjectDetailPage() {
             <ProjectMeta project={project} />
           </header>
 
-          <ProjectCardImage project={project} showTech={false} className="project-detail-figure" />
+          <ProjectCardImage
+            project={project}
+            showTitle={false}
+            showTech={false}
+            className="project-detail-figure"
+          />
 
           {techList.length > 0 && (
             <section
@@ -140,13 +163,27 @@ export default function ProjectDetailPage() {
               {archDescription && <p className="project-detail-text">{archDescription}</p>}
               {archImage && (
                 <figure className="project-architecture-figure">
-                  <ProjectCardImage
-                    project={{
-                      title: project.title,
-                      card: { image: archImage, imageAlt: architecture.imageAlt },
-                    }}
-                    className="project-architecture-image"
-                  />
+                  <button
+                    type="button"
+                    className="project-architecture-image image-lightbox-trigger"
+                    ref={architectureImageRef}
+                    onClick={() =>
+                      handleOpenImage(
+                        archImage,
+                        architecture.imageAlt || `${project.title} architecture`,
+                        architectureImageRef.current
+                      )
+                    }
+                    aria-label="View architecture image in full size"
+                  >
+                    <ProjectCardImage
+                      project={{
+                        title: project.title,
+                        card: { image: archImage, imageAlt: architecture.imageAlt },
+                      }}
+                      className=""
+                    />
+                  </button>
                   {architecture.imageAlt && (
                     <figcaption className="project-architecture-caption">
                       {architecture.imageAlt}
@@ -176,7 +213,13 @@ export default function ProjectDetailPage() {
               aria-labelledby="project-detail-gallery-heading"
             >
               <ProjectSectionHeading id="project-detail-gallery-heading" title="Gallery" />
-              <Gallery gallery={gallery} cardImage={cardImage} archImage={archImage} />
+              <Gallery
+                gallery={gallery}
+                cardImage={cardImage}
+                archImage={archImage}
+                onImageClick={(src, alt, element) => handleOpenImage(src, alt, element)}
+                imageRefs={galleryImageRefs}
+              />
             </section>
           )}
 
@@ -189,6 +232,13 @@ export default function ProjectDetailPage() {
           </section>
         </div>
       </section>
+      <ImageLightbox
+        isOpen={lightboxOpen}
+        onClose={handleCloseLightbox}
+        src={selectedImage.src}
+        alt={selectedImage.alt}
+        triggerElement={triggerElement}
+      />
     </main>
   );
 }

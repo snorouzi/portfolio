@@ -64,7 +64,7 @@ export function ProjectCardImage({ project, className }) {
  *
  * @param {{ project: import('../../lib/projectTypes').Project, showTech?: boolean }} props
  */
-export default function ProjectCard({ project, showTech = true }) {
+export default function ProjectCard({ project, showTitle = true, showTech = true }) {
   const description = project.tagline?.trim() || project.description?.trim() || '';
 
   return (
@@ -72,11 +72,13 @@ export default function ProjectCard({ project, showTech = true }) {
       <ProjectCardImage project={project} />
 
       <div className="project-card-body">
-        <h3 className="project-card-title">
-          <Link to={`/projects/${project.slug}`} className="project-card-link">
-            {project.title}
-          </Link>
-        </h3>
+        {showTitle && (
+          <h3 className="project-card-title">
+            <Link to={`/projects/${project.slug}`} className="project-card-link">
+              {project.title}
+            </Link>
+          </h3>
+        )}
 
         {description && <p className="project-card-tagline">{description}</p>}
 
