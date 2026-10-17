@@ -1,0 +1,433 @@
+[
+  {
+    "id": "ms-ticketing-service-api",
+    "slug": "ms-ticketing-service-api",
+    "title": "Tractor FC Ticket Sales Platform",
+    "tagline": "A NestJS microservice powering the Tractor Club stadium ticketing platform.",
+    "description": "A modular NestJS microservice that powers the ticketing platform for Tractor Club stadium events. It manages the full lifecycle of stadium inventory and ticketing: stadiums, zones, sections, seats, gates, matches, seat reservations with Redis-backed bitmap locking, ticket issuance, payments, KYC, provider discounts, waiting lists, and attendee check-in.",
+    "featured": true,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Tractor Club",
+    "period": {
+      "start": "2026-06",
+      "end": "Ongoing"
+    },
+    "technologies": [
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "TypeORM",
+      "Redis",
+      "RabbitMQ",
+      "Swagger",
+      "Pino",
+      "Lua Scripts",
+      "Cockatiel",
+      "JWT"
+    ],
+    "card": {
+      "image": "/images/projects/reservation-system/cover.png",
+      "imageAlt": "MS Ticketing Service API cover"
+    },
+    "details": {
+      "overview": "A backend microservice that manages the entire stadium ticketing lifecycle for Tractor Club events. It exposes a versioned REST API (global prefix /api, URI versioning) with Swagger documentation, health checks, and structured Pino logging. The service handles stadium inventory modeling, match scheduling, high-concurrency seat reservation via Redis bitmap locking with atomic Lua scripts, ticket issuance and payment verification, attendee and gate check-in, waiting lists, KYC, provider discounts, notifications, and optional RabbitMQ messaging.",
+      "responsibilities": [
+        "Designed and implemented modular NestJS modules for stadium inventory, matches, reservations, tickets, payments, and attendees.",
+        "Implemented Redis-backed bitmap seat locking with atomic Lua scripts for high-concurrency seat selection.",
+        "Integrated PostgreSQL via TypeORM with migrations and Redis (single node or Sentinel).",
+        "Built payment initiation/verification, refunds, and HMAC-protected provider discounts.",
+        "Implemented KYC identity verification and external stadium ticketing service integration.",
+        "Added waiting list, attendee gate check-in, notifications, and optional RabbitMQ publisher/consumer subsystem.",
+        "Configured i18n (Persian default), JWT auth, Swagger docs, health checks, and Cockatiel resilience (timeout, retry, circuit breaker)."
+      ],
+      "features": [
+        {
+          "title": "Stadium & Inventory Management",
+          "description": "Manage stadiums, zones, platforms, sections, seats, and gates."
+        },
+        {
+          "title": "Match Management",
+          "description": "Manage matches, match-stadium assignments, and per-match section snapshots."
+        },
+        {
+          "title": "Reservations",
+          "description": "Redis-backed bitmap seat locking with atomic Lua scripts for high-concurrency seat selection."
+        },
+        {
+          "title": "Ticketing & Payments",
+          "description": "Ticket issuance, payment initiation/verification, refunds, and HMAC-protected provider discounts."
+        },
+        {
+          "title": "Attendee & Gate Flow",
+          "description": "Attendee records and entry validation for stadium gates."
+        },
+        {
+          "title": "Waiting List",
+          "description": "Queue-based fallback when seats are unavailable."
+        },
+        {
+          "title": "KYC & External Stadium Integration",
+          "description": "Identity verification and external ticketing service integration for syncing with stadium databases."
+        },
+        {
+          "title": "Notifications",
+          "description": "Integration with a remote notification services."
+        },
+        {
+          "title": "Messaging (Optional)",
+          "description": "RabbitMQ publisher/consumer with JSON serialization, dead-letter support, and retry middleware (disabled by default)."
+        },
+        {
+          "title": "i18n & Observability",
+          "description": "Multi-language support (Persian default) plus Swagger docs, health checks, and structured Pino logging."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "High-Concurrency Seat Reservation",
+          "problem": "Multiple requests could attempt to reserve the same seat simultaneously.",
+          "approach": "Used Redis-backed bitmap seat locking with atomic Lua scripts to guarantee atomic, race-free seat selection under high concurrency."
+        },
+        {
+          "title": "Stadium Inventory Hierarchy",
+          "problem": "Modeling stadiums, zones, platforms, sections, and seats with consistent propagation and seat counts.",
+          "approach": "Implemented hierarchy resolver and propagation services to keep inventory counts consistent across the stadium hierarchy."
+        },
+        {
+          "title": "Resilience to Upstream Failures",
+          "problem": "Upstream services (KYC, Jaberi, payments, notifications) may be slow or unavailable.",
+          "approach": "Applied Cockatiel policies (timeout, retry, circuit breaker) around HTTP clients to degrade gracefully."
+        }
+      ],
+      "architecture": {
+        "description": "A modular NestJS service organized into feature modules (Stadium, Zone, Platform, Section, Seat, Gate, Match, MatchStadium, Attendee, Reservation, ProviderDiscount, Ticket, Payment, Kyc, Jaberi, User, WaitingList, Notification, Health) over shared core infrastructure (config, database, files, logger, resilience) and common cross-cutting concerns (filters, interceptors, pipes, guards, interfaces). PostgreSQL via TypeORM is the primary data store, Redis provides caching and atomic seat locking, and RabbitMQ is an optional messaging layer. External integrations include KYC, Jaberi, payment gateway, and notification service.",
+        "image": "/images/projects/reservation-system/architecture.png",
+        "imageAlt": "MS Ticketing Service API architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/reservation-system/cover.png",
+          "alt": "MS Ticketing Service API cover",
+          "caption": "The cover image for the Tractor FC Ticket Sales Platform project."
+        },
+        {
+          "type": "architecture",
+          "src": "/images/projects/reservation-system/architecture.png",
+          "alt": "System architecture diagram",
+          "caption": "MS Ticketing Service API architecture diagram"
+        },
+        {
+          "type": "diagram",
+          "src": "/images/projects/reservation-system/booking-flow.png",
+          "alt": "Booking workflow diagram",
+          "caption": "The flow of a reservation request through the backend."
+        },
+        {
+          "type": "other",
+          "src": "/images/projects/reservation-system/swagger.png",
+          "alt": "Swagger UI",
+          "caption": "The Swagger UI for the MS Ticketing Service API."
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": "https://ticket.tractor-club.com/",
+      "documentation": null
+    }
+  },
+  {
+    "id": "ms-kyc-service-api",
+    "slug": "ms-kyc-service-api",
+    "title": "KYC Identity Verification Service",
+    "tagline": "A NestJS microservice for Know Your Customer (KYC) identity verification with pluggable provider strategies.",
+    "description": "A NestJS microservice that provides Know Your Customer (KYC) identity verification. It exposes three API surfaces — internal service (/api/v1/service/kyc), end-user (/api/v1/user/kyc), and admin (/api/v1/admin) — each protected by dedicated guards and gateway-injected authentication. Verifications run synchronously via async/await with pluggable provider strategies and automatic priority-based fallback (UID, Jibit). Features include Fancard KYC, short-circuit verification of already-verified steps, per-provider resilience policies (retry, timeout, circuit breaker via Cockatiel), a subject data model storing full identity profiles, event-driven audit logging and user-service webhook callbacks, an under-18 guardian OTP flow, Sub-KYC (verifying on behalf of another user), TypeORM migrations with PostgreSQL, AWS S3 document uploads, structured Pino logging, i18n (fa/en), and Swagger UI at /api/docs.",
+    "featured": true,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Tractor Club",
+    "period": {
+      "start": "2026-05",
+      "end": "Ongoing"
+    },
+    "technologies": [
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "TypeORM",
+      "Redis",
+      "Swagger",
+      "Pino",
+      "Cockatiel",
+      "JWT",
+      "AWS S3",
+      "i18n",
+      "Zod",
+      "amqplib"
+    ],
+    "card": {
+      "image": "/images/projects/ms-kyc-service/cover.png",
+      "imageAlt": "MS KYC Service API cover"
+    },
+    "details": {
+      "overview": "A backend NestJS microservice for Know Your Customer (KYC) identity verification serving Tractor Club platforms. It exposes three authenticated API surfaces — internal service, end-user, and admin — and processes verifications synchronously through a pluggable provider pipeline with UID/Jibit fallback. The service covers the full KYC lifecycle: subject identity profiles, verification types (PHONE_NATIONAL_ID, IRANIAN_INQUIRY, FOREIGNER_INQUIRY, FANCARD, FOREIGN_FANCARD, SHAHKAR_SABTE_AHVAL, and service-initiated variants), verification statuses (PENDING, IN_PROGRESS, VERIFIED, REJECTED, ERROR, OTP_REQUIRED, PENDING_GUARDIAN), under-18 guardian OTP flow, Sub-KYC, admin manual review of Fancard verifications, provider credential management, S3 document uploads, audit logging, webhook callbacks, health checks, and Swagger documentation.",
+      "responsibilities": [
+        "Designed and implemented modular NestJS modules for KYC verification, subject management, provider management, audit, events, health, and settings.",
+        "Built a synchronous verification pipeline with pluggable provider strategies and priority-based fallback (UID, Jibit).",
+        "Applied Cockatiel resilience policies (retry, timeout, circuit breaker) around provider HTTP clients for graceful degradation.",
+        "Implemented Fancard KYC, under-18 guardian OTP verification flow, and Sub-KYC (verifying on behalf of another user).",
+        "Integrated AWS S3 for KYC document uploads (images, videos, PDFs) with presigned URLs.",
+        "Configured three API surfaces with gateway-injected authentication: UserInfoGuard, AdminRoleGuard, and ServiceAuthDecorator.",
+        "Added event-driven audit logging and user-service webhook callbacks for verification state changes.",
+        "Set up TypeORM migrations with PostgreSQL, Pino structured JSON logging, Swagger docs, i18n (Persian default), and health checks."
+      ],
+      "features": [
+        {
+          "title": "Triple API Surface",
+          "description": "Separate endpoints for internal services (/api/v1/service/kyc), end users (/api/v1/user/kyc), and admin operators (/api/v1/admin), each with dedicated auth guards."
+        },
+        {
+          "title": "Gateway-Injected Authentication",
+          "description": "UserInfoGuard for user endpoints, AdminRoleGuard for admin endpoints (super-admin role), and ServiceAuthDecorator for service-to-service calls."
+        },
+        {
+          "title": "Synchronous Verification Pipeline",
+          "description": "Direct async/await verification processing with short-circuiting of already-verified steps."
+        },
+        {
+          "title": "Pluggable Provider Strategies",
+          "description": "UID and Jibit KYC provider implementations with priority-based automatic fallback between providers."
+        },
+        {
+          "title": "Resilience Policies",
+          "description": "Per-provider Cockatiel policies: retry, timeout, and circuit breaker to degrade gracefully under upstream failures."
+        },
+        {
+          "title": "Subject Data Model",
+          "description": "Stores a full identity profile per user reference, including verification levels and dates."
+        },
+        {
+          "title": "Fancard KYC",
+          "description": "Internal fan-card verification with no external provider — males auto-verified, females require admin review."
+        },
+        {
+          "title": "Under-18 Guardian OTP Flow",
+          "description": "Guardian OTP delivery with 30-second cooldown, up to three resends within 15 minutes, and requested-info prefill without leaking the OTP."
+        },
+        {
+          "title": "Sub-KYC",
+          "description": "One user can initiate verification on behalf of another subject."
+        },
+        {
+          "title": "Admin Manual Review",
+          "description": "Admin endpoints to list, review, approve, or reject Fancard and Foreign Fancard verifications awaiting manual review."
+        },
+        {
+          "title": "Provider Management",
+          "description": "Admin CRUD for KYC providers and provider priorities, including encrypted credential storage at rest."
+        },
+        {
+          "title": "S3 Document Uploads",
+          "description": "Upload KYC documents (images, videos, PDFs) to AWS S3 with presigned URL support."
+        },
+        {
+          "title": "Observability",
+          "description": "Structured Pino JSON logging, Swagger UI at /api/docs, i18n (Persian default), and public health checks (database, memory, disk)."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Provider Failover & Resilience",
+          "problem": "Upstream KYC providers (UID, Jibit) may be slow or unavailable, risking failed verifications.",
+          "approach": "Applied Cockatiel resilience policies (retry, timeout, circuit breaker) around each provider HTTP client, with priority-based automatic fallback to a secondary provider."
+        },
+        {
+          "title": "Synchronous Multi-Step Verification",
+          "problem": "Coordinating several verification steps in order while skipping steps that are already verified.",
+          "approach": "Implemented a synchronous pipeline using direct async/await with short-circuit logic that skips already-verified steps and surfaces the first blocking or failed step."
+        },
+        {
+          "title": "Three Distinct Auth Surfaces",
+          "problem": "Service, user, and admin endpoints require different authentication models and role checks.",
+          "approach": "Created dedicated guards (ServiceAuthDecorator, UserInfoGuard, AdminRoleGuard) and applied them per route group so each surface enforces its own auth contract."
+        },
+        {
+          "title": "Sensitive Data Protection",
+          "problem": "Provider credentials and subject PII must be encrypted at rest.",
+          "approach": "Used an AES encryption transformer (PROVIDER_ENCRYPTION_KEY) to encrypt provider credentials and subject data before persisting to PostgreSQL."
+        },
+        {
+          "title": "Under-18 Guardian OTP Flow",
+          "problem": "Guardian OTP must be delivered, rate-limited, and never leaked to the client, while still allowing form prefill.",
+          "approach": "Tracked OTP state server-side with a 30-second cooldown, a three-resend limit within 15 minutes, and exposed only requestedInfo (never the OTP) for client prefill."
+        }
+      ],
+      "architecture": {
+        "description": "A modular NestJS service organized into feature modules (Kyc, Subject, ProviderManagement, Health, Audit, Events, Settings) over shared core infrastructure (config, database, redis, logger, resilience, observability, swagger) and common cross-cutting concerns (filters, interceptors, pipes, guards, decorators, dto, enums, interfaces, utils). Integrations include UID and Jibit KYC providers, AWS S3 file storage, and notification/webhook delivery. PostgreSQL via TypeORM is the primary data store, Redis provides caching and rate limiting, and Cockatiel resilience policies wrap provider HTTP clients. Three API surfaces (/api/v1/service/kyc, /api/v1/user/kyc, /api/v1/admin) are each protected by dedicated guards. The verification pipeline runs synchronously via async/await with pluggable provider strategies, priority-based fallback, and short-circuiting of already-verified steps. Event-driven side effects emit audit logs and user-service webhook callbacks.",
+        "image": "/images/projects/ms-kyc-service/architecture.png",
+        "imageAlt": "MS KYC Service API architecture diagram"
+      },
+      "gallery": []
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": "https://tractor-club.com/",
+      "documentation": null
+    }
+  },
+  {
+    "id": "ms-content-management-api",
+    "slug": "ms-content-management-api",
+    "title": "Content Management API",
+    "tagline": "A NestJS backend for managing multi-language news, galleries, matches, and media for Tractor FC.",
+    "description": "A production-ready NestJS backend that powers the Tractor FC landing platform. It manages multi-language news content (English/Persian) with tagging, SEO-friendly slugs, scheduled publishing, featured ordering, and full-text search across MongoDB and Elasticsearch. It also handles galleries, match data with live overlays and head-to-head stats, ads, ticketing subsystems, analytics/view tracking, file management with AWS S3, and event-driven side effects via RabbitMQ. Includes JWT auth, Sentry observability, Swagger docs, and Docker deployment.",
+    "featured": true,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Tractor Club",
+    "period": {
+      "start": "2025-10",
+      "end": "Ongoing"
+    },
+    "technologies": [
+      "NestJS",
+      "TypeScript",
+      "MongoDB",
+      "Mongoose",
+      "Elasticsearch",
+      "Redis",
+      "RabbitMQ",
+      "AWS S3",
+      "Sharp",
+      "Swagger",
+      "Sentry",
+      "JWT",
+      "Docker",
+      "Pino"
+    ],
+    "card": {
+      "image": "/images/projects/ms-content-management/cover.png",
+      "imageAlt": "MS Content Management API cover"
+    },
+    "details": {
+      "overview": "A NestJS microservice for the Tractor FC content platform. It exposes REST APIs for news, tags, galleries, matches, ads, ticketing, and file management, with multi-language support (en/fa), scheduled publishing, featured content, full-text search, analytics view tracking, and S3-backed media processing. Integrations include MongoDB (primary store), Elasticsearch (search), Redis (caching/rate limiting), RabbitMQ (event publishing), AWS S3 (media), and Sentry (observability).",
+      "responsibilities": [
+        "Designed and implemented the file manager subsystem with AWS S3 uploads, Sharp-based image processing, dynamic watermarking, multi-quality (high/low) generation, WebP conversion, and file count limits.",
+        "Implemented Elasticsearch integration for news search: mappings, ngram tokenizers, atomic view-count increments, and sync pipelines with transactional outbox delivery.",
+        "Built analytics features including reusable visitor-ID middleware for daily view deduplication and queued Redis view-sync cron jobs.",
+        "Developed match features: live overlays, head-to-head match APIs, and related news conditions.",
+        "Implemented scheduled news publishing with transactional outbox and RabbitMQ event publishing for news and gallery updates.",
+        "Added marquee generation for news and galleries from RabbitMQ events and notification triggers on gallery updates.",
+        "Integrated Sentry error monitoring and APM, structured logging, and Docker-based deployment.",
+        "Maintained Mongoose schemas, indexes, and seeders; hardened Redis sync and Elasticsearch error handling."
+      ],
+      "features": [
+        {
+          "title": "Multi-Language News Management",
+          "description": "Create and manage news in English and Persian with SEO metadata, slugs, tags, featured flags, and scheduled publishing."
+        },
+        {
+          "title": "Full-Text Search",
+          "description": "Search across languages using MongoDB and Elasticsearch with ngram tokenizers and substring matching."
+        },
+        {
+          "title": "File Manager & Media Processing",
+          "description": "Upload files to AWS S3 with Sharp-based watermarking, compression, WebP conversion, dynamic quality profiles, and high-quality migration APIs."
+        },
+        {
+          "title": "Gallery Management",
+          "description": "Manage galleries with marquee generation, update notifications, and scheduled publishing."
+        },
+        {
+          "title": "Match & Live Overlays",
+          "description": "Manage matches, head-to-head stats, and live overlay data for the platform."
+        },
+        {
+          "title": "Ads & Ticketing",
+          "description": "Ads subsystem with short-link types and a ticketing subsystem."
+        },
+        {
+          "title": "Analytics & View Tracking",
+          "description": "Visitor-ID based daily view deduplication with queued Redis sync and Elasticsearch atomic increments."
+        },
+        {
+          "title": "Event-Driven Architecture",
+          "description": "RabbitMQ event publishing for news/gallery updates with transactional outbox delivery."
+        },
+        {
+          "title": "Observability",
+          "description": "Sentry error monitoring, structured Pino logging, Swagger UI, and health checks."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Image Processing Pipeline",
+          "problem": "Generating watermarked, compressed, multi-quality images at scale without degrading performance.",
+          "approach": "Used Sharp with dynamic watermark scaling/margins, WebP conversion for low quality, and S3-backed high-quality migration APIs."
+        },
+        {
+          "title": "Search Relevance",
+          "problem": "Providing accurate multi-language full-text search with substring matching.",
+          "approach": "Centralized Elasticsearch config with ngram tokenizers, env-driven index names, and atomic view-count increments."
+        },
+        {
+          "title": "Reliable Event Delivery",
+          "problem": "Ensuring news/gallery events are published reliably without data loss.",
+          "approach": "Implemented transactional outbox pattern with scheduled delivery and RabbitMQ integration."
+        },
+        {
+          "title": "View Tracking at Scale",
+          "problem": "Deduplicating views per visitor while syncing efficiently to Redis/Elasticsearch.",
+          "approach": "Reusable visitor-ID middleware with queued async Redis sync cron and atomic Elasticsearch increments."
+        }
+      ],
+      "architecture": {
+        "description": "A modular NestJS service organized into feature modules (News, Tags, Gallery, Match, Ads, Ticketing, FileManager, Analytics, Auth, Admin, Health) over shared core infrastructure (config, database, redis, logger, observability, swagger). Integrations include MongoDB (primary store), Elasticsearch (search), Redis (caching/rate limiting), RabbitMQ (events), AWS S3 (media), and Sentry (observability). Event-driven side effects use a transactional outbox. See architecture-prompt.md for an image generation prompt.",
+        "image": "/images/projects/ms-content-management-api/architecture.png",
+        "imageAlt": "MS Content Management API architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-content-management/cover.png",
+          "alt": "Tractor FC website content management project cover",
+          "caption": "An overview of the content management system developed for Tractor FC."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-content-management/gallery-list.png",
+          "alt": "Tractor FC website displaying a list of photo galleries",
+          "caption": "The gallery listing page, where visitors can browse photo galleries featuring the club's events and activities."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-content-management/single-gallery.png",
+          "alt": "Tractor FC website showing photos from an individual gallery",
+          "caption": "An individual gallery page displaying photos from a specific event or subject."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-content-management/news-list.png",
+          "alt": "Tractor FC website displaying a list of news articles",
+          "caption": "The news listing page, where visitors can browse the latest news and updates about the club."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-content-management/single-news.png",
+          "alt": "Tractor FC website displaying a full news article",
+          "caption": "An individual news page presenting the full article and its related information."
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": "https://tractor-club.com/",
+      "documentation": null
+    }
+  }
+]

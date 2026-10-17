@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { env } from '../config/env';
 import Hero from '../components/home/Hero';
+import FeaturedProjects from '../components/home/FeaturedProjects';
 
 export default function HomePage() {
   useEffect(() => {
@@ -15,5 +16,10 @@ export default function HomePage() {
     }
   }, []);
 
-  return <Hero />;
+  return (
+    <>
+      <Hero />
+      <FeaturedProjects />
+    </>
+  );
 }
