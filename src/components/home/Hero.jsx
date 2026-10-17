@@ -15,19 +15,14 @@ export default function Hero() {
               Building scalable, reliable <span className="hero-accent">backend systems</span>.
             </p>
 
-            <p className="hero-intro">
-              I'm a Senior Backend Developer with 6+ years of experience building scalable backend
-              systems with NestJS and TypeScript. I work across backend architecture, data-intensive
-              applications, and distributed systems, with a focus on reliability, maintainability,
-              and solving complex engineering problems.
-            </p>
+            <p className="hero-intro">A software developer driven by curiosity and code. </p>
 
             <div className="hero-actions">
               <Link to="/projects" className="hero-button hero-button-primary">
                 Explore My Projects
               </Link>
               <Link to="/about" className="hero-link hero-link-secondary">
-                View Resume
+                Know me
               </Link>
               <a href="mailto:saeednorouzi98@gmail.com" className="hero-link hero-link-quiet">
                 Get in touch
