@@ -1,10 +1,14 @@
 import { ThemeProvider } from '../context/ThemeContext';
 import { Router } from './router';
+import NetworkBackground from '../components/background/NetworkBackground';
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <Router />
-    </ThemeProvider>
+    <>
+      <NetworkBackground />
+      <ThemeProvider>
+        <Router />
+      </ThemeProvider>
+    </>
   );
 }
