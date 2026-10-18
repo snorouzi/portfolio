@@ -117,6 +117,24 @@
           "src": "/images/projects/reservation-system/swagger.png",
           "alt": "Swagger UI",
           "caption": "The Swagger UI for the MS Ticketing Service API."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/reservation-system/blank-select.png",
+          "alt": "Stadium overview",
+          "caption": "Stadium overview with no seats selected."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/reservation-system/seats-selection.png",
+          "alt": "Seats overview",
+          "caption": "Seats selection overview with seat selected."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/reservation-system/seat-selected.png",
+          "alt": "Stadium overview",
+          "caption": "Stadium overview with seats selected."
         }
       ]
     },
@@ -264,6 +282,30 @@
           "src": "/images/projects/ms-kyc-service/swagger.png",
           "alt": "Tractor FC KYC system swagger Doc",
           "caption": "Interactive Swagger documentation for exploring and testing the Tractor FC KYC System API endpoints."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-kyc-service/not-verified.png",
+          "alt": "Tractor FC KYC system not verified status",
+          "caption": "A user with a 'Not Verified' status, indicating that their KYC verification process has not yet been completed or approved."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-kyc-service/verification-request.png",
+          "alt": "Tractor FC KYC system verification request page",
+          "caption": "The verification request page where users can submit their identity documents for KYC processing."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-kyc-service/verification-result.png",
+          "alt": "Tractor FC KYC system verification result",
+          "caption": "The verification result page showing the outcome of the KYC verification process."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ms-kyc-service/verified.png",
+          "alt": "Tractor FC KYC system verified status",
+          "caption": "A user with a 'Verified' status, indicating that their KYC verification process has been completed and approved."
         }
       ]
     },
