@@ -23,19 +23,6 @@ function findProjectBySlug(slug) {
   return projectsData.find((project) => project.slug === slug);
 }
 
-/**
- * Returns true when one text substantially duplicates another (one is contained
- * within the other after trimming), so we never repeat the same paragraph.
- *
- * @param {string} a
- * @param {string} b
- * @returns {boolean}
- */
-function isDuplicated(a, b) {
-  if (!a || !b) return false;
-  return a.includes(b) || b.includes(a);
-}
-
 export default function ProjectDetailPage() {
   const { slug } = useParams();
 
@@ -68,7 +55,6 @@ export default function ProjectDetailPage() {
     setLightboxOpen(false);
     setTriggerElement(null);
   };
-  const description = project.description?.trim() || '';
   const overview = project.details?.overview?.trim() || '';
   const techList = Array.isArray(project.technologies) ? project.technologies : [];
   const details = project.details || {};
@@ -80,10 +66,6 @@ export default function ProjectDetailPage() {
   const archDescription = architecture.description?.trim() || '';
   const archImage = architecture.image;
   const cardImage = project.card?.image;
-
-  // Decide which overview paragraphs to render, avoiding verbatim duplication.
-  const showDescription = description && !isDuplicated(description, overview);
-  const showOverview = overview && !isDuplicated(overview, description);
 
   return (
     <main>
@@ -117,16 +99,13 @@ export default function ProjectDetailPage() {
             </section>
           )}
 
-          {(showDescription || showOverview) && (
-            <section
-              className="project-detail-section"
-              aria-labelledby="project-detail-overview-heading"
-            >
-              <ProjectSectionHeading id="project-detail-overview-heading" title="Overview" />
-              {showDescription && <p className="project-detail-text">{description}</p>}
-              {showOverview && <p className="project-detail-text">{overview}</p>}
-            </section>
-          )}
+          <section
+            className="project-detail-section"
+            aria-labelledby="project-detail-overview-heading"
+          >
+            <ProjectSectionHeading id="project-detail-overview-heading" title="Overview" />
+            <p className="project-detail-text">{overview}</p>
+          </section>
 
           {features.length > 0 && (
             <section

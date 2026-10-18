@@ -48,6 +48,10 @@
 
   /* Z-index */
   --z-header: 20;
+
+  /* Subtle network background */
+  --network-node-color: rgba(112, 65, 196, 0.5);
+  --network-line-color: rgba(112, 65, 196, 0.18);
 }
 
 [data-theme='dark'] {
@@ -66,10 +70,15 @@
   --color-border: #362d43;
   --color-border-hover: #4a4059;
   --color-focus-ring: #b69af5;
+
+  /* Subtle network background */
+  --network-node-color: rgba(182, 154, 245, 0.55);
+  --network-line-color: rgba(182, 154, 245, 0.16);
 }
 
 html {
   color-scheme: light;
+  overflow-x: hidden;
 }
 
 html[data-theme='dark'] {
@@ -92,12 +101,13 @@ html,
 body,
 #root {
   margin: 0;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   font-family:
     system-ui,
     -apple-system,
@@ -490,12 +500,13 @@ button {
 
 .hero {
   padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 
 .hero-grid {
   display: grid;
   gap: var(--hero-gap);
-  align-items: start;
+  align-items: center;
 }
 
 .hero-text {
@@ -632,6 +643,10 @@ button {
   color: var(--color-text-muted);
 }
 
+.hero-tech-margin {
+  margin-top: 1.5rem;
+}
+
 @media (min-width: 641px) {
   .hero-actions {
     flex-direction: row;
@@ -666,6 +681,8 @@ button {
 
 .featured-projects {
   border-top: 1px solid var(--color-border);
+  padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 
 .featured-projects-heading {
@@ -1309,4 +1326,17 @@ button {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
   border-radius: var(--radius-md);
+}
+
+.network-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  width: 100vw;
+  height: 100dvh;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
 }
