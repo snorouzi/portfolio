@@ -500,12 +500,13 @@ button {
 
 .hero {
   padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 
 .hero-grid {
   display: grid;
   gap: var(--hero-gap);
-  align-items: start;
+  align-items: center;
 }
 
 .hero-text {
@@ -642,6 +643,10 @@ button {
   color: var(--color-text-muted);
 }
 
+.hero-tech-margin {
+  margin-top: 1.5rem;
+}
+
 @media (min-width: 641px) {
   .hero-actions {
     flex-direction: row;
@@ -676,6 +681,8 @@ button {
 
 .featured-projects {
   border-top: 1px solid var(--color-border);
+  padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 
 .featured-projects-heading {

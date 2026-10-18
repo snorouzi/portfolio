@@ -61,6 +61,11 @@ export default function Hero() {
                 LinkedIn
               </a>
             </div>
+
+            <p className="hero-tech hero-tech-margin">
+              NestJS &middot; TypeScript &middot; PostgreSQL &middot; MongoDB &middot; Redis
+              &middot; RabbitMQ
+            </p>
           </div>
 
           <div className="hero-portrait">
@@ -83,11 +88,6 @@ export default function Hero() {
             </figure>
           </div>
         </div>
-
-        <p className="hero-tech">
-          NestJS &middot; TypeScript &middot; PostgreSQL &middot; MongoDB &middot; Redis &middot;
-          RabbitMQ
-        </p>
       </div>
     </section>
   );
