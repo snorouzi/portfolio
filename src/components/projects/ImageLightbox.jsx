@@ -1,14 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { resolveProjectAsset } from '../../lib/assets';
 
-export default function ImageLightbox({
-  isOpen,
-  onClose,
-  src,
-  alt,
-  triggerRef,
-  triggerElement,
-}) {
+export default function ImageLightbox({ isOpen, onClose, src, alt, triggerRef, triggerElement }) {
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
   const lastFocusedRef = useRef(null);
@@ -113,12 +106,7 @@ export default function ImageLightbox({
   const displayAlt = alt?.trim() || 'Project image preview';
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="image-lightbox"
-      aria-label="Image preview"
-      open
-    >
+    <dialog ref={dialogRef} className="image-lightbox" aria-label="Image preview" open>
       <div className="image-lightbox__backdrop">
         <button
           ref={closeButtonRef}
@@ -150,12 +138,7 @@ export default function ImageLightbox({
               decoding="async"
             />
           ) : (
-            <img
-              src={src}
-              alt={displayAlt}
-              className="image-lightbox__image"
-              decoding="async"
-            />
+            <img src={src} alt={displayAlt} className="image-lightbox__image" decoding="async" />
           )}
         </div>
       </div>
