@@ -20,8 +20,9 @@ export const profile = {
     label: 'Download Resume',
     hint: 'PDF',
   },
-  journeyLink: {
-    label: 'My career journey',
+  contactLink: {
+    label: 'Send me a message',
+    email: 'saeednorouzi98@gmail.com',
   },
 };
 

@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      target: production
+      args:
+        VITE_APP_NAME: "Personal Portfolio"
+        VITE_APP_URL: "https://snorouzi.ir"
+    image: snorouzi-portfolio:latest
+    restart: unless-stopped
+    expose:
+      - "80"
+    environment:
+      VIRTUAL_HOST: snorouzi.ir
+      VIRTUAL_PORT: "80"
+      ACME_HOST: snorouzi.ir
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:1.7-alpine
+    container_name: portfolio-nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - vhost:/etc/nginx/vhost.d
+      - ./nginx/vhost.d/snorouzi.ir:/etc/nginx/vhost.d/snorouzi.ir:ro
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  acme-companion:
+    image: nginxproxy/acme-companion:2.5
+    container_name: portfolio-acme-companion
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+    environment:
+      NGINX_PROXY_CONTAINER: portfolio-nginx-proxy
+      ACME_CHALLENGE: HTTP-01
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  certs:
+  acme:
+  vhost:
+  html:
