@@ -1,93 +1,121 @@
-# Personal Portfolio
+# Saeed Norouzi — Portfolio
 
-A personal portfolio website built with [React](https://react.dev/) and [Vite](https://vite.dev/).
+A responsive personal portfolio built with React 19, React Router, and Vite. It presents selected backend projects, career and education details, contribution activity, and a downloadable resume. The interface supports light and dark themes and adapts to the visitor's system preference.
 
-This is a clean, minimal foundation. The portfolio UI has not been built yet.
+## Pages
 
-## Prerequisites
+- `/` — introduction and up to three featured projects.
+- `/projects` — the complete project list.
+- `/projects/:slug` — project overview, technologies, features, responsibilities, architecture, challenges, gallery, and links.
+- `/about` — profile, career journey, focus areas, GitHub and company contribution calendars, education, and resume.
+- Unknown routes and project slugs show a not-found page.
 
-- Node.js (LTS recommended)
-- npm (included with Node.js)
+Project content is maintained in `src/data/projects.json`. Profile and career content lives in `src/data/about.js`; the contribution calendars use the JSON exports in `src/data/github.json` and `src/data/gitlab.json`.
 
-## Installation
+## Requirements
+
+- Node.js 22 or newer (the production Docker build uses Node 22).
+- npm.
+
+## Run locally
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-## Development
+Copy the example environment file and update its values:
 
-Start the Vite development server:
+```bash
+cp .env.example .env.local
+```
+
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-The application is served at `http://localhost:3000`. If port 3000 is already in use, Vite fails instead of selecting another port (`strictPort`).
+The app is served at <http://localhost:3000> by default. Vite uses a strict port and exits if the configured port is already occupied.
 
-## Production
+## Configuration
 
-Build the application:
+| Variable | Required | Default | Purpose |
+| --- | --- | --- | --- |
+| `VITE_APP_NAME` | Yes | — | App name used in page titles. |
+| `VITE_APP_URL` | Yes | — | Canonical application URL; must be a valid URL. |
+| `VITE_PORT` | No | `3000` | Port used by the Vite development and preview servers. |
+
+Vite reads local values from `.env.local` (start from `.env.example`). Restart the server after changing them. `VITE_*` values are embedded in the browser bundle and are public; do not put secrets, API keys, credentials, or private keys in them. Configuration is validated in `src/config/env.js`.
+
+## Production build
+
+Create and preview the static production build:
 
 ```bash
 npm run build
-```
-
-Preview the production build locally:
-
-```bash
 npm run preview
 ```
 
+The build output is written to `dist/`. The preview server uses the same `VITE_PORT` setting as development.
+
+## Docker
+
+Build the production image. The two build arguments are embedded in the client bundle:
+
+```bash
+docker build \
+  --build-arg VITE_APP_NAME="Saeed Norouzi — Portfolio" \
+  --build-arg VITE_APP_URL="https://example.com" \
+  -t portfolio .
+```
+
+Run it at <http://localhost:8080>:
+
+```bash
+docker run --rm -p 8080:80 portfolio
+```
+
+The multi-stage image builds the Vite app with Node and serves the static files with Nginx. Nginx serves hashed assets with long-lived caching and falls back to `index.html` for client-side routes.
+
+### Public deployment with Docker Compose
+
+The included Compose stack is configured specifically for `snorouzi.ir`. On the server, start it with:
+
+```bash
+docker compose up -d --build
+```
+
+It runs the app behind `nginx-proxy` and `acme-companion`, publishes ports 80 and 443, and obtains and renews a Let's Encrypt certificate using HTTP-01 validation. Before starting the stack:
+
+1. Point the domain's DNS A record to the server's public IP (currently configured as `85.198.53.7`).
+2. Allow inbound TCP ports 80 and 443 through the server and cloud firewalls.
+3. Ensure the domain resolves to that server and port 80 is reachable for certificate issuance.
+
+To receive certificate expiry and recovery notices, set `DEFAULT_EMAIL` on the `acme-companion` service in `docker-compose.yml`.
+
 ## Code quality
 
-Lint the source:
-
 ```bash
-npm run lint
+npm run lint         # Check JavaScript and JSX with ESLint
+npm run format       # Format files with Prettier
+npm run format:check # Check formatting without changing files
 ```
 
-Format the source:
+## Project layout
 
-```bash
-npm run format
+```text
+src/
+  app/          App composition and route definitions
+  assets/       Profile photo and project images
+  components/   Layout, home, about, background, and project UI
+  config/       Environment and resume configuration
+  context/      Theme state and controls
+  data/         Project, biography, contribution, and resume content
+  lib/          Asset resolution, date formatting, and contribution helpers
+  pages/        Home, projects, project details, about, and not-found pages
+  styles/       Global styles and theme tokens
 ```
 
-Check formatting without writing changes:
-
-```bash
-npm run format:check
-```
-
-## Environment variables
-
-Client-side variables are prefixed with `VITE_` and bundled into the application by Vite. Because they are publicly readable, never store secrets, API keys, database credentials, or private keys in `VITE_*` variables.
-
-Available variables:
-
-- `VITE_APP_NAME` — human-readable application name.
-- `VITE_APP_URL` — canonical URL of the running application.
-- `VITE_PORT` — port for the Vite development and preview servers (default: `3000`).
-
-The dev and preview ports are read from `VITE_PORT` in `vite.config.js`. Both servers use `strictPort`, so they fail instead of picking another port if the configured port is occupied. The `npm run dev` and `npm run preview` scripts are static commands; the port value comes from `.env.local` (via `.env.example`).
-
-1. Copy the example file:
-
-   ```bash
-   cp .env.example .env.local
-   ```
-
-2. Adjust the values in `.env.local` as needed. `.env.local` is ignored by Git and must not be committed.
-3. Restart the development server after changing environment variables.
-
-Configuration is centralized in `src/config/env.js`, which validates required variables and fails with a clear message if any are missing or invalid.
-
-## Project structure
-
-- `src/main.jsx` — application bootstrap (React root mount, global styles)
-- `src/app/App.jsx` — root application component
-- `src/config/env.js` — centralized environment configuration and validation
-- `src/styles/globals.css` — global CSS reset and defaults
-- `src/components/ui/` — shared UI components (to be added)
-- `src/utils/` — pure helper functions (to be added)
-- `public/` — static assets
+Static files such as the favicon are in `public/`. The production container and reverse-proxy configuration are in `Dockerfile`, `nginx.conf`, and `docker-compose.yml`.
