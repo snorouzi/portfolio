@@ -106,6 +106,12 @@ export default function Header() {
             </button>
           )}
 
+          {isMobile && (
+            <button className="theme-toggle" onClick={toggleTheme} aria-label={toggleLabel}>
+              {toggleIcon}
+            </button>
+          )}
+
           <button
             ref={buttonRef}
             className="menu-button"
@@ -139,15 +145,15 @@ export default function Header() {
             </svg>
           </button>
 
-          {isMobile && (
-            <button className="theme-toggle" onClick={toggleTheme} aria-label={toggleLabel}>
-              {toggleIcon}
-            </button>
-          )}
         </div>
 
         {isMobile && (
-          <div className="mobile-menu nav-links" id="mobile-menu" role="menu">
+          <div
+            className={`mobile-menu nav-links${isOpen ? ' open' : ''}`}
+            id="mobile-menu"
+            role="menu"
+            hidden={!isOpen}
+          >
             {NAV_LINKS.map((link) => (
               <NavLink
                 key={link.name}

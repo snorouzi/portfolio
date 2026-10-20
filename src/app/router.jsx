@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
 import HomePage from '../pages/HomePage';
 import ProjectsPage from '../pages/ProjectsPage';
 import ProjectDetailPage from '../pages/ProjectDetailPage';
@@ -18,6 +19,7 @@ export function Router() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

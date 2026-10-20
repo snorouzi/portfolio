@@ -460,5 +460,129 @@
       "liveProject": "https://tractor-club.com/",
       "documentation": null
     }
+  },
+	{
+    "id": "dorpad-back-webapp",
+    "slug": "dorpad-back-webapp",
+    "title": "Dorpad Backend",
+    "tagline": "A modular NestJS backend powering the Dorpad web platform.",
+    "description": "A production-ready NestJS backend for the Dorpad platform. It provides a versioned REST API with authentication and role-based authorization, product and category management, orders, content management (news, pages, FAQ, awards, featured content, gallery), company info, footer, file handling, ads, contact forms, and employee/salary/payroll tooling with Excel uploads. Includes i18n (English/Persian), OpenTelemetry tracing, Prometheus metrics, Pyroscope profiling, and enterprise-grade security.",
+    "featured": false,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Dorpad",
+    "period": {
+      "start": "2025-11",
+      "end": null
+    },
+    "technologies": [
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "TypeORM",
+      "Redis",
+      "Swagger",
+      "Winston",
+      "OpenTelemetry",
+      "Prometheus",
+      "Pyroscope",
+      "MJML",
+      "Jalaali",
+      "Helmet",
+      "JWT",
+      "bcryptjs",
+      "Excel (xlsx)"
+    ],
+    "card": {
+      "image": "/images/projects/dorpad-back-webapp/cover.png",
+      "imageAlt": "Dorpad Backend cover"
+    },
+    "details": {
+      "overview": "A modular NestJS backend that powers the Dorpad web platform. It exposes a versioned REST API (global prefix /api, URI versioning) with Swagger docs, health checks, and structured logging. The service covers authentication with JWT (Redis-backed tokens), role/permission management, product and category catalogs with variants and price history, order processing, content management (news, pages, FAQ, awards, featured content, gallery), company/footer configuration, file storage and security, ads, contact-us, and employee/salary payroll imports from Excel. Observability includes OpenTelemetry tracing, Prometheus metrics, and optional Pyroscope profiling; security includes Helmet, CORS, rate limiting, and guards.",
+      "responsibilities": [
+        "Designed and implemented modular NestJS feature modules for auth, users, roles, permissions, and operators.",
+        "Built product, category, and product-variant catalog with price history tracking.",
+        "Implemented order processing and file storage with security controls.",
+        "Developed content management modules (news, pages, FAQ, awards, featured content, gallery, footer, company).",
+        "Built employee and salary modules with Excel upload, dry-run validation, and transactional imports.",
+        "Integrated PostgreSQL via TypeORM with migrations and Redis for JWT/session storage.",
+        "Configured i18n (English/Persian), Swagger docs, health checks, metrics, and tracing.",
+        "Applied rate limiting, Helmet, CORS, and auth/permission guards."
+      ],
+      "features": [
+        {
+          "title": "Authentication & Authorization",
+          "description": "JWT-based auth with Redis token storage, roles, permissions, and guards."
+        },
+        {
+          "title": "Product Catalog",
+          "description": "Products, categories, variants, and price history management."
+        },
+        {
+          "title": "Order Management",
+          "description": "Order creation and processing workflows."
+        },
+        {
+          "title": "Content Management",
+          "description": "News, pages, FAQ, awards, featured content, gallery, company info, and footer."
+        },
+        {
+          "title": "File Handling",
+          "description": "File uploads, storage, and security-protected file access."
+        },
+        {
+          "title": "Employee & Salary",
+          "description": "Employee records and salary imports from Excel with dry-run validation and transactions."
+        },
+        {
+          "title": "Ads & Contact",
+          "description": "Advertisement management and contact-us submissions."
+        },
+        {
+          "title": "Observability",
+          "description": "OpenTelemetry tracing, Prometheus metrics, Pyroscope profiling, and health checks."
+        },
+        {
+          "title": "i18n & Security",
+          "description": "English/Persian localization plus Helmet, CORS, and rate limiting."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Transactional Excel Salary Imports",
+          "problem": "Large salary uploads needed validation and atomic persistence without partial writes.",
+          "approach": "Implemented dry-run validation mode and transactional imports with header validation and error handling."
+        },
+        {
+          "title": "Role-Based Access Control",
+          "problem": "Fine-grained permission checks across many modules.",
+          "approach": "Centralized auth guards and permission decorators with role/permission modules."
+        },
+        {
+          "title": "Observability Integration",
+          "problem": "Correlating traces, metrics, and logs across a modular NestJS app.",
+          "approach": "Integrated OpenTelemetry, Prometheus metrics, and Winston logging with correlation IDs."
+        }
+      ],
+      "architecture": {
+        "description": "A modular NestJS service organized into feature modules (Auth, User, Role, Permission, Operator, Product, ProductVariant, Category, PriceHistory, Order, News, Page, FAQ, Award, FeaturedContent, Gallery, Company, Footer, File, FileSecurity, Ads, ContactUs, Employee, Salary, Health, Logger, Metrics, Email, SMS, Encryption) over shared core infrastructure (config, database, redis, logger, security) and common cross-cutting concerns (filters, interceptors, guards, middleware, utils). PostgreSQL via TypeORM is the primary data store, Redis stores JWT tokens and sessions. External integrations include email/SMS providers.",
+        "image": "/images/projects/dorpad-back-webapp/architecture.png",
+        "imageAlt": "Dorpad Backend architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "diagram",
+          "src": "/images/projects/dorpad-back-webapp/overview.png",
+          "alt": "Dorpad backend overview",
+          "caption": "High-level module overview of the Dorpad backend."
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": "https://dorpad.com/",
+      "documentation": null
+    }
   }
 ]
