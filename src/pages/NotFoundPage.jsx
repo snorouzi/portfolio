@@ -1,23 +1,20 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { env } from '../config/env';
+import ErrorPage from '../components/ErrorPage';
 
 export default function NotFoundPage() {
   useEffect(() => {
-    document.title = `Not found | ${env.appName}`;
+    document.title = `Page not found | ${env.appName}`;
   }, []);
 
   return (
-    <main>
-      <section className="section section-heading">
-        <div className="container">
-          <h1>Not found</h1>
-          <p>The page you are looking for does not exist.</p>
-          <p>
-            <Link to="/">Return to the homepage</Link>
-          </p>
-        </div>
-      </section>
-    </main>
+    <ErrorPage
+      title="Page Not Found"
+      description="The page you're looking for doesn't exist or may have been moved. Let's get you back on track."
+      primaryLabel="Back to Home"
+      primaryTo="/"
+      secondaryLabel="Explore Projects"
+      secondaryTo="/projects"
+    />
   );
 }

@@ -253,6 +253,86 @@ button {
   margin-bottom: var(--section-heading-gap);
 }
 
+.error-page-main {
+  justify-content: center;
+}
+
+.error-page-section {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  min-height: min(32rem, calc(100vh - var(--header-height) - 8rem));
+  padding-top: clamp(3rem, 8vh, 6rem);
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.error-page-content {
+  width: 100%;
+  max-width: 38rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.error-page-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.5rem;
+  min-height: 2.25rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.error-page-content h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+.error-page-description {
+  max-width: 58ch;
+  margin: 0.875rem auto 0;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.error-page-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.error-page-actions .button {
+  justify-content: center;
+}
+
+.error-page-actions .button-primary {
+  color: #fff;
+}
+
+.error-page-actions .button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .error-page-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 22rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

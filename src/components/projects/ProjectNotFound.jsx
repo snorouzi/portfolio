@@ -1,22 +1,20 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { env } from '../../config/env';
+import ErrorPage from '../ErrorPage';
 
-export default function ProjectNotFound({
-  title = 'Project not found',
-  message = 'The project you are looking for does not exist.',
-  linkTo = '/projects',
-  linkText = 'View all projects',
-}) {
+export default function ProjectNotFound() {
+  useEffect(() => {
+    document.title = `Project not found | ${env.appName}`;
+  }, []);
+
   return (
-    <main>
-      <section className="section section-heading">
-        <div className="container">
-          <h1>{title}</h1>
-          <p>{message}</p>
-          <p>
-            <Link to={linkTo}>{linkText}</Link>
-          </p>
-        </div>
-      </section>
-    </main>
+    <ErrorPage
+      title="Project Not Found"
+      description="This project doesn't exist or may no longer be available. You can explore my other projects instead."
+      primaryLabel="View All Projects"
+      primaryTo="/projects"
+      secondaryLabel="Back to Home"
+      secondaryTo="/"
+    />
   );
 }
