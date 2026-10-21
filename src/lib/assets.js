@@ -13,7 +13,8 @@
 
 const assetManifest = import.meta.glob('/src/assets/projects/**/*.{png,jpg,jpeg,svg,webp,gif}', {
   eager: true,
-  as: 'url',
+  query: '?url',
+  import: 'default',
 });
 
 /**
