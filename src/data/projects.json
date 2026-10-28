@@ -461,7 +461,7 @@
       "documentation": null
     }
   },
-	{
+  {
     "id": "dorpad-back-webapp",
     "slug": "dorpad-back-webapp",
     "title": "Dorpad Backend",
@@ -519,6 +519,10 @@
           "description": "Products, categories, variants, and price history management."
         },
         {
+          "title": "Price History",
+          "description": "Track and manage price changes over time for products and variants."
+        },
+        {
           "title": "Order Management",
           "description": "Order creation and processing workflows."
         },
@@ -571,10 +575,10 @@
       },
       "gallery": [
         {
-          "type": "diagram",
-          "src": "/images/projects/dorpad-back-webapp/overview.png",
-          "alt": "Dorpad backend overview",
-          "caption": "High-level module overview of the Dorpad backend."
+          "type": "screenshot",
+          "src": "/images/projects/dorpad-back-webapp/price-board.png",
+          "alt": "Price list overview",
+          "caption": "Price board overview listing product prices."
         }
       ]
     },
