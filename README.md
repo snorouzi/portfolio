@@ -95,6 +95,17 @@ It runs the app behind `nginx-proxy` and `acme-companion`, publishes ports 80 an
 
 To receive certificate expiry and recovery notices, set `DEFAULT_EMAIL` on the `acme-companion` service in `docker-compose.yml`.
 
+## Cloudflare Workers coming soon page
+
+`worker.js` is a standalone HTML response for temporarily serving a coming soon page. Its styles and graphics are embedded, so it does not depend on the React app, `dist/`, or external assets. The root `wrangler.toml` points Wrangler at this Worker.
+
+With Wrangler available and authenticated to Cloudflare, preview and deploy it with:
+
+```bash
+npx wrangler dev
+npx wrangler deploy
+```
+
 ## Code quality
 
 ```bash
