@@ -134,6 +134,35 @@ body {
     color var(--transition-base);
 }
 
+/* Scrollbar theming */
+html {
+  scrollbar-color: var(--color-accent-soft) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+[data-theme='dark'] html {
+  scrollbar-color: var(--color-border) transparent;
+}
+
 /*
   ==========================================================================
   3. Base document and typography styles
