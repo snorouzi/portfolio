@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import { ScrollToTop } from '../components/ScrollToTop';
 import HomePage from '../pages/HomePage';
 import ProjectsPage from '../pages/ProjectsPage';
 import ProjectDetailPage from '../pages/ProjectDetailPage';
@@ -10,6 +11,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 export function Router() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <div className="page">
         <Routes>
