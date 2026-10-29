@@ -579,6 +579,12 @@
           "src": "/images/projects/dorpad-back-webapp/price-board.png",
           "alt": "Price list overview",
           "caption": "Price board overview listing product prices."
+        },
+        {
+          "type": "other",
+          "src": "/images/projects/dorpad-back-webapp/swagger.png",
+          "alt": "Swagger UI",
+          "caption": "The Swagger UI for the Dorpad project API."
         }
       ]
     },
