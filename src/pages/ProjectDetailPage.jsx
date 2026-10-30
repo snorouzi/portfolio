@@ -29,6 +29,7 @@ export default function ProjectDetailPage() {
   const project = useMemo(() => findProjectBySlug(slug ?? ''), [slug]);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState({ src: null, alt: '' });
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
   const architectureImageRef = useRef(null);
   const galleryImageRefs = useRef({});
 
@@ -44,9 +45,10 @@ export default function ProjectDetailPage() {
     return <ProjectNotFound />;
   }
 
-  const handleOpenImage = (src, alt, element) => {
+  const handleOpenImage = (src, alt, element, index = -1) => {
     if (!src) return;
     setSelectedImage({ src, alt: alt || '' });
+    setLightboxIndex(index);
     setTriggerElement(element || document.activeElement);
     setLightboxOpen(true);
   };
@@ -66,6 +68,15 @@ export default function ProjectDetailPage() {
   const archDescription = architecture.description?.trim() || '';
   const archImage = architecture.image;
   const cardImage = project.card?.image;
+
+  const galleryEntries = gallery
+    .map((entry) => {
+      const src = entry.src;
+      if (!src) return null;
+      if (src === cardImage || src === archImage) return null;
+      return { src, alt: entry.alt?.trim() || '' };
+    })
+    .filter(Boolean);
 
   return (
     <main>
@@ -196,7 +207,7 @@ export default function ProjectDetailPage() {
                 gallery={gallery}
                 cardImage={cardImage}
                 archImage={archImage}
-                onImageClick={(src, alt, element) => handleOpenImage(src, alt, element)}
+                onImageClick={(src, alt, element, index) => handleOpenImage(src, alt, element, index)}
                 imageRefs={galleryImageRefs}
               />
             </section>
@@ -217,6 +228,14 @@ export default function ProjectDetailPage() {
         src={selectedImage.src}
         alt={selectedImage.alt}
         triggerElement={triggerElement}
+        images={galleryEntries}
+        currentIndex={lightboxIndex}
+        onNavigate={(index) => {
+          const img = galleryEntries[index];
+          if (!img) return;
+          setSelectedImage({ src: img.src, alt: img.alt });
+          setLightboxIndex(index);
+        }}
       />
     </main>
   );

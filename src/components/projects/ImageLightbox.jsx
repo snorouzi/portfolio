@@ -5,7 +5,17 @@ const MIN_SCALE = 1;
 const MAX_SCALE = 5;
 const ZOOM_STEP = 0.25;
 
-export default function ImageLightbox({ isOpen, onClose, src, alt, triggerRef, triggerElement }) {
+export default function ImageLightbox({
+  isOpen,
+  onClose,
+  src,
+  alt,
+  triggerRef,
+  triggerElement,
+  images = [],
+  currentIndex = -1,
+  onNavigate,
+}) {
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
   const lastFocusedRef = useRef(null);
@@ -44,13 +54,31 @@ export default function ImageLightbox({ isOpen, onClose, src, alt, triggerRef, t
     resetZoom();
   }, [resetZoom]);
 
+  const hasNav = Array.isArray(images) && images.length > 1 && currentIndex >= 0;
+  const prevIndex = hasNav ? (currentIndex - 1 + images.length) % images.length : -1;
+  const nextIndex = hasNav ? (currentIndex + 1) % images.length : -1;
+
+  const handlePrev = useCallback(() => {
+    if (!hasNav) return;
+    resetZoom();
+    onNavigate?.(prevIndex);
+  }, [hasNav, onNavigate, prevIndex, resetZoom]);
+
+  const handleNext = useCallback(() => {
+    if (!hasNav) return;
+    resetZoom();
+    onNavigate?.(nextIndex);
+  }, [hasNav, onNavigate, nextIndex, resetZoom]);
+
   useEffect(() => {
     if (!isOpen) {
-      resetZoom();
-      return;
+      // Return a cleanup that will reset zoom before the next effect runs (when isOpen becomes true)
+      return () => {
+        resetZoom();
+      };
     }
 
-    resetZoom();
+    // isOpen is true
     lastFocusedRef.current = triggerElement || triggerRef?.current || document.activeElement;
 
     const dialog = dialogRef.current;
@@ -72,6 +100,18 @@ export default function ImageLightbox({ isOpen, onClose, src, alt, triggerRef, t
       if (event.key === '-') {
         event.preventDefault();
         handleZoomOut();
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        handlePrev();
+        return;
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        handleNext();
         return;
       }
 
@@ -149,43 +189,66 @@ export default function ImageLightbox({ isOpen, onClose, src, alt, triggerRef, t
       if (triggerElement && typeof triggerElement.focus === 'function') {
         triggerElement.focus();
       }
+
+      // Reset zoom in cleanup to avoid setState in effect body
+      resetZoom();
     };
-  }, [isOpen, onClose, triggerRef, triggerElement, resetZoom, handleZoomIn, handleZoomOut, handleResetZoom]);
+  }, [
+    isOpen,
+    onClose,
+    triggerRef,
+    triggerElement,
+    resetZoom,
+    handleZoomIn,
+    handleZoomOut,
+    handleResetZoom,
+    handlePrev,
+    handleNext,
+  ]);
 
-  const handleWheel = useCallback((event) => {
-    if (!isOpen) return;
-    event.preventDefault();
-    const delta = event.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
-    setScale((prev) => {
-      const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, prev + delta));
-      if (next === 1) {
-        setTranslateX(0);
-        setTranslateY(0);
-      }
-      return next;
-    });
-  }, [isOpen]);
+  const handleWheel = useCallback(
+    (event) => {
+      if (!isOpen) return;
+      event.preventDefault();
+      const delta = event.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+      setScale((prev) => {
+        const next = Math.min(MAX_SCALE, Math.max(MIN_SCALE, prev + delta));
+        if (next === 1) {
+          setTranslateX(0);
+          setTranslateY(0);
+        }
+        return next;
+      });
+    },
+    [isOpen]
+  );
 
-  const handleMouseDown = useCallback((event) => {
-    if (scale <= 1) return;
-    event.preventDefault();
-    setIsPanning(true);
-    panStartRef.current = {
-      x: event.clientX,
-      y: event.clientY,
-      translateX,
-      translateY,
-    };
-  }, [scale, translateX, translateY]);
+  const handleMouseDown = useCallback(
+    (event) => {
+      if (scale <= 1) return;
+      event.preventDefault();
+      setIsPanning(true);
+      panStartRef.current = {
+        x: event.clientX,
+        y: event.clientY,
+        translateX,
+        translateY,
+      };
+    },
+    [scale, translateX, translateY]
+  );
 
-  const handleMouseMove = useCallback((event) => {
-    if (!isPanning || scale <= 1) return;
-    event.preventDefault();
-    const deltaX = event.clientX - panStartRef.current.x;
-    const deltaY = event.clientY - panStartRef.current.y;
-    setTranslateX(panStartRef.current.translateX + deltaX);
-    setTranslateY(panStartRef.current.translateY + deltaY);
-  }, [isPanning, scale]);
+  const handleMouseMove = useCallback(
+    (event) => {
+      if (!isPanning || scale <= 1) return;
+      event.preventDefault();
+      const deltaX = event.clientX - panStartRef.current.x;
+      const deltaY = event.clientY - panStartRef.current.y;
+      setTranslateX(panStartRef.current.translateX + deltaX);
+      setTranslateY(panStartRef.current.translateY + deltaY);
+    },
+    [isPanning, scale]
+  );
 
   const handleMouseUp = useCallback(() => {
     setIsPanning(false);
@@ -223,6 +286,50 @@ export default function ImageLightbox({ isOpen, onClose, src, alt, triggerRef, t
       <div className="image-lightbox__backdrop" onWheel={handleWheel}>
         <div className="image-lightbox__topbar">
           <div className="image-lightbox__controls" role="group" aria-label="Image zoom controls">
+            {hasNav && (
+              <button
+                type="button"
+                className="image-lightbox__control"
+                onClick={handlePrev}
+                aria-label="Previous image"
+                title="Previous (Left arrow)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+            )}
+            {hasNav && (
+              <button
+                type="button"
+                className="image-lightbox__control"
+                onClick={handleNext}
+                aria-label="Next image"
+                title="Next (Right arrow)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            )}
             <button
               type="button"
               className="image-lightbox__control"

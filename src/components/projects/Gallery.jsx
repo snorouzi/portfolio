@@ -75,11 +75,11 @@ export default function Gallery({ gallery, cardImage, archImage, onImageClick, i
                   imageRefs.current[entry.src] = el;
                 }
               }}
-              onClick={() => {
-                if (onImageClick) {
-                  onImageClick(entry.src, alt);
-                }
-              }}
+               onClick={() => {
+                 if (onImageClick) {
+                   onImageClick(entry.src, alt, null, index);
+                 }
+               }}
               aria-label="View gallery image in full size"
             >
               <img
