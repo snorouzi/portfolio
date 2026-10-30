@@ -9,6 +9,10 @@ import { formatPeriod } from '../../lib/format';
 export default function ProjectMeta({ project }) {
   const items = [];
 
+  if (project.organization?.trim()) {
+    items.push({ key: 'organization', label: 'Organization', value: project.organization.trim() });
+  }
+
   if (project.role?.trim()) {
     items.push({ key: 'role', label: 'Role', value: project.role.trim() });
   }

@@ -8,7 +8,7 @@
     "featured": true,
     "visibility": "public",
     "role": "Backend Developer",
-    "organization": "Tractor Club",
+    "organization": "Tractor FC",
     "period": {
       "start": "2026-06",
       "end": "Ongoing"
@@ -154,7 +154,7 @@
     "featured": true,
     "visibility": "public",
     "role": "Backend Developer",
-    "organization": "Tractor Club",
+    "organization": "Tractor FC",
     "period": {
       "start": "2026-05",
       "end": "Ongoing"
@@ -325,7 +325,7 @@
     "featured": true,
     "visibility": "public",
     "role": "Backend Developer",
-    "organization": "Tractor Club",
+    "organization": "Tractor FC",
     "period": {
       "start": "2025-10",
       "end": "Ongoing"
@@ -470,7 +470,7 @@
     "featured": false,
     "visibility": "public",
     "role": "Backend Developer",
-    "organization": "Dorpad",
+    "organization": "Daric Data Processing",
     "period": {
       "start": "2025-11",
       "end": null
