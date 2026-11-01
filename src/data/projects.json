@@ -462,6 +462,142 @@
     }
   },
   {
+    "id": "ms-short-link-generator-service-api",
+    "slug": "ms-short-link-generator-service-api",
+    "title": "Short Link Generator Service API",
+    "tagline": "A high-performance URL shortener service with a web UI, REST API, Redis caching, and Docker deployment for Tractor marketing.",
+    "description": "A Node.js/Express URL shortener service built for Tractor marketing. It converts long URLs into short, shareable links with optional custom aliases, tracks click counts, and resolves short URLs with a Redis-first caching layer backed by MongoDB. It ships a web interface (EJS) plus a REST API, HMAC-authenticated client endpoints, an admin page with recent-link management, redirect animations, ads integration, health monitoring, MongoDB weekly backups, and Nginx/Docker deployment. The service is containerized with MongoDB 7 and Redis 7 via Docker Compose.",
+    "featured": false,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Tractor FC",
+    "period": {
+      "start": "2025-07",
+      "end": "Ongoing"
+    },
+    "technologies": [
+      "Node.js 18",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Redis",
+      "EJS",
+      "nanoid",
+      "valid-url",
+      "Nginx",
+      "Docker",
+      "Docker Compose",
+      "Helmet",
+      "cookie-parser",
+      "body-parser",
+      "dotenv"
+    ],
+    "card": {
+      "image": "/images/projects/short-link/cover.png",
+      "imageAlt": "Short Link Generator Service API cover"
+    },
+    "details": {
+      "overview": "A URL shortener service for Tractor marketing, built with Node.js and Express, persisting mappings in MongoDB and caching them in Redis for fast resolution. It exposes both a browser UI and a REST API, supports custom aliases and click tracking. Features include HMAC client authentication, an admin page, redirect animations, ads integration, health endpoint, and automated MongoDB backups.",
+      "responsibilities": [
+        "Built the core URL shortening flow: validation, unique short ID generation (nanoid), optional custom aliases, MongoDB persistence, and Redis caching.",
+        "Implemented fast URL resolution with Redis-first lookup, MongoDB fallback, click-count updates in both stores, and redirect handling.",
+        "Added custom alias support with alphanumeric validation and uniqueness checks.",
+        "Built the web interface (EJS) for creating short links and an admin page listing recently created links, moved to client-side cookies.",
+        "Added redirect animations and pre-load page for a smoother redirect experience.",
+        "Implemented HMAC-based authentication for API clients and client examples.",
+        "Added health endpoint for uptime monitoring and removed Elastic APM instrumentation.",
+        "Added ads API integration and banners on error pages.",
+        "Restricted API-domain access to API endpoints only and refactored Nginx URL access.",
+        "Added MongoDB weekly backup scripts and Docker/Nginx deployment configuration.",
+        "Fixed redirect bugs and the duplicate-short-link generation bug for identical long URLs.",
+        "Updated generated link styling and copy options in the admin UI."
+      ],
+      "features": [
+        {
+          "title": "URL Shortening",
+          "description": "Convert long URLs into short, shareable links with optional custom aliases."
+        },
+        {
+          "title": "Click Tracking",
+          "description": "Monitor click statistics for each shortened URL."
+        },
+        {
+          "title": "Redis Caching",
+          "description": "Fast URL resolution with a Redis caching layer in front of MongoDB."
+        },
+        {
+          "title": "Web Interface",
+          "description": "User-friendly EJS web UI for creating and managing short links."
+        },
+        {
+          "title": "REST API",
+          "description": "Programmatic access via RESTful endpoints (POST /api/shorten, GET /:shortID)."
+        },
+        {
+          "title": "HMAC Authentication",
+          "description": "HMAC-based auth for API clients with example clients."
+        },
+        {
+          "title": "Admin Page",
+          "description": "Admin view of recently created links with copy options."
+        },
+        {
+          "title": "Redirect Animations",
+          "description": "Animated pre-load page shown before redirecting to the original URL."
+        },
+        {
+          "title": "Health Endpoint",
+          "description": "Health route for uptime monitoring."
+        },
+        {
+          "title": "Docker Deployment",
+          "description": "Containerized deployment with MongoDB 7 and Redis 7 via Docker Compose and Nginx."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Fast URL Resolution",
+          "problem": "Short-link redirects must be low-latency even under load.",
+          "approach": "Redis-first lookup with MongoDB fallback, updating click counts in both stores."
+        },
+        {
+          "title": "Duplicate Link Prevention",
+          "problem": "The same long URL could generate different short links.",
+          "approach": "Fixed generation logic to reuse existing mappings for identical long URLs."
+        },
+        {
+          "title": "Custom Alias Uniqueness",
+          "problem": "Custom aliases must be alphanumeric and unique.",
+          "approach": "Validated aliases with valid-url/alphanumeric rules and enforced uniqueness in MongoDB."
+        },
+        {
+          "title": "Client-Side Recent Links",
+          "problem": "Server-stored recent links table was unnecessary overhead.",
+          "approach": "Moved recent created links to client cookies and removed the server table."
+        }
+      ],
+      "architecture": {
+        "description": "Express.js application (app.js) with routes for shortening, redirect, health, and admin. MongoDB (Mongoose) persists URL mappings; Redis caches mappings keyed by shorturl:{BASE_URL}/{shortID} for fast resolution. EJS renders the web UI and admin page. Nginx fronts the app and restricts API-domain access to API endpoints. Docker Compose orchestrates the Node app, MongoDB 7, and Redis 7. HMAC auth secures API clients; automated scripts handle MongoDB weekly backups.",
+        "image": "/images/projects/short-link/architecture.png",
+        "imageAlt": "Short Link Generator Service API architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/short-link/redirect.png",
+          "alt": "Link overview",
+          "caption": "The redirect page shown before navigating to the destination URL."
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": "https://tractor-club.com/",
+      "documentation": null
+    }
+  },
+  {
     "id": "dorpad-back-webapp",
     "slug": "dorpad-back-webapp",
     "title": "Dorpad Backend",
@@ -473,7 +609,7 @@
     "organization": "Daric Data Processing",
     "period": {
       "start": "2025-11",
-      "end": null
+      "end": "2026-07"
     },
     "technologies": [
       "NestJS",
@@ -592,6 +728,309 @@
       "repository": null,
       "demo": null,
       "liveProject": "https://dorpad.com/",
+      "documentation": null
+    }
+  },
+  {
+    "id": "daric-holding-backend-platform",
+    "slug": "daric-holding-backend-platform",
+    "title": "Daric Holding Backend Platform",
+    "tagline": "A two-part NestJS backend system powering the Daric Holding group — an admin panel API and a public website backend API working together.",
+    "description": "The Daric Holding Backend Platform is a complete NestJS backend system for the Daric Holding group, composed of two cooperating parts: the Daric Holding Admin Panel API and the Daric Holding Website Backend API. Together they form a full content and hiring management system. The Admin Panel API handles authenticated admin operations — users, roles, granular permission-based access control, hiring panel (job opportunities, work domains, job applications, employment applications with resume/photo uploads and Excel export), organizational chart management, contact requests with email notifications, publication workflow (draft/published/archived), and file management. The Website Backend API serves the public-facing website — homepage sections (activities, companies, holdings, search, founder biography, activity areas, latest events, latest projects, settings/social media), public hiring APIs matching the frontend mock data format, organizational charts, history content, and file/asset serving. The two parts work together: the admin panel publishes content that the website backend consumes and exposes to the frontend. Built with TypeScript, MongoDB/Mongoose, Swagger-documented REST APIs, nestjs-i18n (Persian fallback), JWT auth, and Docker.",
+    "featured": false,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Daric Data Processing",
+    "period": {
+      "start": "2024-08",
+      "end": "2026-07"
+    },
+    "technologies": [
+      "NestJS",
+      "TypeScript",
+      "MongoDB",
+      "Mongoose",
+      "Multer",
+      "Swagger",
+      "nestjs-i18n",
+      "JWT",
+      "bcrypt",
+      "Axios",
+      "MJML",
+      "ExcelJS (xlsx)",
+      "moment-jalali",
+      "Helmet",
+      "CORS",
+      "Faker.js",
+      "Docker",
+      "GitLab CI"
+    ],
+    "card": {
+      "image": "/images/projects/daric-holding/cover.png",
+      "imageAlt": "Daric Holding Backend Platform cover"
+    },
+    "details": {
+      "overview": "A complete NestJS backend platform for the Daric Holding group, split into two cooperating repositories: an Admin Panel API (darik-api) and a Website Backend API (daric-holding-backend-web). The admin panel manages users, roles, permissions, hiring workflows (job opportunities, work domains, job applications, employment applications with file uploads and Excel export), organizational charts, contact requests with email notifications, publication status control, and file management. The website backend serves public homepage data, hiring APIs compatible with the frontend mock data, org charts, history content, and static assets. Published content flows from the admin panel to the website backend, which exposes it to the website frontend. Both use MongoDB, TypeScript, Swagger, and nestjs-i18n with Persian fallback.",
+      "responsibilities": [
+        "Implemented granular permission-based access control with Permission and Role modules, including role assignment and authorization guards; fixed permission guard and refactored permissions/authorization access to APIs.",
+        "Implemented the hiring module: job opportunities, work domains, job applications, and employment applications with panel review and email notification on both admin panel and website backend.",
+        "Added Excel export for employment applications including resume and photo data; fixed Excel missing data and email data styling.",
+        "Implemented employment application V2 with resume/photo file uploads, preventing duplicate applications using national code; unified application submission with file uploads and fixed uploaded file URL handling.",
+        "Implemented company-chart module: employee creation with validation, organizational chart mock data, pagination, child reordering for hierarchy display, and chart data on position; exposed org chart to both admin panel and website.",
+        "Implemented contact-us module with email notifications for contact requests, settings-based recipient, MJML email templates, and RTL support.",
+        "Implemented homepage module APIs: first section (activities, companies, holdings), featured section, search bar by faName, founder info biography, activity area, latest events, latest projects, and settings/social media endpoints.",
+        "Built public hiring website APIs matching the exact frontend mock data format: job opportunities with filtering/pagination, work domains, companies, cities, and job applications.",
+        "Removed admin panel APIs from the website application to separate public and admin concerns; refactored environment configuration and removed ESLint config.",
+        "Supported publication management (draft/published/archived) for hiring and history content; website APIs return only published content while panel APIs show all content.",
+        "Managed Git workflows: merging feature branches (hiring, employee-hiring, contact-us-email, role-management) into development and main; bugfix/hiring-excel merges; updating env files and adding missing variables.",
+        "Refactored assets module: updated default BASE_URL to production endpoint; fixed hiring uploaded file URL handling."
+      ],
+      "features": [
+        {
+          "title": "Admin Panel API",
+          "description": "Authenticated admin operations: users, roles, granular permissions, hiring panel, org chart, contact requests, publication workflow, file management."
+        },
+        {
+          "title": "Website Backend API",
+          "description": "Public-facing website data: homepage sections, hiring APIs matching frontend mock data, org charts, history content, static asset serving."
+        },
+        {
+          "title": "Published Content Flow",
+          "description": "Admin panel publishes content that the website backend consumes and exposes to the frontend."
+        },
+        {
+          "title": "Authentication & Authorization",
+          "description": "JWT-based auth with role management and granular permission-based access control."
+        },
+        {
+          "title": "Hiring Panel",
+          "description": "Job opportunities, work domains, job applications, employment applications with resume/photo uploads, Excel export, and duplicate prevention via national code."
+        },
+        {
+          "title": "Organizational Chart",
+          "description": "Company chart with departments, employees, hierarchy display, pagination, and child reordering for both admin panel and website."
+        },
+        {
+          "title": "Contact Us",
+          "description": "Contact request management with email notifications, MJML templates, RTL support, and settings-based recipients."
+        },
+        {
+          "title": "Publication Management",
+          "description": "Draft/published/archived workflow with published date and audit trail for controlled public visibility."
+        },
+        {
+          "title": "i18n & Localization",
+          "description": "Multilingual support with Persian as the fallback language using nestjs-i18n."
+        },
+        {
+          "title": "API Documentation",
+          "description": "Swagger/OpenAPI documentation, Postman collection, and database seeding scripts."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Two-Repository Coordination",
+          "problem": "The admin panel and website backend are separate repositories that must work together with consistent data flow.",
+          "approach": "Designed a published-content flow where the admin panel publishes content and the website backend consumes and exposes it to the frontend, keeping public and admin concerns separated."
+        },
+        {
+          "title": "Granular Permission-Based Access Control",
+          "problem": "APIs needed fine-grained authorization beyond simple role checks.",
+          "approach": "Implemented Permission and Role modules with authorization guards to enforce granular access control across endpoints."
+        },
+        {
+          "title": "Mock Data Compatibility",
+          "problem": "Website hiring APIs had to return data in the exact format expected by the frontend mock data.",
+          "approach": "Aligned hiring entity fields and response structures with the mock data format, including embedded company data and Persian salary currency."
+        },
+        {
+          "title": "Employment Application File Uploads",
+          "problem": "Applications required resume and photo uploads with duplicate prevention and Excel export.",
+          "approach": "Implemented employment application V2 with Multer file uploads, national-code duplicate detection, and ExcelJS-based export including resume/photo URLs."
+        },
+        {
+          "title": "Organizational Chart Hierarchy",
+          "problem": "Displaying nested department/employee hierarchy with pagination and reordering across admin panel and website.",
+          "approach": "Built company-chart module with child reordering, mock data integration, and paginated hierarchy responses."
+        }
+      ],
+      "architecture": {
+        "description": "A two-part NestJS backend platform. The Admin Panel API (darik-api) is organized into feature modules (Auth, Users, Role, Permission, Hiring, CompanyChart, ContactUs, FileManager, Holding, Company, Post, Activity, Category, Comment, Position, Settings, History, Seed) over shared core infrastructure. The Website Backend API (daric-holding-backend-web) is organized into feature modules (Homepage, Activity, Holding, Company, Post, Setting, History, Hiring, CompanyChart, ContactUs, FileManager, Assets, Position, Comment, Category, Tag, Recaptcha). Both use MongoDB via Mongoose as the primary data store, nestjs-i18n with Persian fallback, Swagger for API documentation, and logging middleware. The admin panel uses Multer, JWT, bcrypt, Axios, MJML, and xlsx (Excel export). The website backend uses Helmet, CORS, and ServeStatic for file serving. A bidirectional published-content flow connects the admin panel to the website backend, and both write to shared MongoDB data.",
+        "image": "/images/projects/daric-holding/architecture.png",
+        "imageAlt": "Daric Holding Backend Platform architecture diagram"
+      },
+      "gallery": []
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": "https://daricgroup.com/fa",
+      "documentation": null
+    }
+  },
+	{
+    "id": "trasafar-flight-hotel-reservation-platform",
+    "slug": "trasafar-flight-hotel-reservation-platform",
+    "title": "Trasafer Flight & Hotel Reservation Platform",
+    "tagline": "Full-stack flight and hotel booking platform.",
+    "description": "A combined flight and hotel reservation and management platform composed of three cooperating services: an admin/panel backend (panel-backend) for operations, a hotel static data manager (hotel_static_data_manager) for hotel data ingestion and search, and a ticketing backend (Ticket_Backend_Refact) for bookings, payments, and wallets. Together they cover flight and hotel search, booking, payment processing, wallet management, refunds, withdrawals, reviews, and reporting.",
+    "featured": false,
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Daric Data Processing",
+    "period": {
+      "start": "2023-12",
+      "end": "2025-12"
+    },
+    "technologies": [
+      "Node.js",
+      "NestJS",
+      "TypeScript",
+      "TypeORM",
+      "MongoDB",
+      "Mongoose",
+      "PostgreSQL",
+      "Redis",
+      "RabbitMQ",
+      "Docker",
+      "JWT",
+      "Helmet"
+    ],
+    "card": {
+      "image": "/images/projects/trasafar/cover.png",
+      "imageAlt": "Trasafer Flight & Hotel Reservation Platform cover"
+    },
+    "details": {
+      "overview": "A reservation platform spanning flights and hotels. The admin backend manages users, wallets, bookings, payments, refunds, withdrawals, reviews, categories, and reporting. The hotel data manager handles hotel static data, facilities, cities, properties, and search/filtering. The ticketing backend integrates hotel data, manages bookings and payments, and processes wallet transactions with card tracking.",
+      "responsibilities": [
+        "Implemented hotel review management system with detailed micro-ratings and enhanced review statistics.",
+        "Added hotel city and property priority update endpoints with image upload support.",
+        "Enhanced hotel data structures for cities, properties, facilities, and search/filtering, including domestic property attributes and popular cities/properties endpoints.",
+        "Refactored hotel price calculation logic and facility data structures in responses.",
+        "Implemented wallet and payment features: card storage (Mongoose), card info tracking in transactions, deposit reduction logic using associated card balances, and transaction remaining-amount updates.",
+        "Added card-based refund flow: refund withdrawal amounts to card on rejection, update card info during refunds, and track used transactions.",
+        "Enhanced withdrawal retrieval with options and date parsing; switched withdrawals to use card number instead of IBAN and fetch card info.",
+        "Added profit summary and paginated profit table reporting endpoints.",
+        "Added age field to PermanentPassenger entity and card icon assets.",
+        "Implemented Metabase service streamlining and interfaces; enhanced category/blog service integration.",
+        "Fixed payment verification logic and conditional execution of discount recharge/PNR cancellation for booking payments.",
+        "Enabled TypeORM synchronization and refactored wallet module imports."
+      ],
+      "features": [
+        {
+          "title": "Flight & Hotel Booking",
+          "description": "Search and book flights and hotels across integrated providers."
+        },
+        {
+          "title": "Wallet & Payments",
+          "description": "Wallet balances, card storage, payments, refunds, and withdrawals."
+        },
+        {
+          "title": "Hotel Reviews",
+          "description": "Hotel review management with detailed micro-ratings and statistics."
+        },
+        {
+          "title": "Hotel Data Management",
+          "description": "Static hotel data, facilities, cities, properties, and search/filtering."
+        },
+        {
+          "title": "Admin Reporting",
+          "description": "Profit summaries and paginated profit tables."
+        },
+        {
+          "title": "Withdrawals",
+          "description": "Withdrawal requests with card-based refunds and date filtering."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Card-Based Wallet Tracking",
+          "problem": "Tracking which cards were used across wallet transactions and bookings for accurate refunds.",
+          "approach": "Introduced IUsedCards/ICards interfaces, stored card details in wallet transactions and bookings, and updated remaining amounts on refund."
+        },
+        {
+          "title": "Hotel Data Consistency",
+          "problem": "Keeping hotel static data, facilities, and city/property structures consistent across services.",
+          "approach": "Refactored data structures and price calculation logic; added domestic attributes and filtering endpoints."
+        },
+        {
+          "title": "Payment Verification",
+          "problem": "Incorrect payment verification for specific payment types.",
+          "approach": "Corrected verification logic and gated discount recharge/PNR cancellation to booking payments only."
+        }
+      ],
+      "architecture": {
+        "description": "Three cooperating NestJS/Node services. The admin backend (panel-backend) exposes management APIs for users, wallets, bookings, payments, refunds, withdrawals, reviews, and reporting, backed by a relational database via TypeORM. The hotel static data manager (hotel_static_data_manager) ingests and serves hotel static data, facilities, cities, and properties. The ticketing backend (Ticket_Backend_Refact) handles bookings, payments, wallet transactions, and hotel data integration. See architecture-prompt.md for an AI image-generation prompt.",
+        "image": "/images/projects/trasafar/architecture.png",
+        "imageAlt": "Trasafer platform architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/hotel-landing.png",
+          "alt": "Trasafar hotel booking landing page with hotel search form and promotional banner",
+          "caption": "Hotel booking landing page with domestic hotel search fields, recent searches, and a promotional flight banner."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/domestic-one-way-search.png",
+          "alt": "Domestic one-way flight search results with flight cards and filters",
+          "caption": "Search results for a domestic one-way flight, with fare details, departure and arrival times, and filters."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/international-two-way-search.png",
+          "alt": "International round-trip flight search results with outbound and return itineraries",
+          "caption": "International round-trip search results showing paired outbound and return flights with fares and filters."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/hotel-search.png",
+          "alt": "Hotel search results with a property listing, map, and amenity filters",
+          "caption": "Hotel search page with a Tehran property result, map preview, booking details, and amenity filters."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/single-hotel.png",
+          "alt": "Ers Tehran hotel detail page with room photos, amenities, room rates, and reviews",
+          "caption": "Hotel detail page for Ers Tehran, showing room photos, facilities, available room rates, and guest reviews."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/one-way-info.png",
+          "alt": "One-way flight details modal with itinerary, baggage allowance, and passenger fare breakdown",
+          "caption": "One-way flight details and fare breakdown, including the Tehran to Yazd itinerary, baggage allowance, and passenger prices."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/two-way-outboud.png",
+          "alt": "Outbound flight details for a Tehran to Dubai round trip",
+          "caption": "Outbound leg details for the Tehran to Dubai round trip, with flight times, airport information, and fare breakdown."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/two-way-inbound.png",
+          "alt": "Return flight details for a Dubai to Tehran round trip",
+          "caption": "Return leg details for the Dubai to Tehran round trip, with flight times, airport information, and fare breakdown."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/two-way-price-chart.png",
+          "alt": "Round-trip fare calendar comparing prices across outbound and return dates",
+          "caption": "Round-trip fare calendar with a date-by-date price grid and the selected itinerary's total fare."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/trasafar/payout-page.png",
+          "alt": "Flight checkout page with passenger details, contact information, and payment summary",
+          "caption": "Flight booking checkout showing passenger and contact forms, itinerary details, and the payable amount."
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": null,
       "documentation": null
     }
   }
