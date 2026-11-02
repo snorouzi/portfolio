@@ -11,6 +11,10 @@
  */
 
 /**
+ * @typedef {'professional' | 'personal'} ProjectCategory
+ */
+
+/**
  * @typedef {Object} Project
  * @property {string} id
  * @property {string} slug
@@ -24,6 +28,7 @@
  * @property {ProjectPeriod} period
  * @property {string[]} technologies
  * @property {ProjectCard} card
+ * @property {ProjectCategory} category
  * @property {Object} details
  * @property {Object} links
  */
@@ -37,4 +42,15 @@
  */
 export function getFeaturedProjects(projects) {
   return projects.filter((project) => project.featured === true).slice(0, 3);
+}
+
+/**
+ * Returns projects filtered by category, preserving their declared order.
+ *
+ * @param {Project[]} projects
+ * @param {ProjectCategory} category
+ * @returns {Project[]}
+ */
+export function getProjectsByCategory(projects, category) {
+  return projects.filter((project) => project.category === category);
 }

@@ -895,6 +895,51 @@ button {
   padding: 2rem 0;
 }
 
+/* ---- Projects category sections ---- */
+
+.projects-section {
+  padding-top: 0;
+}
+
+.projects-section + .projects-section {
+  padding-top: var(--section-gap);
+  border-top: 1px solid var(--color-border);
+}
+
+.projects-section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.projects-section-title {
+  font-size: clamp(1.5rem, 3vw + 0.25rem, 2.25rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.projects-section-sub {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ---- Show More ---- */
+
+.projects-show-more {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.projects-show-more .button {
+  min-width: 10rem;
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .projects-show-more .button {
+    width: 100%;
+  }
+}
+
 .section.section.projects-listing {
   padding-top: 0;
 }

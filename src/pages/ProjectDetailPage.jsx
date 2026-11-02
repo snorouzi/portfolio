@@ -207,19 +207,32 @@ export default function ProjectDetailPage() {
                 gallery={gallery}
                 cardImage={cardImage}
                 archImage={archImage}
-                onImageClick={(src, alt, element, index) => handleOpenImage(src, alt, element, index)}
+                onImageClick={(src, alt, element, index) =>
+                  handleOpenImage(src, alt, element, index)
+                }
                 imageRefs={galleryImageRefs}
               />
             </section>
           )}
 
-          <section
-            className="project-detail-section"
-            aria-labelledby="project-detail-links-heading"
-          >
-            <ProjectSectionHeading id="project-detail-links-heading" title="Links" />
-            <ProjectLinks links={project.links} />
-          </section>
+          {project.links &&
+            Object.values(project.links).some((value) => {
+              if (typeof value !== 'string' || !value.trim()) return false;
+              try {
+                const url = new URL(value.trim());
+                return url.protocol === 'http:' || url.protocol === 'https:';
+              } catch {
+                return false;
+              }
+            }) && (
+              <section
+                className="project-detail-section"
+                aria-labelledby="project-detail-links-heading"
+              >
+                <ProjectSectionHeading id="project-detail-links-heading" title="Links" />
+                <ProjectLinks links={project.links} />
+              </section>
+            )}
         </div>
       </section>
       <ImageLightbox
