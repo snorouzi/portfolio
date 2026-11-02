@@ -6,6 +6,7 @@
     "tagline": "A NestJS microservice powering the Tractor Club stadium ticketing platform.",
     "description": "A modular NestJS microservice that powers the ticketing platform for Tractor Club stadium events. It manages the full lifecycle of stadium inventory and ticketing: stadiums, zones, sections, seats, gates, matches, seat reservations with Redis-backed bitmap locking, ticket issuance, payments, KYC, provider discounts, waiting lists, and attendee check-in.",
     "featured": true,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Tractor FC",
@@ -152,6 +153,7 @@
     "tagline": "A NestJS microservice for Know Your Customer (KYC) identity verification with pluggable provider strategies.",
     "description": "A NestJS microservice that provides Know Your Customer (KYC) identity verification. It exposes three API surfaces — internal service (/api/v1/service/kyc), end-user (/api/v1/user/kyc), and admin (/api/v1/admin) — each protected by dedicated guards and gateway-injected authentication. Verifications run synchronously via async/await with pluggable provider strategies and automatic priority-based fallback (UID, Jibit). Features include Fancard KYC, short-circuit verification of already-verified steps, per-provider resilience policies (retry, timeout, circuit breaker via Cockatiel), a subject data model storing full identity profiles, event-driven audit logging and user-service webhook callbacks, an under-18 guardian OTP flow, Sub-KYC (verifying on behalf of another user), TypeORM migrations with PostgreSQL, AWS S3 document uploads, structured Pino logging, i18n (fa/en), and Swagger UI at /api/docs.",
     "featured": true,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Tractor FC",
@@ -323,6 +325,7 @@
     "tagline": "A NestJS backend for managing multi-language news, galleries, matches, and media for Tractor FC.",
     "description": "A production-ready NestJS backend that powers the Tractor FC landing platform. It manages multi-language news content (English/Persian) with tagging, SEO-friendly slugs, scheduled publishing, featured ordering, and full-text search across MongoDB and Elasticsearch. It also handles galleries, match data with live overlays and head-to-head stats, ads, ticketing subsystems, analytics/view tracking, file management with AWS S3, and event-driven side effects via RabbitMQ. Includes JWT auth, Sentry observability, Swagger docs, and Docker deployment.",
     "featured": true,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Tractor FC",
@@ -468,6 +471,7 @@
     "tagline": "A high-performance URL shortener service with a web UI, REST API, Redis caching, and Docker deployment for Tractor marketing.",
     "description": "A Node.js/Express URL shortener service built for Tractor marketing. It converts long URLs into short, shareable links with optional custom aliases, tracks click counts, and resolves short URLs with a Redis-first caching layer backed by MongoDB. It ships a web interface (EJS) plus a REST API, HMAC-authenticated client endpoints, an admin page with recent-link management, redirect animations, ads integration, health monitoring, MongoDB weekly backups, and Nginx/Docker deployment. The service is containerized with MongoDB 7 and Redis 7 via Docker Compose.",
     "featured": false,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Tractor FC",
@@ -604,6 +608,7 @@
     "tagline": "A modular NestJS backend powering the Dorpad web platform.",
     "description": "A production-ready NestJS backend for the Dorpad platform. It provides a versioned REST API with authentication and role-based authorization, product and category management, orders, content management (news, pages, FAQ, awards, featured content, gallery), company info, footer, file handling, ads, contact forms, and employee/salary/payroll tooling with Excel uploads. Includes i18n (English/Persian), OpenTelemetry tracing, Prometheus metrics, Pyroscope profiling, and enterprise-grade security.",
     "featured": false,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Daric Data Processing",
@@ -738,6 +743,7 @@
     "tagline": "A two-part NestJS backend system powering the Daric Holding group — an admin panel API and a public website backend API working together.",
     "description": "The Daric Holding Backend Platform is a complete NestJS backend system for the Daric Holding group, composed of two cooperating parts: the Daric Holding Admin Panel API and the Daric Holding Website Backend API. Together they form a full content and hiring management system. The Admin Panel API handles authenticated admin operations — users, roles, granular permission-based access control, hiring panel (job opportunities, work domains, job applications, employment applications with resume/photo uploads and Excel export), organizational chart management, contact requests with email notifications, publication workflow (draft/published/archived), and file management. The Website Backend API serves the public-facing website — homepage sections (activities, companies, holdings, search, founder biography, activity areas, latest events, latest projects, settings/social media), public hiring APIs matching the frontend mock data format, organizational charts, history content, and file/asset serving. The two parts work together: the admin panel publishes content that the website backend consumes and exposes to the frontend. Built with TypeScript, MongoDB/Mongoose, Swagger-documented REST APIs, nestjs-i18n (Persian fallback), JWT auth, and Docker.",
     "featured": false,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Daric Data Processing",
@@ -868,13 +874,14 @@
       "documentation": null
     }
   },
-	{
+  {
     "id": "trasafar-flight-hotel-reservation-platform",
     "slug": "trasafar-flight-hotel-reservation-platform",
     "title": "Trasafer Flight & Hotel Reservation Platform",
     "tagline": "Full-stack flight and hotel booking platform.",
     "description": "A combined flight and hotel reservation and management platform composed of three cooperating services: an admin/panel backend (panel-backend) for operations, a hotel static data manager (hotel_static_data_manager) for hotel data ingestion and search, and a ticketing backend (Ticket_Backend_Refact) for bookings, payments, and wallets. Together they cover flight and hotel search, booking, payment processing, wallet management, refunds, withdrawals, reviews, and reporting.",
     "featured": false,
+    "category": "professional",
     "visibility": "public",
     "role": "Backend Developer",
     "organization": "Daric Data Processing",
@@ -1029,6 +1036,150 @@
     },
     "links": {
       "repository": null,
+      "demo": null,
+      "liveProject": null,
+      "documentation": null
+    }
+  },
+  {
+    "id": "ai-shell",
+    "slug": "ai-shell",
+    "title": "AI Shell",
+    "tagline": "A local-first AI assistant for your Zsh shell, powered by Ollama.",
+    "description": "AI Shell (`ai`) is a local-first AI assistant for the Zsh shell. It is a small Go program that talks to a locally-running Ollama instance for inference and an optional, self-managed SearXNG container for web search. There is no cloud dependency, no paid API, and no telemetry — everything runs on your machine. It is used as a shell function that captures terminal context (current directory, previous command, exit code, git status) and feeds it to the model, so questions like \"why did that fail?\" just work. Responses stream back as they are generated, conversation history is kept per shell session, and the assistant can optionally suggest (and, with confirmation, execute) shell commands with risk-tier classification and an audit log.",
+    "featured": false,
+    "category": "personal",
+    "visibility": "public",
+    "role": "Creator & Developer",
+    "organization": "Personal",
+    "period": {
+      "start": "2026-07",
+      "end": "2026-07"
+    },
+    "technologies": [
+      "Go",
+      "Ollama",
+      "SearXNG",
+      "Zsh",
+      "Unix Domain Sockets",
+      "YAML",
+      "Docker",
+      "Markdown (ANSI rendering)"
+    ],
+    "card": {
+      "image": "/images/projects/ai-shell/cover.png",
+      "imageAlt": "AI Shell terminal banner describing its local-first Zsh assistant features"
+    },
+    "details": {
+      "overview": "A local-first AI assistant for Zsh built as a single Go binary with two run modes (client and daemon) communicating over a Unix domain socket. The daemon owns the Ollama connection, per-session chat memory, and an optional SearXNG container. It provides streaming answers, Markdown rendering in the terminal, terminal-context injection, model profile management (add/remove/switch at runtime), optional web search via a self-managed SearXNG container, and optional command execution with risk tiers and confirmation. Configuration lives in YAML and is created by a first-run wizard with GPU-aware preflight checks.",
+      "responsibilities": [
+        "Designed and implemented the entire Go codebase from scratch as the sole developer.",
+        "Built the client/daemon architecture: a single `ai` binary that lazily spawns a background daemon over a Unix domain socket and speaks a newline-delimited JSON protocol.",
+        "Implemented the Ollama HTTP client with streaming `/api/generate` and `/api/tags` support.",
+        "Created the config system: YAML load/save with defaults, model profiles, first-run wizard, and runtime add/remove of model profiles persisted to config.",
+        "Built preflight checks: Ollama/GPU detection, VRAM-aware context-length suggestions, guided model pulling, and first-run setup.",
+        "Implemented terminal context injection: captures cwd, last command, exit code, and git status from Zsh and feeds them into the model's system prompt.",
+        "Built per-session in-memory chat state with capped history and pending-suggestion handling.",
+        "Implemented optional web search: a basic function-calling loop where the model can request a SearXNG search, plus a SearXNG client and container lifecycle manager (Docker).",
+        "Implemented optional command execution: structured JSON suggestions (`{explanation, commands, risk}`), glob-based risk classification (low/medium/high), user confirmation (typed `yes` for high risk), execution via `sh -c`, and an audit log.",
+        "Wrote a tiny dependency-free ANSI Markdown renderer and markdown detection for TTY output.",
+        "Wrote the Zsh shell function (`ai.zsh`) for integration, including session-token capture and context forwarding via environment variables.",
+        "Added the `help` command, `model`/`models`/`model-add`/`model-rm` subcommands, and `--model` one-off override.",
+        "Wrote unit tests for every package (`go test ./...`) and documentation (README, architecture, configuration, web-search guides)."
+      ],
+      "features": [
+        {
+          "title": "Local inference only",
+          "description": "All chats go to Ollama on localhost; nothing leaves your machine, no cloud dependency, no paid API, no telemetry."
+        },
+        {
+          "title": "Streaming answers",
+          "description": "Tokens are printed as they arrive from Ollama through the daemon to the client in real time."
+        },
+        {
+          "title": "Markdown rendering",
+          "description": "Answers are re-rendered as ANSI-styled Markdown in the terminal (disabled automatically when output is piped)."
+        },
+        {
+          "title": "Terminal context",
+          "description": "The Zsh function captures cwd, previous command, exit code, and git status and feeds them to the model."
+        },
+        {
+          "title": "Session memory",
+          "description": "Short conversation history kept per shell session (in-memory, capped, not persisted)."
+        },
+        {
+          "title": "Model switching",
+          "description": "Switch the active model per shell, list configured profiles, or override for a single query; add/remove profiles at runtime."
+        },
+        {
+          "title": "Optional web search",
+          "description": "AI Shell manages its own SearXNG container and uses it only when the model decides a query needs live information."
+        },
+        {
+          "title": "Optional command execution",
+          "description": "The assistant suggests shell commands with a risk tier and runs them after confirmation, logging every executed command."
+        },
+        {
+          "title": "First-run wizard & preflight",
+          "description": "GPU-aware Ollama install guidance, VRAM detection, model pulling, and interactive config creation."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Client/daemon socket protocol",
+          "problem": "The CLI must remain a short-lived process while the daemon holds long-lived state (Ollama connection, sessions). They needed a robust, language-agnostic IPC mechanism.",
+          "approach": "Used Unix domain sockets with newline-delimited JSON request/response types (query, model_switch, model_list, model_add, model_remove, execute_confirm, and chunk/searching/notice/done/error responses). The client auto-spawns the daemon when the socket is unreachable."
+        },
+        {
+          "title": "Streaming with Markdown re-rendering",
+          "problem": "Ollama tokens should stream live, but Markdown needs the full answer to render nicely on a TTY.",
+          "approach": "Print chunks verbatim while they arrive, buffer them, then on completion jump the cursor back and replace the plain text with ANSI-styled Markdown — only when rendering is enabled, stdout is a TTY, and the content looks like Markdown."
+        },
+        {
+          "title": "Safe optional command execution",
+          "problem": "Letting an AI suggest shell commands is dangerous; commands must never run silently and high-risk actions need strong confirmation.",
+          "approach": "The model returns structured JSON (`{explanation, commands, risk}`); risk is classified from config globs; every command is shown and confirmed before running (high risk requires typing `yes`); every run is logged to an audit file."
+        },
+        {
+          "title": "Isolating Docker usage",
+          "problem": "Web search needs a SearXNG container managed by Docker, but the rest of the codebase should not shell out to Docker.",
+          "approach": "Split into `internal/web` (a pure HTTP client for an already-running SearXNG instance) and `internal/searxng` (owns the container lifecycle via `os/exec`). All Docker usage lives in the latter."
+        },
+        {
+          "title": "Minimal dependency footprint",
+          "problem": "Keeping the binary small and auditable without pulling in CLI frameworks, routers, ORMs, or UUID libraries.",
+          "approach": "Standard library only plus `gopkg.in/yaml.v3`; hand-rolled glob-to-regexp compiler for risk rules and a small ANSI Markdown writer."
+        }
+      ],
+      "architecture": {
+        "description": "AI Shell is a single Go binary (`ai`) with two run modes over a Unix domain socket. `cmd/ai/main.go` is the entrypoint: `ai daemon` runs preflight and serves the socket; everything else is client mode, which ensures the daemon is running (spawning it if needed), dials the socket, sends a JSON request, and streams responses back. The Zsh function (`ai.zsh`) calls the binary as the client, injecting context via environment variables. Internal packages: `config` (YAML load/save/defaults), `preflight` (Ollama/GPU checks, model pulling, first-run wizard, SearXNG setup), `ollama` (HTTP client for Ollama's `/api/generate` streaming + `/api/tags`, `ollama pull`), `daemon` (Unix socket server, JSON protocol, request routing, web tool loop), `session` (in-memory per-session chat state + pending suggestion), `context` (gather cwd/git/last-command/exit-code into a system prompt), `execution` (structured suggestions, risk classification, confirmation, execution, audit log), `web` (pure SearXNG HTTP client), `searxng` (manages the SearXNG container lifecycle via Docker), and `markdown` (tiny dependency-free ANSI Markdown renderer). Startup runs preflight (Ollama reachability, GPU/VRAM detection, wizard, model pulls, optional SearXNG container), then opens the daemon log, builds the Ollama client, and serves the socket. Query handling resolves the model, optionally runs the web-search decision loop against SearXNG, then branches to chat (streamed answer) or execution (JSON suggestion, risk classify, confirm, run). Sessions live in a mutex-guarded map capped by `max_history_messages`; state is in-memory only and tied to the shell.",
+        "image": "/images/projects/ai-shell/architecture.png",
+        "imageAlt": "AI Shell architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ai-shell/help.png",
+          "alt": "AI Shell help output listing commands, options, and usage examples in a Zsh terminal",
+          "caption": "The built-in help screen shows common commands, model management, options, and example queries."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ai-shell/model-change.png",
+          "alt": "AI Shell terminal showing configured Ollama models and switching the active model",
+          "caption": "List configured model profiles and switch the active model for the current shell session."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/ai-shell/function.gif",
+          "alt": "Animated demonstration of invoking the AI Shell Zsh function and interacting with the assistant in the terminal",
+          "caption": "An animated demonstration of the `ai` Zsh function in use."
+        }
+      ]
+    },
+    "links": {
+      "repository": "https://github.com/snorouzi/ai-shell",
       "demo": null,
       "liveProject": null,
       "documentation": null

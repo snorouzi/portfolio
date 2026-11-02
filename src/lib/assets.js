@@ -11,7 +11,7 @@
  *  - No asset path is invented or silently substituted.
  */
 
-const assetManifest = import.meta.glob('/src/assets/projects/**/*.{png,jpg,jpeg,svg,webp,gif}', {
+const assetManifest = import.meta.glob('/src/assets/projects/**/*.{png,jpg,jpeg,svg,webp,gif,GIF}', {
   eager: true,
   query: '?url',
   import: 'default',
