@@ -1172,7 +1172,7 @@
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ai-shell/function.gif",
+          "src": "/images/projects/ai-shell/function.png",
           "alt": "Animated demonstration of invoking the AI Shell Zsh function and interacting with the assistant in the terminal",
           "caption": "An animated demonstration of the `ai` Zsh function in use."
         }
