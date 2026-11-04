@@ -28,7 +28,7 @@
       "JWT"
     ],
     "card": {
-      "image": "/images/projects/reservation-system/cover.png",
+      "image": "/images/projects/reservation-system/cover.webp",
       "imageAlt": "MS Ticketing Service API cover"
     },
     "details": {
@@ -103,37 +103,37 @@
       ],
       "architecture": {
         "description": "A modular NestJS service organized into feature modules (Stadium, Zone, Platform, Section, Seat, Gate, Match, MatchStadium, Attendee, Reservation, ProviderDiscount, Ticket, Payment, Kyc, Jaberi, User, WaitingList, Notification, Health) over shared core infrastructure (config, database, files, logger, resilience) and common cross-cutting concerns (filters, interceptors, pipes, guards, interfaces). PostgreSQL via TypeORM is the primary data store, Redis provides caching and atomic seat locking, and RabbitMQ is an optional messaging layer. External integrations include KYC, Jaberi, payment gateway, and notification service.",
-        "image": "/images/projects/reservation-system/architecture.png",
+        "image": "/images/projects/reservation-system/architecture.webp",
         "imageAlt": "MS Ticketing Service API architecture diagram"
       },
       "gallery": [
         {
           "type": "diagram",
-          "src": "/images/projects/reservation-system/booking-flow.png",
+          "src": "/images/projects/reservation-system/booking-flow.webp",
           "alt": "Booking workflow diagram",
           "caption": "The flow of a reservation request through the backend."
         },
         {
           "type": "other",
-          "src": "/images/projects/reservation-system/swagger.png",
+          "src": "/images/projects/reservation-system/swagger.webp",
           "alt": "Swagger UI",
           "caption": "The Swagger UI for the MS Ticketing Service API."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/reservation-system/blank-select.png",
+          "src": "/images/projects/reservation-system/blank-select.webp",
           "alt": "Stadium overview",
           "caption": "Stadium overview with no seats selected."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/reservation-system/seats-selection.png",
+          "src": "/images/projects/reservation-system/seats-selection.webp",
           "alt": "Seats overview",
           "caption": "Seats selection overview with seat selected."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/reservation-system/seat-selected.png",
+          "src": "/images/projects/reservation-system/seat-selected.webp",
           "alt": "Stadium overview",
           "caption": "Stadium overview with seats selected."
         }
@@ -177,7 +177,7 @@
       "amqplib"
     ],
     "card": {
-      "image": "/images/projects/ms-kyc-service/cover.png",
+      "image": "/images/projects/ms-kyc-service/cover.webp",
       "imageAlt": "MS KYC Service API cover"
     },
     "details": {
@@ -275,37 +275,37 @@
       ],
       "architecture": {
         "description": "A modular NestJS service organized into feature modules (Kyc, Subject, ProviderManagement, Health, Audit, Events, Settings) over shared core infrastructure (config, database, redis, logger, resilience, observability, swagger) and common cross-cutting concerns (filters, interceptors, pipes, guards, decorators, dto, enums, interfaces, utils). Integrations include UID and Jibit KYC providers, AWS S3 file storage, and notification/webhook delivery. PostgreSQL via TypeORM is the primary data store, Redis provides caching and rate limiting, and Cockatiel resilience policies wrap provider HTTP clients. Three API surfaces (/api/v1/service/kyc, /api/v1/user/kyc, /api/v1/admin) are each protected by dedicated guards. The verification pipeline runs synchronously via async/await with pluggable provider strategies, priority-based fallback, and short-circuiting of already-verified steps. Event-driven side effects emit audit logs and user-service webhook callbacks.",
-        "image": "/images/projects/ms-kyc-service/architecture.png",
+        "image": "/images/projects/ms-kyc-service/architecture.webp",
         "imageAlt": "MS KYC Service API architecture diagram"
       },
       "gallery": [
         {
           "type": "other",
-          "src": "/images/projects/ms-kyc-service/swagger.png",
+          "src": "/images/projects/ms-kyc-service/swagger.webp",
           "alt": "Tractor FC KYC system swagger Doc",
           "caption": "Interactive Swagger documentation for exploring and testing the Tractor FC KYC System API endpoints."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-kyc-service/not-verified.png",
+          "src": "/images/projects/ms-kyc-service/not-verified.webp",
           "alt": "Tractor FC KYC system not verified status",
           "caption": "A user with a 'Not Verified' status, indicating that their KYC verification process has not yet been completed or approved."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-kyc-service/verification-request.png",
+          "src": "/images/projects/ms-kyc-service/verification-request.webp",
           "alt": "Tractor FC KYC system verification request page",
           "caption": "The verification request page where users can submit their identity documents for KYC processing."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-kyc-service/verification-result.png",
+          "src": "/images/projects/ms-kyc-service/verification-result.webp",
           "alt": "Tractor FC KYC system verification result",
           "caption": "The verification result page showing the outcome of the KYC verification process."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-kyc-service/verified.png",
+          "src": "/images/projects/ms-kyc-service/verified.webp",
           "alt": "Tractor FC KYC system verified status",
           "caption": "A user with a 'Verified' status, indicating that their KYC verification process has been completed and approved."
         }
@@ -350,7 +350,7 @@
       "Pino"
     ],
     "card": {
-      "image": "/images/projects/ms-content-management/cover.png",
+      "image": "/images/projects/ms-content-management/cover.webp",
       "imageAlt": "MS Content Management API cover"
     },
     "details": {
@@ -427,31 +427,31 @@
       ],
       "architecture": {
         "description": "A modular NestJS service organized into feature modules (News, Tags, Gallery, Match, Ads, Ticketing, FileManager, Analytics, Auth, Admin, Health) over shared core infrastructure (config, database, redis, logger, observability, swagger). Integrations include MongoDB (primary store), Elasticsearch (search), Redis (caching/rate limiting), RabbitMQ (events), AWS S3 (media), and Sentry (observability). Event-driven side effects use a transactional outbox. See architecture-prompt.md for an image generation prompt.",
-        "image": "/images/projects/ms-content-management/architecture.png",
+        "image": "/images/projects/ms-content-management/architecture.webp",
         "imageAlt": "MS Content Management API architecture diagram"
       },
       "gallery": [
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-content-management/gallery-list.png",
+          "src": "/images/projects/ms-content-management/gallery-list.webp",
           "alt": "Tractor FC website displaying a list of photo galleries",
           "caption": "The gallery listing page, where visitors can browse photo galleries featuring the club's events and activities."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-content-management/single-gallery.png",
+          "src": "/images/projects/ms-content-management/single-gallery.webp",
           "alt": "Tractor FC website showing photos from an individual gallery",
           "caption": "An individual gallery page displaying photos from a specific event or subject."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-content-management/news-list.png",
+          "src": "/images/projects/ms-content-management/news-list.webp",
           "alt": "Tractor FC website displaying a list of news articles",
           "caption": "The news listing page, where visitors can browse the latest news and updates about the club."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ms-content-management/single-news.png",
+          "src": "/images/projects/ms-content-management/single-news.webp",
           "alt": "Tractor FC website displaying a full news article",
           "caption": "An individual news page presenting the full article and its related information."
         }
@@ -497,7 +497,7 @@
       "dotenv"
     ],
     "card": {
-      "image": "/images/projects/short-link/cover.png",
+      "image": "/images/projects/short-link/cover.webp",
       "imageAlt": "Short Link Generator Service API cover"
     },
     "details": {
@@ -582,13 +582,13 @@
       ],
       "architecture": {
         "description": "Express.js application (app.js) with routes for shortening, redirect, health, and admin. MongoDB (Mongoose) persists URL mappings; Redis caches mappings keyed by shorturl:{BASE_URL}/{shortID} for fast resolution. EJS renders the web UI and admin page. Nginx fronts the app and restricts API-domain access to API endpoints. Docker Compose orchestrates the Node app, MongoDB 7, and Redis 7. HMAC auth secures API clients; automated scripts handle MongoDB weekly backups.",
-        "image": "/images/projects/short-link/architecture.png",
+        "image": "/images/projects/short-link/architecture.webp",
         "imageAlt": "Short Link Generator Service API architecture diagram"
       },
       "gallery": [
         {
           "type": "screenshot",
-          "src": "/images/projects/short-link/redirect.png",
+          "src": "/images/projects/short-link/redirect.webp",
           "alt": "Link overview",
           "caption": "The redirect page shown before navigating to the destination URL."
         }
@@ -635,7 +635,7 @@
       "Excel (xlsx)"
     ],
     "card": {
-      "image": "/images/projects/dorpad-back-webapp/cover.png",
+      "image": "/images/projects/dorpad-back-webapp/cover.webp",
       "imageAlt": "Dorpad Backend cover"
     },
     "details": {
@@ -711,19 +711,19 @@
       ],
       "architecture": {
         "description": "A modular NestJS service organized into feature modules (Auth, User, Role, Permission, Operator, Product, ProductVariant, Category, PriceHistory, Order, News, Page, FAQ, Award, FeaturedContent, Gallery, Company, Footer, File, FileSecurity, Ads, ContactUs, Employee, Salary, Health, Logger, Metrics, Email, SMS, Encryption) over shared core infrastructure (config, database, redis, logger, security) and common cross-cutting concerns (filters, interceptors, guards, middleware, utils). PostgreSQL via TypeORM is the primary data store, Redis stores JWT tokens and sessions. External integrations include email/SMS providers.",
-        "image": "/images/projects/dorpad-back-webapp/architecture.png",
+        "image": "/images/projects/dorpad-back-webapp/architecture.webp",
         "imageAlt": "Dorpad Backend architecture diagram"
       },
       "gallery": [
         {
           "type": "screenshot",
-          "src": "/images/projects/dorpad-back-webapp/price-board.png",
+          "src": "/images/projects/dorpad-back-webapp/price-board.webp",
           "alt": "Price list overview",
           "caption": "Price board overview listing product prices."
         },
         {
           "type": "other",
-          "src": "/images/projects/dorpad-back-webapp/swagger.png",
+          "src": "/images/projects/dorpad-back-webapp/swagger.webp",
           "alt": "Swagger UI",
           "caption": "The Swagger UI for the Dorpad project API."
         }
@@ -772,7 +772,7 @@
       "GitLab CI"
     ],
     "card": {
-      "image": "/images/projects/daric-holding/cover.png",
+      "image": "/images/projects/daric-holding/cover.webp",
       "imageAlt": "Daric Holding Backend Platform cover"
     },
     "details": {
@@ -862,7 +862,7 @@
       ],
       "architecture": {
         "description": "A two-part NestJS backend platform. The Admin Panel API (darik-api) is organized into feature modules (Auth, Users, Role, Permission, Hiring, CompanyChart, ContactUs, FileManager, Holding, Company, Post, Activity, Category, Comment, Position, Settings, History, Seed) over shared core infrastructure. The Website Backend API (daric-holding-backend-web) is organized into feature modules (Homepage, Activity, Holding, Company, Post, Setting, History, Hiring, CompanyChart, ContactUs, FileManager, Assets, Position, Comment, Category, Tag, Recaptcha). Both use MongoDB via Mongoose as the primary data store, nestjs-i18n with Persian fallback, Swagger for API documentation, and logging middleware. The admin panel uses Multer, JWT, bcrypt, Axios, MJML, and xlsx (Excel export). The website backend uses Helmet, CORS, and ServeStatic for file serving. A bidirectional published-content flow connects the admin panel to the website backend, and both write to shared MongoDB data.",
-        "image": "/images/projects/daric-holding/architecture.png",
+        "image": "/images/projects/daric-holding/architecture.webp",
         "imageAlt": "Daric Holding Backend Platform architecture diagram"
       },
       "gallery": []
@@ -904,7 +904,7 @@
       "Helmet"
     ],
     "card": {
-      "image": "/images/projects/trasafar/cover.png",
+      "image": "/images/projects/trasafar/cover.webp",
       "imageAlt": "Trasafer Flight & Hotel Reservation Platform cover"
     },
     "details": {
@@ -968,67 +968,67 @@
       ],
       "architecture": {
         "description": "Three cooperating NestJS/Node services. The admin backend (panel-backend) exposes management APIs for users, wallets, bookings, payments, refunds, withdrawals, reviews, and reporting, backed by a relational database via TypeORM. The hotel static data manager (hotel_static_data_manager) ingests and serves hotel static data, facilities, cities, and properties. The ticketing backend (Ticket_Backend_Refact) handles bookings, payments, wallet transactions, and hotel data integration. See architecture-prompt.md for an AI image-generation prompt.",
-        "image": "/images/projects/trasafar/architecture.png",
+        "image": "/images/projects/trasafar/architecture.webp",
         "imageAlt": "Trasafer platform architecture diagram"
       },
       "gallery": [
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/hotel-landing.png",
+          "src": "/images/projects/trasafar/hotel-landing.webp",
           "alt": "Trasafar hotel booking landing page with hotel search form and promotional banner",
           "caption": "Hotel booking landing page with domestic hotel search fields, recent searches, and a promotional flight banner."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/domestic-one-way-search.png",
+          "src": "/images/projects/trasafar/domestic-one-way-search.webp",
           "alt": "Domestic one-way flight search results with flight cards and filters",
           "caption": "Search results for a domestic one-way flight, with fare details, departure and arrival times, and filters."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/international-two-way-search.png",
+          "src": "/images/projects/trasafar/international-two-way-search.webp",
           "alt": "International round-trip flight search results with outbound and return itineraries",
           "caption": "International round-trip search results showing paired outbound and return flights with fares and filters."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/hotel-search.png",
+          "src": "/images/projects/trasafar/hotel-search.webp",
           "alt": "Hotel search results with a property listing, map, and amenity filters",
           "caption": "Hotel search page with a Tehran property result, map preview, booking details, and amenity filters."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/single-hotel.png",
+          "src": "/images/projects/trasafar/single-hotel.webp",
           "alt": "Ers Tehran hotel detail page with room photos, amenities, room rates, and reviews",
           "caption": "Hotel detail page for Ers Tehran, showing room photos, facilities, available room rates, and guest reviews."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/one-way-info.png",
+          "src": "/images/projects/trasafar/one-way-info.webp",
           "alt": "One-way flight details modal with itinerary, baggage allowance, and passenger fare breakdown",
           "caption": "One-way flight details and fare breakdown, including the Tehran to Yazd itinerary, baggage allowance, and passenger prices."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/two-way-outboud.png",
+          "src": "/images/projects/trasafar/two-way-outboud.webp",
           "alt": "Outbound flight details for a Tehran to Dubai round trip",
           "caption": "Outbound leg details for the Tehran to Dubai round trip, with flight times, airport information, and fare breakdown."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/two-way-inbound.png",
+          "src": "/images/projects/trasafar/two-way-inbound.webp",
           "alt": "Return flight details for a Dubai to Tehran round trip",
           "caption": "Return leg details for the Dubai to Tehran round trip, with flight times, airport information, and fare breakdown."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/two-way-price-chart.png",
+          "src": "/images/projects/trasafar/two-way-price-chart.webp",
           "alt": "Round-trip fare calendar comparing prices across outbound and return dates",
           "caption": "Round-trip fare calendar with a date-by-date price grid and the selected itinerary's total fare."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/trasafar/payout-page.png",
+          "src": "/images/projects/trasafar/payout-page.webp",
           "alt": "Flight checkout page with passenger details, contact information, and payment summary",
           "caption": "Flight booking checkout showing passenger and contact forms, itinerary details, and the payable amount."
         }
@@ -1067,7 +1067,7 @@
       "Markdown (ANSI rendering)"
     ],
     "card": {
-      "image": "/images/projects/ai-shell/cover.png",
+      "image": "/images/projects/ai-shell/cover.webp",
       "imageAlt": "AI Shell terminal banner describing its local-first Zsh assistant features"
     },
     "details": {
@@ -1154,25 +1154,25 @@
       ],
       "architecture": {
         "description": "AI Shell is a single Go binary (`ai`) with two run modes over a Unix domain socket. `cmd/ai/main.go` is the entrypoint: `ai daemon` runs preflight and serves the socket; everything else is client mode, which ensures the daemon is running (spawning it if needed), dials the socket, sends a JSON request, and streams responses back. The Zsh function (`ai.zsh`) calls the binary as the client, injecting context via environment variables. Internal packages: `config` (YAML load/save/defaults), `preflight` (Ollama/GPU checks, model pulling, first-run wizard, SearXNG setup), `ollama` (HTTP client for Ollama's `/api/generate` streaming + `/api/tags`, `ollama pull`), `daemon` (Unix socket server, JSON protocol, request routing, web tool loop), `session` (in-memory per-session chat state + pending suggestion), `context` (gather cwd/git/last-command/exit-code into a system prompt), `execution` (structured suggestions, risk classification, confirmation, execution, audit log), `web` (pure SearXNG HTTP client), `searxng` (manages the SearXNG container lifecycle via Docker), and `markdown` (tiny dependency-free ANSI Markdown renderer). Startup runs preflight (Ollama reachability, GPU/VRAM detection, wizard, model pulls, optional SearXNG container), then opens the daemon log, builds the Ollama client, and serves the socket. Query handling resolves the model, optionally runs the web-search decision loop against SearXNG, then branches to chat (streamed answer) or execution (JSON suggestion, risk classify, confirm, run). Sessions live in a mutex-guarded map capped by `max_history_messages`; state is in-memory only and tied to the shell.",
-        "image": "/images/projects/ai-shell/architecture.png",
+        "image": "/images/projects/ai-shell/architecture.webp",
         "imageAlt": "AI Shell architecture diagram"
       },
       "gallery": [
         {
           "type": "screenshot",
-          "src": "/images/projects/ai-shell/help.png",
+          "src": "/images/projects/ai-shell/help.webp",
           "alt": "AI Shell help output listing commands, options, and usage examples in a Zsh terminal",
           "caption": "The built-in help screen shows common commands, model management, options, and example queries."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ai-shell/model-change.png",
+          "src": "/images/projects/ai-shell/model-change.webp",
           "alt": "AI Shell terminal showing configured Ollama models and switching the active model",
           "caption": "List configured model profiles and switch the active model for the current shell session."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/ai-shell/function.png",
+          "src": "/images/projects/ai-shell/function.webp",
           "alt": "Animated demonstration of invoking the AI Shell Zsh function and interacting with the assistant in the terminal",
           "caption": "An animated demonstration of the `ai` Zsh function in use."
         }
@@ -1300,79 +1300,79 @@
       ],
       "architecture": {
         "description": "VS Code extension architecture with three main layers: Extension Host (TypeScript) handling VS Code API integration, Kanban/Parser logic for Markdown processing, and Webview UI (HTML/CSS/JS) for the board interface. The extension registers commands, manages webview panels per file, watches files for changes, and communicates via postMessage. The parser reads/writes Markdown with column/task/note/comment/ID parsing. The Kanban class provides high-level operations and persists changes immediately.",
-        "image": "/images/projects/kanban-board/architecture.png",
+        "image": "/images/projects/kanban-board/architecture.webp",
         "imageAlt": "Kanban Board extension architecture diagram"
       },
       "gallery": [
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/dark-theme.png",
+          "src": "/images/projects/kanban-board/dark-theme.webp",
           "alt": "Kanban board displayed in the dark theme with tasks arranged in columns",
           "caption": "The main board view shows Markdown tasks organized into columns in the dark theme."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/dark-help.png",
+          "src": "/images/projects/kanban-board/dark-help.webp",
           "alt": "Kanban Board help screen in the dark theme",
           "caption": "The help screen explains the extension’s commands and keyboard shortcuts."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/dark-column.png",
+          "src": "/images/projects/kanban-board/dark-column.webp",
           "alt": "Kanban board column controls in the dark theme",
           "caption": "Column controls let users manage and reorder their board columns."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/dark-new-task.png",
+          "src": "/images/projects/kanban-board/dark-new-task.webp",
           "alt": "New task form on a Kanban board in the dark theme",
           "caption": "Add a task directly to a column from the dark themed board."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/dark-task-info.png",
+          "src": "/images/projects/kanban-board/dark-task-info.webp",
           "alt": "Task details view showing task metadata in the dark theme",
           "caption": "The task details view provides access to task status, priority, notes, and comments."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/dark-activity.png",
+          "src": "/images/projects/kanban-board/dark-activity.webp",
           "alt": "Recent Kanban board activity shown in the dark theme",
           "caption": "The activity view summarizes recent changes made on the board."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/light-theme.png",
+          "src": "/images/projects/kanban-board/light-theme.webp",
           "alt": "Kanban board displayed in the light theme with tasks arranged in columns",
           "caption": "The main board view shows Markdown tasks organized into columns in the light theme."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/light-help.png",
+          "src": "/images/projects/kanban-board/light-help.webp",
           "alt": "Kanban Board help screen in the light theme",
           "caption": "The help screen explains the extension’s commands and keyboard shortcuts."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/light-column.png",
+          "src": "/images/projects/kanban-board/light-column.webp",
           "alt": "Kanban board column controls in the light theme",
           "caption": "Column controls let users manage and reorder their board columns."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/light-new-task.png",
+          "src": "/images/projects/kanban-board/light-new-task.webp",
           "alt": "New task form on a Kanban board in the light theme",
           "caption": "Add a task directly to a column from the light themed board."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/light-task-info.png",
+          "src": "/images/projects/kanban-board/light-task-info.webp",
           "alt": "Task details view showing task metadata in the light theme",
           "caption": "The task details view provides access to task status, priority, notes, and comments."
         },
         {
           "type": "screenshot",
-          "src": "/images/projects/kanban-board/light-activity.png",
+          "src": "/images/projects/kanban-board/light-activity.webp",
           "alt": "Recent Kanban board activity shown in the light theme",
           "caption": "The activity view summarizes recent changes made on the board."
         }
