@@ -693,15 +693,17 @@ button {
 
 .hero-actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 0.75rem;
+  align-items: center;
 }
 
 .hero-button-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
@@ -818,6 +820,10 @@ button {
 }
 
 @media (max-width: 640px) {
+  .hero-button-primary {
+    width: 100%;
+  }
+
   .portrait {
     max-width: 260px;
   }
