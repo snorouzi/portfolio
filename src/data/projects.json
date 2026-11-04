@@ -1184,5 +1184,205 @@
       "liveProject": null,
       "documentation": null
     }
+  },
+  {
+    "id": "kanban-board",
+    "slug": "kanban-board",
+    "title": "Kanban Board",
+    "tagline": "A lightweight VS Code extension for managing Markdown-based Kanban boards.",
+    "description": "Kanban Board is a VS Code extension that transforms Markdown files into interactive Kanban boards. Each level-2 heading becomes a column and each checklist item becomes a draggable task. It provides full two-way synchronization between the visual board and the underlying Markdown file, with support for priorities, notes, comments, column reordering, cross-board task movement, keyboard shortcuts, and theme switching",
+    "featured": false,
+    "category": "personal",
+    "visibility": "public",
+    "role": "Creator & Developer",
+    "organization": "Personal",
+    "period": {
+      "start": "2025-09",
+      "end": "2026-11"
+    },
+    "technologies": [
+      "TypeScript",
+      "VS Code Extension API",
+      "Node.js",
+      "Markdown",
+      "HTML/CSS/JavaScript",
+      "markdown-it",
+      "Mocha"
+    ],
+    "card": {
+      "image": "/images/projects/kanban-board/cover.svg",
+      "imageAlt": "Kanban Board extension interface showing tasks in columns"
+    },
+    "details": {
+      "overview": "A VS Code extension that renders Markdown files as interactive Kanban boards. The extension parses `##` headings as columns and `- [ ]`/`- [x]` checklist items as tasks, maintains stable UUIDs for tasks, and writes all changes back to Markdown. Features include drag-and-drop, task priorities, multi-line notes, comments, cross-board movement, column reordering, find/search, keyboard shortcuts, and dark/light themes. Built with TypeScript and the VS Code Webview API.",
+      "responsibilities": [
+        "Designed and implemented the entire VS Code extension from scratch as the sole developer.",
+        "Built the Markdown parser to read/write tasks with columns, priorities, notes, comments, and stable IDs.",
+        "Implemented the Kanban logic layer for task operations (add/move/toggle/remove), column management, and cross-board task movement.",
+        "Created the VS Code extension entry point with commands to open boards from workspace or from any Markdown file.",
+        "Developed the webview UI with drag-and-drop, modals for task details/comments, column reordering, and keyboard interactions.",
+        "Implemented two-way sync between the webview and Markdown files with automatic ID generation for tasks.",
+        "Added file watching for external changes with auto-refresh of open panels.",
+        "Built task priority system (5 levels), comments serialization in task lines, and multi-line note support.",
+        "Implemented keyboard shortcuts and chord commands (Ctrl/Cmd+G then Ctrl/Cmd+T).",
+        "Added dark/light theme toggle with persistence and RTL/LTR text detection.",
+        "Created test suite with Mocha for parser and kanban logic.",
+        "Released versions 0.1.0 through 0.4.0 with continuous feature additions and improvements."
+      ],
+      "features": [
+        {
+          "title": "Markdown as Source of Truth",
+          "description": "Columns map to ## headings, tasks to checkbox items. All changes sync back to Markdown instantly."
+        },
+        {
+          "title": "Drag & Drop",
+          "description": "Move tasks between columns and reorder within columns. Drag column handles to reorder columns."
+        },
+        {
+          "title": "Cross-Board Movement",
+          "description": "Move tasks between different Markdown files/boards seamlessly."
+        },
+        {
+          "title": "Task Management",
+          "description": "5-level priority system, multi-line notes, comments per task, toggle completion, and quick removal."
+        },
+        {
+          "title": "Task Details Modal",
+          "description": "Click task titles to view and edit priority, status, notes, and comments with full CRUD operations."
+        },
+        {
+          "title": "Keyboard Shortcuts",
+          "description": "Chord shortcuts, Ctrl/Cmd+F find panel, Enter/Esc for modal interactions, hotkeys for quick actions."
+        },
+        {
+          "title": "Column Management",
+          "description": "Add/remove columns, reorder columns with drag handles, automatic 'Done' column creation."
+        },
+        {
+          "title": "Search & Navigation",
+          "description": "Find panel to search task titles with next/previous navigation."
+        },
+        {
+          "title": "Themes & UI",
+          "description": "Dark/light theme toggle, RTL/LTR auto-detection, smart input pairing, activity log of recent changes."
+        },
+        {
+          "title": "Auto ID Management",
+          "description": "Stable UUIDs for tasks for persistence and cross-board operations, auto-generated if missing."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Two-way Markdown synchronization",
+          "problem": "Keeping the visual Kanban board in sync with Markdown files while preserving formatting like notes (indented), comments, and IDs.",
+          "approach": "Built a custom Markdown parser that reads `##` sections and checkbox items, extracts metadata from inline tags like `[id:...]`, `[Priority:...]`, `[Comments:...]`, and parses indented lines as notes. Writer serializes back in a consistent format with 4-space indentation for notes."
+        },
+        {
+          "title": "Cross-board task movement",
+          "problem": "Moving tasks between different Markdown files while maintaining data integrity and refreshing all open panels.",
+          "approach": "Implemented `moveTaskBetweenFiles` in the kanban module that reads source, removes task by ID, inserts into target at specified position, writes both files. Extension tracks all open panels by file path and refreshes them after cross-board moves."
+        },
+        {
+          "title": "Webview state management",
+          "problem": "Managing multiple Kanban instances for different files, handling drag-and-drop across boards, and keeping UI in sync with file changes.",
+          "approach": "Used VS Code Webview API with message passing between extension host and webview. Each panel has its own Kanban instance. Implemented file watching with debouncing to auto-refresh on external changes. Tracked panels in a Map by file path."
+        },
+        {
+          "title": "Rich task metadata in Markdown",
+          "problem": "Storing priorities, comments, IDs, and notes in a human-readable Markdown format without breaking existing tools.",
+          "approach": "Encoded metadata as inline tags in task lines (`[id: uuid] [Priority: High] [Comments: a | b]`) and used indentation for multi-line notes. Parser handles these tags robustly with regex, writer serializes consistently."
+        },
+        {
+          "title": "Stable task identity",
+          "problem": "Enabling reliable task movement and updates even if text changes.",
+          "approach": "Assigned each task a stable UUID via `crypto.randomUUID()`, stored as `[id: ...]`, auto-generated on read if missing and persisted back to file. All operations use IDs for cross-board moves."
+        }
+      ],
+      "architecture": {
+        "description": "VS Code extension architecture with three main layers: Extension Host (TypeScript) handling VS Code API integration, Kanban/Parser logic for Markdown processing, and Webview UI (HTML/CSS/JS) for the board interface. The extension registers commands, manages webview panels per file, watches files for changes, and communicates via postMessage. The parser reads/writes Markdown with column/task/note/comment/ID parsing. The Kanban class provides high-level operations and persists changes immediately.",
+        "image": "/images/projects/kanban-board/architecture.png",
+        "imageAlt": "Kanban Board extension architecture diagram"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/dark-theme.png",
+          "alt": "Kanban board displayed in the dark theme with tasks arranged in columns",
+          "caption": "The main board view shows Markdown tasks organized into columns in the dark theme."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/dark-help.png",
+          "alt": "Kanban Board help screen in the dark theme",
+          "caption": "The help screen explains the extension’s commands and keyboard shortcuts."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/dark-column.png",
+          "alt": "Kanban board column controls in the dark theme",
+          "caption": "Column controls let users manage and reorder their board columns."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/dark-new-task.png",
+          "alt": "New task form on a Kanban board in the dark theme",
+          "caption": "Add a task directly to a column from the dark themed board."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/dark-task-info.png",
+          "alt": "Task details view showing task metadata in the dark theme",
+          "caption": "The task details view provides access to task status, priority, notes, and comments."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/dark-activity.png",
+          "alt": "Recent Kanban board activity shown in the dark theme",
+          "caption": "The activity view summarizes recent changes made on the board."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/light-theme.png",
+          "alt": "Kanban board displayed in the light theme with tasks arranged in columns",
+          "caption": "The main board view shows Markdown tasks organized into columns in the light theme."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/light-help.png",
+          "alt": "Kanban Board help screen in the light theme",
+          "caption": "The help screen explains the extension’s commands and keyboard shortcuts."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/light-column.png",
+          "alt": "Kanban board column controls in the light theme",
+          "caption": "Column controls let users manage and reorder their board columns."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/light-new-task.png",
+          "alt": "New task form on a Kanban board in the light theme",
+          "caption": "Add a task directly to a column from the light themed board."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/light-task-info.png",
+          "alt": "Task details view showing task metadata in the light theme",
+          "caption": "The task details view provides access to task status, priority, notes, and comments."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/kanban-board/light-activity.png",
+          "alt": "Recent Kanban board activity shown in the light theme",
+          "caption": "The activity view summarizes recent changes made on the board."
+        }
+      ]
+    },
+    "links": {
+      "repository": "https://github.com/snorouzi/kanban-board",
+      "demo": null,
+      "liveProject": null,
+      "documentation": null
+    }
   }
 ]
