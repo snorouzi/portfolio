@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="44" x2="1100" y2="885" gradientUnits="userSpaceOnUse"><stop stop-color="#101A2B"/><stop offset="1" stop-color="#172D3C"/></linearGradient>
+    <linearGradient id="nest" x1="665" y1="205" x2="1020" y2="570" gradientUnits="userSpaceOnUse"><stop stop-color="#FF9A62"/><stop offset="1" stop-color="#F26450"/></linearGradient>
+    <linearGradient id="panel" x1="168" y1="508" x2="1032" y2="778" gradientUnits="userSpaceOnUse"><stop stop-color="#202E40"/><stop offset="1" stop-color="#142232"/></linearGradient>
+    <filter id="shadow" x="113" y="457" width="974" height="386" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <rect width="1200" height="900" rx="36" fill="url(#bg)"/>
+  <circle cx="941" cy="289" r="254" fill="#F36F54" fill-opacity=".055"/>
+  <circle cx="941" cy="289" r="196" stroke="#F58A5E" stroke-opacity=".13" stroke-width="2"/>
+  <circle cx="941" cy="289" r="142" stroke="#F58A5E" stroke-opacity=".16" stroke-width="2"/>
+  <path d="M788 302c8-66 63-115 131-115 69 0 124 49 132 115-8 65-63 114-132 114-68 0-123-49-131-114Z" stroke="url(#nest)" stroke-width="18"/>
+  <path d="M819 302c6-47 48-83 100-83s94 36 100 83c-6 47-48 83-100 83s-94-36-100-83Z" stroke="#FFC18A" stroke-width="13"/>
+  <path d="M851 302c5-30 33-52 68-52s63 22 68 52c-5 30-33 52-68 52s-63-22-68-52Z" stroke="#F26D54" stroke-width="13"/>
+  <path d="m904 286 15-13 15 13v30l-15 13-15-13v-30Z" fill="#FFD29D"/>
+  <path d="M0 0h1200v14H0z" fill="#F47A56"/>
+  <rect x="112" y="155" width="12" height="74" rx="6" fill="#F47A56"/>
+  <text x="151" y="185" fill="#F2A277" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="4">A BETTER WAY TO BEGIN</text>
+  <text x="145" y="300" fill="#F7F4EF" font-family="Arial,sans-serif" font-size="92" font-weight="700" letter-spacing="-4">Nest Craft</text>
+  <text x="151" y="356" fill="#B8C5CC" font-family="Arial,sans-serif" font-size="26">Production-ready NestJS projects,</text>
+  <text x="151" y="394" fill="#B8C5CC" font-family="Arial,sans-serif" font-size="26">crafted from one thoughtful CLI.</text>
+  <ellipse cx="600" cy="663" rx="448" ry="126" fill="#000" fill-opacity=".35" filter="url(#shadow)"/>
+  <rect x="150" y="493" width="900" height="286" rx="22" fill="url(#panel)" stroke="#526174" stroke-opacity=".72" stroke-width="2"/>
+  <path d="M172 493h856a22 22 0 0 1 22 22v42H150v-42a22 22 0 0 1 22-22Z" fill="#26364A"/>
+  <circle cx="184" cy="528" r="7" fill="#F27659"/><circle cx="211" cy="528" r="7" fill="#F1BC68"/><circle cx="238" cy="528" r="7" fill="#76B99B"/>
+  <text x="282" y="534" fill="#93A4B3" font-family="monospace" font-size="17">nest-craft — interactive setup</text>
+  <text x="196" y="603" fill="#F58C63" font-family="monospace" font-size="21" font-weight="700">◆</text>
+  <text x="232" y="603" fill="#F1F3F2" font-family="monospace" font-size="21">Create a new NestJS project</text>
+  <text x="232" y="651" fill="#9DAEBA" font-family="monospace" font-size="18">Project name</text>
+  <text x="422" y="651" fill="#D9E0DF" font-family="monospace" font-size="18">api-platform</text>
+  <path d="M420 663h132" stroke="#F47A56" stroke-width="2"/>
+  <text x="232" y="707" fill="#9DAEBA" font-family="monospace" font-size="18">Package manager</text>
+  <rect x="422" y="682" width="74" height="32" rx="8" fill="#F47A56" fill-opacity=".18"/>
+  <text x="436" y="704" fill="#FFAC7C" font-family="monospace" font-size="17" font-weight="700">pnpm</text>
+  <text x="525" y="704" fill="#718395" font-family="monospace" font-size="17">npm   yarn</text>
+  <text x="152" y="833" fill="#7F93A3" font-family="Arial,sans-serif" font-size="17" letter-spacing="2">SCAFFOLD  ·  CONFIGURE  ·  SHIP</text>
+  <text x="873" y="833" fill="#7F93A3" font-family="monospace" font-size="17">NODE.JS  /  NESTJS</text>
+</svg>

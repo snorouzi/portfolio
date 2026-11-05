@@ -1182,7 +1182,7 @@
       "repository": "https://github.com/snorouzi/ai-shell",
       "demo": null,
       "liveProject": null,
-      "documentation": null
+      "documentation": "https://github.com/snorouzi/ai-shell#readme"
     }
   },
   {
@@ -1380,9 +1380,164 @@
     },
     "links": {
       "repository": "https://github.com/snorouzi/kanban-board",
-      "demo": null,
+      "demo": "https://github.com/snorouzi/kanban-board/releases/tag/v0.4.1",
       "liveProject": null,
-      "documentation": null
+      "documentation": "https://github.com/snorouzi/kanban-board#readme"
+    }
+  },
+  {
+    "id": "nest-craft",
+    "slug": "nest-craft",
+    "title": "Nest Craft",
+    "tagline": "A batteries-included CLI for scaffolding and enhancing production-ready NestJS projects.",
+    "description": "Nest Craft is a Node.js CLI tool that streamlines creating and evolving NestJS applications. It orchestrates `nest new`, applies opinionated defaults (ConfigModule and env files, ESLint/Prettier/Jest tweaks, typed env/request definitions, static assets), and can inject production-focused features into both new and existing NestJS codebases through interactive, cancellation-safe prompts. The generator can wire API prefixing and URI versioning, security middleware (CORS, Helmet, custom headers), validation/interceptors/filters, Swagger with custom UI assets, pagination utilities for TypeORM or Mongoose, Multer upload helpers, Winston-based logging with request context, and a Docker Compose setup with selectable services, custom networks, and smart dependencies.",
+    "featured": false,
+    "category": "personal",
+    "visibility": "public",
+    "role": "Creator & Maintainer",
+    "organization": "Personal",
+    "period": {
+      "start": "2025-01",
+      "end": "2026-02"
+    },
+    "technologies": [
+      "Node.js",
+      "JavaScript (ES Modules)",
+      "NestJS",
+      "@nestjs/cli",
+      "@clack/prompts",
+      "execa",
+      "Chalk",
+      "Figlet",
+      "Docker Compose",
+      "Swagger / OpenAPI",
+      "Winston",
+      "TypeORM",
+      "Mongoose",
+      "Multer",
+      "Helmet",
+      "CORS",
+      "Prettier"
+    ],
+    "card": {
+      "image": "/images/projects/nest-craft/cover.svg",
+      "imageAlt": "Nest Craft terminal prompt framed by a woven nest-inspired emblem"
+    },
+    "details": {
+      "overview": "Nest Craft is a globally installable CLI (`nest-craft`) that helps developers bootstrap real-world NestJS projects and retrofit features into existing repositories. The interactive workflow supports multiple package managers (npm, yarn, pnpm), optional Git initialization, Docker service selection, and feature toggles. Under the hood it shells out to `@nestjs/cli` for base project creation, copies curated templates/configs into the target app, installs required dependencies, and patches `src/main.ts` and project configuration to enable selected capabilities (API prefix/versioning, validation, security, Swagger, logging, pagination, uploads, and more). An `--add-feature` mode re-runs feature injection against an existing NestJS project, while `--list-features`, `--help`, and `--version` provide discoverability and CLI ergonomics.",
+      "responsibilities": [
+        "Designed and implemented the Nest Craft CLI from the initial release (v1.0.0) through subsequent feature releases, based on commit history for saeednorouzi98@gmail.com",
+        "Built the command-line entrypoint and argument routing (`init`, `--add-feature`, `--list-features`, `--help`, `--version`) and the interactive initialization/add-feature workflows.",
+        "Implemented project scaffolding orchestration around `@nestjs/cli` and shell execution, including package-manager support, directory setup, app module handling, and non-sudo/permission/error-handling guard rails.",
+        "Created the Docker Compose generator with selectable services, service-specific config drops (e.g., Dockerfile/nginx.conf), custom network validation, and dynamic `depends_on` wiring for the Node service.",
+        "Developed template and file-management systems to seed configs, typed definitions, Swagger assets, pagination/Multer utilities, security modules, and Winston logger components into target projects.",
+        "Implemented `main.ts` modification logic to register selected global features (prefix, URI versioning, pipes, filters, interceptors, CORS/Helmet, static assets, Swagger, Winston logger wiring) with safe bootstrap handling.",
+        "Added and refined features across releases: `--add-feature` retrofit flow, global API prefix/versioning prompts, security utilities (CORS/Helmet/fake tech-stack headers), pagination DTO/interface/driver utilities, Multer module refactor, and Winston Logger integration (v1.5.0).",
+        "Improved Swagger UX and configuration (custom UI assets, styling/scripts, config updates) and fixed/refined CORS, pagination, and logger setup behavior in later maintenance commits.",
+        "Maintained project documentation and release history (`README.md`, `LOGS.md`) alongside version bumps and feature announcements."
+      ],
+      "features": [
+        {
+          "title": "Interactive Project Scaffolding",
+          "description": "Guides users through project creation with `@clack/prompts`, supporting project naming/paths, Git initialization, package manager selection, and safe cancellation/error handling."
+        },
+        {
+          "title": "Feature Injection for Existing Projects",
+          "description": "`--add-feature` validates a target NestJS project and applies selected features/configs (including Docker Compose generation) without re-scaffolding the whole app."
+        },
+        {
+          "title": "Docker Compose Generator",
+          "description": "Generates `docker-compose.yml` from selectable services (Node, databases, caches, brokers, search, admin tools, Nginx, etc.) with optional custom networks, smart `depends_on`, and service-specific config file drops."
+        },
+        {
+          "title": "Main.ts & App Wiring Automation",
+          "description": "Patches `src/main.ts` to enable selected capabilities such as `NestExpressApplication`, static assets, global prefix, URI API versioning, validation, filters, interceptors, CORS/Helmet, Swagger, and Winston logger integration."
+        },
+        {
+          "title": "Security Utilities",
+          "description": "Provides prompt-driven security options including reusable CORS config, opinionated Helmet setup, and a custom headers interceptor to spoof tech-stack headers."
+        },
+        {
+          "title": "Swagger Integration with Custom UI",
+          "description": "Copies Swagger configuration and custom `assets/swagger-ui` enhancements (search/navigation/RBAC-oriented UX styling and scripts) and registers Swagger in the generated app."
+        },
+        {
+          "title": "Pagination & File Upload Toolkits",
+          "description": "Ships pagination DTO/interface/utilities for TypeORM and Mongoose, and a Multer module with typed config/utilities and upload/file cleanup helpers under `assets`."
+        },
+        {
+          "title": "Winston Logger Module",
+          "description": "Adds a production-oriented logger setup with NestJS `LoggerService` integration, request-context tracking, HTTP logging interceptor, console overrides, environment-aware config, and daily rotating log files."
+        },
+        {
+          "title": "CLI Discoverability & DX",
+          "description": "Includes `--help`, `--version`, and `--list-features` commands, plus curated ESLint/Prettier/Jest/env/request definition templates and Post-scaffold formatting."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Safe, idempotent-ish feature injection into existing NestJS apps",
+          "problem": "Adding features to an existing project requires modifying files and installing dependencies without breaking unrelated user code, especially when only a subset of features is selected.",
+          "approach": "Separated orchestration into focused modules (prompts, file copying, shell commands, and `main.ts` modifiers), validated target directories/Nest projects for `--add-feature`, and applied conditional template injection and dependency installation based on explicit user selections."
+        },
+        {
+          "title": "Composing Docker setups from modular service templates",
+          "problem": "Generating a usable `docker-compose.yml` for different service combinations requires correct YAML composition, optional networking, and dependency ordering for the Node service.",
+          "approach": "Built a Docker config generator that assembles service YAML snippets from template files, injects/removes network blocks as needed, validates custom network names, computes `depends_on` from selected backing services, and drops auxiliary files (Dockerfile/nginx.conf) when required."
+        },
+        {
+          "title": "Programmatically wiring selected capabilities into `main.ts`",
+          "problem": "Users can choose different combinations of prefix/versioning, validation, security, Swagger, interceptors, and logging; the generated bootstrap code must remain coherent and correctly ordered.",
+          "approach": "Implemented a `main-file.modifier` that conditionally inserts imports and runtime setup lines (including interceptor chaining and NestExpress/static asset configuration) and wraps bootstrap error handling, allowing feature-specific wiring without manual edits."
+        },
+        {
+          "title": "Balancing opinionated defaults with developer choice",
+          "problem": "The CLI must provide production-friendly defaults while supporting different stacks (TypeORM vs Mongoose), package managers, and optional features across new and existing projects.",
+          "approach": "Used an interactive prompt-driven flow with explicit feature toggles and per-feature template/dependency paths (pagination drivers, security selections, logger setup), plus documentation/changelog updates to keep behavior transparent across releases."
+        },
+        {
+          "title": "Maintaining template quality across evolving NestJS/tooling conventions",
+          "problem": "Generated config and runtime integrations (linting, Swagger UI, logging, CORS/pagination behavior) needed refinement as the tool matured.",
+          "approach": "Iterated through releases and maintenance commits to replace/update templates, improve Swagger UI assets, refactor pagination/Multer/logger setup, and fix runtime/config edge cases while preserving the CLI's additive workflow."
+        }
+      ],
+      "architecture": {
+        "description": "Nest Craft is structured as a Node.js CLI with a `bin/` command layer and a `lib/` implementation layer. The entrypoint performs a non-sudo guard and delegates to an argv manager that routes `init`, `--add-feature`, and informational commands. `init` and `add-feature` collect configuration through `@clack/prompts`-based modules, resolve/validate target paths, and orchestrate work via shell utilities (`execa`, `@nestjs/cli` for scaffolding, package installation) plus guard functions. Feature application is handled by `lib/files` (template copying, env/definition/config seeding, Swagger/logger/pagination/Multer/security asset injection, Prettier/Jest adjustments) and `main-file.modifier` (patching `src/main.ts` for global app wiring). Docker support is implemented in `lib/docker` by composing service YAML templates into a final `docker-compose.yml` and copying service-specific files. An architecture image prompt for generating a diagram is provided in `ARCHITECTURE_IMAGE_PROMPT.md` at the repository root.",
+        "image": "/images/projects/nest-craft/architecture.webp",
+        "imageAlt": "Nest Craft CLI architecture diagram (placeholder — generate using ARCHITECTURE_IMAGE_PROMPT.md)"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/nest-craft/help.webp",
+          "alt": "Nest Craft CLI help screen listing init, add-feature, version, help, and list-features commands.",
+          "caption": "The `nest-craft --help` output shows the available commands and usage examples."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/nest-craft/features.webp",
+          "alt": "Nest Craft feature catalog listing integrations, utilities, and supported Docker Compose services.",
+          "caption": "The `nest-craft --list-features` output summarizes available features, options, and service integrations."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/nest-craft/init.webp",
+          "alt": "Nest Craft interactive init prompts configuring a NestJS project named portfo with Yarn, Swagger, validation utilities, logging, and API prefix.",
+          "caption": "The `nest-craft init` workflow collects project settings and selected NestJS features before scaffolding."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/nest-craft/docker-options.webp",
+          "alt": "Nest Craft init prompts selecting a custom Docker network and Node, Redis, PostgreSQL, RabbitMQ, and Nginx services.",
+          "caption": "The Docker Compose setup prompts let users configure a custom network and choose supporting services."
+        }
+      ]
+    },
+    "links": {
+      "repository": "https://github.com/snorouzi/nest-craft",
+      "demo": null,
+      "liveProject": "https://www.npmjs.com/package/nest-craft",
+      "documentation": "https://github.com/snorouzi/nest-craft#readme"
     }
   }
 ]
