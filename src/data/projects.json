@@ -1042,6 +1042,168 @@
     }
   },
   {
+    "id": "101bitcom",
+    "slug": "101bitcom",
+    "title": "101bitcom",
+    "tagline": "Backend for a cryptocurrency exchange platform with real-time trading, wallet, and admin operations.",
+    "description": "101bitcom is a Node.js MVC cryptocurrency exchange application that combines server-rendered views with a substantial backend API and real-time market infrastructure. The platform supports user onboarding and authentication, trading workflows, wallet and turnover operations, order-book/market data delivery, administrative management, and operational monitoring. This portfolio entry focuses on backend development work: API and domain controllers, the trading core and order-processing logic, MongoDB/Mongoose data models, Socket.IO real-time handlers, queue/cron-driven background processing, and reliability/maintenance improvements across the exchange backend.",
+    "featured": false,
+    "category": "professional",
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Webline Studio",
+    "period": {
+      "start": "2021-02",
+      "end": "2024-01"
+    },
+    "technologies": [
+      "Node.js",
+      "JavaScript",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Socket.IO",
+      "Bull",
+      "Redis",
+      "node-cron",
+      "JSON Web Token (JWT)",
+      "express-session",
+      "connect-mongo",
+      "bcryptjs",
+      "Winston",
+      "express-validator",
+      "Multer",
+      "Nodemailer",
+      "Swagger / OpenAPI",
+      "Prometheus (prom-client)",
+      "Jest",
+      "EJS"
+    ],
+    "card": {
+      "image": "/images/projects/101bitcom/cover.png",
+      "imageAlt": "The cover Image of the 101bitcom trading platform"
+    },
+    "details": {
+      "overview": "101bitcom is built as an Express-based MVC monolith where backend services power both web flows and API operations for a crypto exchange. At startup, the application configures environment and middleware, connects to MongoDB, initializes core collections/settings/commissions, restores trading cache state, and registers routes, cron jobs, Socket.IO handlers, Swagger (non-production), and Prometheus metrics. The backend domain covers authentication and access control, user trading and wallet/turnover operations, administrative management (users, trades, turnovers, commissions, notices, tickets, events, vault/companions/settings), market/price integrations, and background processing. Key runtime components include SystemCore trading logic with cache-assisted order handling, Mongoose models for exchange entities and logs, Socket.IO controllers for live market/order updates, Bull queues for asynchronous work, and scheduled jobs for system routines. This case study emphasizes backend implementation and maintenance work attributed to the git history of `saeednorouzi98@gmail.com` (816 commits, 2021-03 to 2024-01).",
+      "responsibilities": [
+        "Implemented and maintained core trading backend logic, including SystemCore cache/order-processing flows, trade creation/cancellation behavior, matching/transfer-related units, commission handling, wallet balance updates, and trade logging, based on commits by saeednorouzi98@gmail.com.",
+        "Developed and evolved user-facing backend APIs for trading, wallets, turnovers/deposits/withdrawals, bank accounts, account/security actions, notices, ticketing, referrals/commission plans, alarms, and related validation/response handling.",
+        "Built and maintained administrative backend modules for users, trades, turnovers, commissions, notices, ticketing, events, vault/companion operations, and system/wallet management endpoints.",
+        "Implemented real-time backend behavior with Socket.IO, including market/crypto info and buy/sale list emissions, interval management, disconnect cleanup, and refactoring of socket handlers/controllers for stability and maintainability.",
+        "Added asynchronous and scheduled processing support through Bull queue integration and cron-triggered workflows, including robot/offer-related task handling and queue progress/error management.",
+        "Improved data integrity and runtime performance by adding/fixing Mongoose indexes, refining model schemas and trade/log structures, and addressing cache/database update ordering in critical backend paths.",
+        "Hardened backend input and operational behavior by adding request escaping/trimming across controllers, fixing decimal/scientific-notation and calculation edge cases, improving authentication/wallet validation paths, and maintaining mailer/config/runtime behavior.",
+        "Performed backend maintenance and refactoring across controllers, models, transforms, routes, utilities, and app startup/initialization code, including documentation-oriented updates and production/stability fixes reflected in the commit history."
+      ],
+      "features": [
+        {
+          "title": "Trading Core & Order Processing",
+          "description": "Backend trading workflows centered around SystemCore and trade controllers, covering order validation, cache-assisted processing, matching/transfer support, trade logs, and cancellation/update paths."
+        },
+        {
+          "title": "Wallets, Turnovers & Financial Operations",
+          "description": "Server-side handling for user/system wallets, deposit and withdrawal flows, turnover management, commission calculations, and asset/balance updates with decimal-sensitive logic."
+        },
+        {
+          "title": "User & Admin API Domains",
+          "description": "Modular Express controllers and routes for user operations (account, trade, wallet, notices, tickets, referrals) and admin operations (users, trades, turnovers, commissions, events, vault, settings)."
+        },
+        {
+          "title": "Real-Time Market & Order Updates",
+          "description": "Socket.IO-based backend emissions for live crypto information and order-book/buy-sell data, with interval lifecycle management and connection/disconnect handling."
+        },
+        {
+          "title": "Background Jobs & Scheduled Tasks",
+          "description": "Bull-backed asynchronous processing and node-cron scheduled routines for system tasks, including robot/offer queue workflows and operational maintenance triggers."
+        },
+        {
+          "title": "Data Modeling & Serialization",
+          "description": "Mongoose models, transforms, and utility units for exchange entities such as users, trades/caches/complete trades, wallets, turnovers, commissions, notices, tickets, logs, and related records."
+        },
+        {
+          "title": "Reliability, Validation & Observability Foundations",
+          "description": "Input sanitization across APIs, index/performance tuning, Winston logging, Swagger/OpenAPI support in non-production, and protected Prometheus metrics exposure."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Correctness in trading and balance calculations",
+          "problem": "Exchange operations involve order matching, commissions, wallet transfers, and user balances where decimal precision, scientific-notation values, and cancellation/update paths can produce incorrect financial state.",
+          "approach": "Implemented and iteratively fixed calculation-sensitive backend logic across SystemCore, trade/wallet controllers, transforms, and utility units; added safeguards and logging around trade processing, commission/wallet updates, and edge cases reflected in maintenance commits."
+        },
+        {
+          "title": "Keeping real-time market data stable under long-lived connections",
+          "problem": "Socket.IO streams for crypto/order-book data require periodic emissions, but unmanaged intervals and disconnect handling can leak work or keep processing after clients leave.",
+          "approach": "Refactored socket handlers/controllers, adjusted emission intervals, changed interval tracking structures, added volatile/update behavior where appropriate, and fixed disconnect cleanup so intervals stop correctly."
+        },
+        {
+          "title": "Performance and consistency in a MongoDB-backed exchange backend",
+          "problem": "Frequent reads/writes for trades, wallets, notices, and system jobs can degrade performance or behave inconsistently without appropriate query patterns and indexes.",
+          "approach": "Added and corrected Mongoose indexes for socket/cron/query-heavy collections, refined model usage, and adjusted cache/database update ordering in core processing paths to reduce avoidable load and improve runtime behavior."
+        },
+        {
+          "title": "Coordinating synchronous APIs with asynchronous/background workflows",
+          "problem": "Some exchange actions need immediate API responses while still triggering robot/offer or maintenance work that should run reliably outside the request path.",
+          "approach": "Used Bull queues and scheduled jobs for asynchronous/system tasks, integrated queue progress and robot event/error handling, and added defensive error handling around queue-driven processing."
+        },
+        {
+          "title": "Maintaining a large legacy MVC backend safely",
+          "problem": "The codebase spans many controller/model/route modules with evolving business rules, making changes risky without careful validation and targeted fixes.",
+          "approach": "Applied incremental backend refactors and maintenance across domains, added broad controller-level input escaping/trimming, preserved existing MVC/API structure, and used commit-history-driven fixes for regressions in trading, sockets, auth, and operational flows."
+        }
+      ],
+      "architecture": {
+        "description": "101bitcom uses a Node.js/Express MVC monolith. `app.js` boots configuration, connects Mongoose to MongoDB, initializes session storage, middleware, routes, cron jobs, and Socket.IO, and exposes Swagger UI (non-production) plus protected Prometheus metrics. The backend is organized into modular domains under `modules/`: `controllers/api/v1` for user/admin/system/robot/auth flows, `models` for Mongoose entities, `routes` and `middlewares` for HTTP access control, `sockets` for real-time market/order updates, `queues` for Bull background processing, `transforms`/`unit`/`utils` for shared business logic and serialization, and `core`/`init` for startup routines. A central trading component (`SystemCore`) coordinates cache-assisted order handling, trade execution support, commissions, wallet/log updates, and integration points for queued/robot-related events. A detailed backend diagram prompt is provided in `ARCHITECTURE_IMAGE_PROMPT.md` at the repository root.",
+        "image": "/images/projects/101bitcom/architecture.png",
+        "imageAlt": "101bitcom backend architecture diagram (placeholder — generate using ARCHITECTURE_IMAGE_PROMPT.md)"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/101bitcom/features.png",
+          "alt": "Feature overview of the 101bitcom cryptocurrency exchange",
+          "caption": "Exchange features and platform capabilities"
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/101bitcom/landing.webp",
+          "alt": "101bitcom cryptocurrency exchange landing page",
+          "caption": "The exchange landing page"
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/101bitcom/trade-room.webp",
+          "alt": "101bitcom trading room showing live market information",
+          "caption": "Live trading room and market view"
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/101bitcom/buy.webp",
+          "alt": "Buy cryptocurrency screen on 101bitcom",
+          "caption": "Buy cryptocurrency workflow"
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/101bitcom/sale.webp",
+          "alt": "Sell cryptocurrency screen on 101bitcom",
+          "caption": "Sell cryptocurrency workflow"
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/101bitcom/panel.webp",
+          "alt": "User profile panel on 101bitcom",
+          "caption": "User profile and account details"
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": null,
+      "documentation": null
+    }
+  },
+  {
     "id": "ai-shell",
     "slug": "ai-shell",
     "title": "AI Shell",
