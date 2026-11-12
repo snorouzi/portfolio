@@ -1373,6 +1373,217 @@
     }
   },
   {
+    "id": "telemedicine",
+    "slug": "telemedicine-backend",
+    "title": "Telemedicine Platform",
+    "tagline": "Backend system for a telehealth platform with real-time consultations, smart diagnostics, medical test interpretation, imaging management, and prescription workflows.",
+    "description": "Telemedicine is a Node.js/Express MVC application serving both server-rendered views and backend APIs for a telehealth platform. The system covers user authentication and account management, real-time doctor-patient consultations via Socket.IO, AI-assisted smart diagnostics, medical test configuration and automated interpretation, diagnostic imaging management, prescription creation and PDF generation, payment processing with gateway integration, administrative management with RBAC, notifications (in-app/SMS), feedback collection, and system monitoring. This portfolio entry focuses on backend work I implemented and maintained: domain APIs and controllers, real-time consultation handlers, medical interpretation engine, financial/payment logic, MongoDB/Mongoose data models, Socket.IO real-time infrastructure, cron-scheduled services, gateway/runtime integrations, and reliability/security fixes across the telehealth backend.",
+    "featured": false,
+    "category": "professional",
+    "visibility": "public",
+    "role": "Backend Developer & Team Lead",
+    "organization": "Webline Studio",
+    "period": {
+      "start": "2023-07",
+      "end": "2024-07"
+    },
+    "technologies": [
+      "Node.js",
+      "JavaScript",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Socket.IO",
+      "node-cron",
+      "Passport.js",
+      "express-session",
+      "connect-mongo",
+      "bcryptjs",
+      "jsonwebtoken",
+      "Winston",
+      "express-validator",
+      "yup",
+      "Multer",
+      "Nodemailer",
+      "Swagger / OpenAPI",
+      "Helmet",
+      "EJS",
+      "pdf-lib",
+      "archiver",
+      "xlsx",
+      "axios",
+      "i18next",
+      "jalali-moment",
+      "validator",
+      "uuid",
+      "http-errors",
+      "morgan",
+      "cors",
+      "cookie-parser",
+      "dotenv"
+    ],
+    "card": {
+      "image": "/images/projects/telemedicine/cover.webp",
+      "imageAlt": "Telemedicine platform backend portfolio cover (screenshot placeholder)"
+    },
+    "details": {
+      "overview": "The backend is an Express-based MVC monolith structured around modular domains for public/auth, user, and admin operations. Application startup configures environment and middleware, connects to MongoDB, initializes core collections (identifiers, permissions, settings, roles, categories, anatomy, diseases, rules, medical test configs, states, banks, display priorities), and wires routes, cron-driven services, Socket.IO handlers, and supporting runtime concerns. Core backend areas include authentication and access control (JWT/OTP/session), real-time consultation messaging (Socket.IO namespaces for user/admin), smart diagnostic workflows, medical test configuration and automated interpretation engine, diagnostic imaging management, prescription creation with PDF generation, payment processing with Zibal gateway integration, wallet/balance management, admin RBAC and operational modules, notifications (in-app/SMS), feedback collection with scheduled short links, system logging, and background jobs. Real-time features deliver consultation messages and prescription sharing over Socket.IO, while cron-scheduled routines handle consultation cancellation, revisit notifications, and feedback reminders. The implementation focuses on server-side architecture and business logic rather than frontend/UI work.",
+      "responsibilities": [
+        "Designed and implemented core backend domains and APIs for authentication (registration, login, OTP verification, password reset, JWT/session management), user accounts/profile/security, real-time consultations, smart diagnostics, medical tests and interpretation, diagnostic imaging, prescriptions, payments, wallets, notifications, feedback, and admin management.",
+        "Built and maintained real-time consultation backend with Socket.IO: dual namespaces (/consultation/user, /consultation/admin), room-based messaging, prescription sharing via generated links, access control per consultation state (pending/accepted/done/failed), and cross-namespace event emission.",
+        "Developed the medical test interpretation engine: configurable test definitions with departments/ranges/operators (LT, LTE, EQL, GT, GTE, GTEALTE), gender/age/general range groups, prescription attachment per range, and automated analysis persistence.",
+        "Implemented smart diagnostic workflows: multi-response-type diagnosis (simple text, consultation referral, prescription), patient info capture, recheck scheduling, and feedback integration.",
+        "Created diagnostic imaging management: imaging categories, prescriptions, display priorities, creator/editor tracking, and interpretation workflows with zip file packaging for multi-image downloads.",
+        "Built prescription system with PDF generation: pdf-lib based A5 prescription rendering with Persian font support, automatic line breaking, multi-page layout, background templates, and secure file access via middleware.",
+        "Integrated Zibal payment gateway: payment link generation with amount validation, callback handling, verification with reference number extraction, bank name resolution, and duplicate payment detection.",
+        "Implemented wallet/asset management: atomic balance updates with findOneAndUpdate, asset change logging (process source, old/new values), and integration with payment/consultation flows.",
+        "Designed and maintained RBAC system: role/permission models, middleware guards (route-level and socket-level), super-user detection, and admin notification targeting by permission.",
+        "Created notification system: in-app notifications with source/target panel routing, admin broadcast with permission filtering, and SMS notifications via sms.ir API with templated parameters.",
+        "Built feedback collection with short links: scheduled/real-time SMS delivery, section-aware timing (consultation/diagnose/tests/imaging), hashId-based short link generation, and deduplication.",
+        "Developed system initialization and data seeding: 13 initializer modules for identifiers, permissions, settings, admin account, categories, roles, banks, anatomy, diseases images, rules, medical test configs, states, and display priorities.",
+        "Implemented background job scheduling with node-cron: 15-minute interval for consultation cancellation, revisit cancellation/notification, and feedback SMS reminders (Asia/Tehran timezone).",
+        "Created and evolved 31 MongoDB/Mongoose models with pagination plugins, text indexes, virtuals, mixed-type schemas for flexible medical test departments, and aggregate pagination support.",
+        "Integrated Swagger/OpenAPI documentation with environment-aware server URLs, organized by public/user/admin route groups, hidden in production.",
+        "Hardened backend through input validation (express-validator/yup), error handling with Winston logging and automatic file cleanup, maintenance mode middleware, Helmet/CORS configuration, and production-specific restrictions (Swagger, design system access).",
+        "Developed utility modules: Jalali date conversion, Excel export, zip archive creation, short link generation, permission guard (reusable for HTTP and Socket), medical test interpreter, PDF exporter, notification creator, SMS sender, and hashId generator."
+      ],
+      "features": [
+        {
+          "title": "Authentication & Account Security",
+          "description": "Registration/login with phone/email, OTP verification (sms.ir), JWT access tokens (30-day expiry) with signed cookies, session middleware, password reset, access control middleware (role-based, permission-based), user profile/security management APIs, and new-user detection."
+        },
+        {
+          "title": "Real-Time Consultations",
+          "description": "Socket.IO dual-namespace architecture (/consultation/user, /consultation/admin) with room-based messaging, JWT-authenticated socket connections, cross-namespace message/prescription emission, consultation state machine (pending/accepted/done/failed) with access rules per state, and automatic room cleanup on disconnect."
+        },
+        {
+          "title": "Smart Diagnostic System",
+          "description": "AI-assisted diagnosis workflow with three response types (simple text, consultation referral, prescription), structured patient info capture, disease title association, recheck scheduling with expiration/notification, and feedback integration."
+        },
+        {
+          "title": "Medical Test Configuration & Interpretation Engine",
+          "description": "Admin-managed test definitions with hierarchical departments/items, configurable range groups (gender/age/general), six comparison operators (LT, LTE, EQL, GT, GTE, GTEALTE), per-range prescription attachment, automated patient-specific interpretation with gender/age routing, and analysis persistence."
+        },
+        {
+          "title": "Diagnostic Imaging Management",
+          "description": "Imaging categories with prescription linking, display priority ordering, creator/editor audit trail, interpretation workflows, and zip archive generation for multi-image downloads via archiver."
+        },
+        {
+          "title": "Prescription Management & PDF Generation",
+          "description": "Prescription schema with examines/medicines/usage, pdf-lib based A5 PDF rendering with embedded Persian font (IRANSansX), automatic text wrapping/line breaking, multi-page pagination (8 items/page), background template overlay, and secure file serving via access-control middleware."
+        },
+        {
+          "title": "Payment Processing & Wallet Management",
+          "description": "Zibal gateway integration: payment link generation with min/max validation, callback verification with reference number extraction, bank name resolution from card BIN, duplicate payment detection (error code 15). Wallet system with atomic balance updates, asset change logging (source, old/new values), and integration with consultation/payment flows."
+        },
+        {
+          "title": "Admin RBAC & Operational Modules",
+          "description": "Role/permission data models with populate chains, middleware guards for HTTP routes and Socket.IO events, super-user role detection, admin notification broadcasting with permission filtering, and comprehensive admin APIs for users, consultations, imaging, tests, diseases, prescriptions, payments, categories, roles, settings, and dashboard analytics."
+        },
+        {
+          "title": "Notifications & SMS Integration",
+          "description": "In-app notification model with source/receiver-panel routing, admin broadcast targeting by permission, SMS delivery via sms.ir API with templated parameters, admin SMS broadcasting, and scheduled/real-time feedback link SMS with section-aware timing."
+        },
+        {
+          "title": "Feedback Collection & Short Links",
+          "description": "Post-interaction feedback with short link generation (hashId-based), scheduled SMS delivery (24h for consultation/diagnose, 15min/24h for tests/imaging based on process type), deduplication, and hashId-based short link resolution."
+        },
+        {
+          "title": "Background Jobs & Scheduled Services",
+          "description": "node-cron scheduled routines (15-min interval, Asia/Tehran): consultation auto-cancellation, revisit cancellation, revisit notifications, and feedback SMS reminders. Services initialized after DB connection in application bootstrap."
+        },
+        {
+          "title": "System Initialization & Data Seeding",
+          "description": "13 initializer modules run at startup: identifiers, permissions, system settings, default admin, categories, simple user role, bank data, anatomy, diseases images, rules, medical test configs, states, and display priorities — ensuring consistent baseline data."
+        },
+        {
+          "title": "API Documentation & Developer Experience",
+          "description": "Swagger/OpenAPI 3.0 with environment-aware server URLs (dev/prod), organized by public/user/admin route groups, custom UI styling, explorer enabled, and automatically hidden in production via NODE_ENV check."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Real-time consultation state synchronization across namespaces",
+          "problem": "Consultation rooms must enforce access rules based on dynamic state (pending/accepted/done/failed) and user role (patient/doctor/admin with permissions), while broadcasting messages and prescriptions to both user and admin namespaces simultaneously.",
+          "approach": "Implemented dual Socket.IO namespaces with shared room names, centralized room-management resolvers with state-aware access checks (permissionGuard for admin, ownership check for user), cross-namespace emit on every message/prescription event, and automatic leave-all-rooms on disconnect to prevent stale connections."
+        },
+        {
+          "title": "Configurable medical test interpretation with variable range logic",
+          "problem": "Medical tests require flexible range definitions supporting six operators, three group types (gender/age/general), single vs multi-range groups, and optional prescription attachments — all configurable by admins without code changes.",
+          "approach": "Designed a mixed-type Mongoose schema for test departments/items/ranges, created a two-phase interpreter (findSingleTestRange / findMultiTestRange) that routes by groupType and range count, loads prescriptions on-demand, and returns structured analysis objects with status/label/color/description/prescription. Persisted results to testsAnalysisModel for audit trail."
+        },
+        {
+          "title": "Prescription PDF generation with Persian typography and layout constraints",
+          "problem": "Prescriptions must render on A5 pages with Persian font, right-to-left text, automatic line breaking for long medicine names/usages, background template overlay, and pagination (8 items/page) — all server-side without browser rendering.",
+          "approach": "Used pdf-lib with @pdf-lib/fontkit to embed IRANSansX-Medium.ttf, implemented custom breakLine utility for word-aware wrapping at 19 chars, paginated examines/medicines across pages, drew background image per page, positioned fixed elements (date, national code, clinic info, website) at absolute coordinates, and saved to user-scoped directory with timestamped filenames."
+        },
+        {
+          "title": "Payment gateway integration with idempotency and error handling",
+          "problem": "Zibal gateway requires amount validation, callback verification, reference number extraction, bank name resolution from card BIN, and handling of duplicate payments (error code 15) without double-charging or state inconsistency.",
+          "approach": "Built getGatewayLink with min/max amount guards, verifyPayment with Axios POST to Zibal verification endpoint, getBankName lookup from seeded bank collection, structured result objects (status, code, trackId, refNumber, bankName, cardNumber), and explicit handling of error code 15 returning 'duplicatedPayment' instead of throwing. Integrated with wallet updates and consultation payment linking."
+        },
+        {
+          "title": "RBAC enforcement across HTTP middleware and Socket.IO event handlers",
+          "problem": "Permission checks must work consistently for Express routes (req.user populated) and Socket.IO events (socket handshake with signed cookies), supporting super-user bypass, role-based permission sets, and granular access permissions (e.g., showAllConsultations, sendConsultationMessage, fullAccess).",
+          "approach": "Created a reusable permissionGuard utility accepting user object, required permissions array, and throwError flag. For HTTP: middleware populates user.adminRole.permissions and checks inclusion. For Socket: socketAccessTokenVerification retrieves user, then permissionGuard called in resolvers. Super-user roles (ADMIN, DOCTOR, etc.) bypass checks. Admin notification creator uses same guard to filter recipients."
+        },
+        {
+          "title": "Scheduled feedback SMS with section-aware timing and deduplication",
+          "problem": "Feedback links must be sent via SMS at different intervals per section (consultation: 24h, diagnose: 48h, tests/imaging: 15min for prescription, 24h for analysis), with deduplication to avoid re-sending for same interaction, and scheduled vs real-time sending types.",
+          "approach": "Implemented feedbackShortLinkCreator with section/processType switch for sendingDateTime calculation, shortLinkModel deduplication by originalLink+source, hashId generation via identifier sequence, sendingType (SCHEDULED/REAL_TIME) determining sendStatus, and cron job (sendFeedbackNotice) processing unsent scheduled links every 15 minutes."
+        },
+        {
+          "title": "Evolving a large MVC monolith with 31 models and modular domain structure",
+          "problem": "Backend spans auth, consultations, diagnostics, imaging, tests, prescriptions, payments, wallets, notifications, feedback, admin RBAC, diseases, rules, and system init — with ongoing feature additions and refactors increasing regression risk.",
+          "approach": "Organized code into domain-segregated directories (router/api/{public,user,admin}, router/web/{public,user,admin}, controllers/api/{public,user,admin}, controllers/web/{public,user,admin}, models, constants, validators, initializers, utils, socket.io). Applied incremental refactoring: extracted reusable utilities (permissionGuard, functions), standardized validator/error-handler patterns, maintained Swagger docs per route group, and used Git history to track feature ownership."
+        }
+      ],
+      "architecture": {
+        "description": "Telemedicine backend is a Node.js/Express MVC monolith with server-rendered EJS views and REST/WebSocket APIs. The `app/` layer organizes business logic into: controllers (api/{public,user,admin}, web/{public,user,admin}, services), Mongoose models (31 entities), route modules (router/api, router/web, router/swagger), middlewares (auth, permission, validation, maintenance, file access), initializers (13 system data seeders), Socket.IO handlers/resolvers/validators (dual namespace for consultations), cron services (consultation/revisit/feedback), transforms, and utilities (18 modules). MongoDB (via Mongoose) stores all entities with pagination/aggregate-paginate plugins. Real-time communication uses Socket.IO with JWT-authenticated handshakes. Background jobs run via node-cron (15-min interval, Asia/Tehran). Payment integration with Zibal gateway. SMS via sms.ir API. PDF generation with pdf-lib. File uploads via Multer with access-control middleware. i18next for EN/FA localization with cookie-based detection. Swagger/OpenAPI 3.0 for API docs (dev only). A detailed backend architecture diagram prompt is provided in `ARCHITECTURE_IMAGE_PROMPT.md` at the repository root.",
+        "image": "/images/projects/telemedicine/architecture.webp",
+        "imageAlt": "Telemedicine backend architecture diagram (placeholder — generate using ARCHITECTURE_IMAGE_PROMPT.md)"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/telemedicine/features.webp",
+          "alt": "Telemedicine platform features overview",
+          "caption": "Overview of the telehealth platform's backend capabilities."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/telemedicine/landing.webp",
+          "alt": "Telemedicine Medical Platform landing page",
+          "caption": "The Medical Platform landing page"
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/telemedicine/consultation-flow.webp",
+          "alt": "Real-time consultation messaging flow",
+          "caption": "Doctor-patient real-time consultation with prescription sharing."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/telemedicine/medical-test-interpretation.webp",
+          "alt": "Medical test interpretation engine",
+          "caption": "Configurable test ranges with automated patient-specific analysis."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/telemedicine/imaging-interpretation.webp",
+          "alt": "Medical image interpretation engine",
+          "caption": "Configurable image interpretation with automated patient-specific analysis."
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": null,
+      "documentation": null
+    }
+  },
+  {
     "id": "ai-shell",
     "slug": "ai-shell",
     "title": "AI Shell",
