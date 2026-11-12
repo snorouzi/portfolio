@@ -1084,9 +1084,9 @@
       "imageAlt": "The cover Image of the 101bitcom trading platform"
     },
     "details": {
-      "overview": "101bitcom is built as an Express-based MVC monolith where backend services power both web flows and API operations for a crypto exchange. At startup, the application configures environment and middleware, connects to MongoDB, initializes core collections/settings/commissions, restores trading cache state, and registers routes, cron jobs, Socket.IO handlers, Swagger (non-production), and Prometheus metrics. The backend domain covers authentication and access control, user trading and wallet/turnover operations, administrative management (users, trades, turnovers, commissions, notices, tickets, events, vault/companions/settings), market/price integrations, and background processing. Key runtime components include SystemCore trading logic with cache-assisted order handling, Mongoose models for exchange entities and logs, Socket.IO controllers for live market/order updates, Bull queues for asynchronous work, and scheduled jobs for system routines. This case study emphasizes backend implementation and maintenance work attributed to the git history of `saeednorouzi98@gmail.com` (816 commits, 2021-03 to 2024-01).",
+      "overview": "101bitcom is built as an Express-based MVC monolith where backend services power both web flows and API operations for a crypto exchange. At startup, the application configures environment and middleware, connects to MongoDB, initializes core collections/settings/commissions, restores trading cache state, and registers routes, cron jobs, Socket.IO handlers, Swagger (non-production), and Prometheus metrics. The backend domain covers authentication and access control, user trading and wallet/turnover operations, administrative management (users, trades, turnovers, commissions, notices, tickets, events, vault/companions/settings), market/price integrations, and background processing. Key runtime components include SystemCore trading logic with cache-assisted order handling, Mongoose models for exchange entities and logs, Socket.IO controllers for live market/order updates, Bull queues for asynchronous work, and scheduled jobs for system routines. This case study emphasizes backend implementation and maintenance work reflected in the commit history (816 commits, 2021-03 to 2024-01).",
       "responsibilities": [
-        "Implemented and maintained core trading backend logic, including SystemCore cache/order-processing flows, trade creation/cancellation behavior, matching/transfer-related units, commission handling, wallet balance updates, and trade logging, based on commits by saeednorouzi98@gmail.com.",
+        "Implemented and maintained core trading backend logic, including SystemCore cache/order-processing flows, trade creation/cancellation behavior, matching/transfer-related units, commission handling, wallet balance updates, and trade logging.",
         "Developed and evolved user-facing backend APIs for trading, wallets, turnovers/deposits/withdrawals, bank accounts, account/security actions, notices, ticketing, referrals/commission plans, alarms, and related validation/response handling.",
         "Built and maintained administrative backend modules for users, trades, turnovers, commissions, notices, ticketing, events, vault/companion operations, and system/wallet management endpoints.",
         "Implemented real-time backend behavior with Socket.IO, including market/crypto info and buy/sale list emissions, interval management, disconnect cleanup, and refactoring of socket handlers/controllers for stability and maintainability.",
@@ -1193,6 +1193,175 @@
           "src": "/images/projects/101bitcom/panel.webp",
           "alt": "User profile panel on 101bitcom",
           "caption": "User profile and account details"
+        }
+      ]
+    },
+    "links": {
+      "repository": null,
+      "demo": null,
+      "liveProject": null,
+      "documentation": null
+    }
+  },
+  {
+    "id": "akocoin",
+    "slug": "akocoin-crypto-exchange-backend",
+    "title": "Akocoin Crypto Exchange",
+    "tagline": "Backend platform for a cryptocurrency exchange with trading, wallet/financial operations, real-time market data, and admin management.",
+    "description": "Akocoin (crypto-exchange) is a Node.js/Express MVC application that serves both server-rendered views and backend APIs for a cryptocurrency exchange. The system covers user authentication and account security, trading workflows, wallet and turnover operations (deposits, withdrawals, payments), commissions/referrals, support and notifications, administrative management, and real-time market/order delivery. This portfolio entry focuses on backend work I implemented and maintained: domain APIs and controllers, trading and financial logic, MongoDB/Mongoose data models, Socket.IO real-time handlers, Bull queues and scheduled jobs, gateway/runtime integrations, and reliability/performance/security fixes across the exchange backend.",
+    "featured": false,
+    "category": "professional",
+    "visibility": "public",
+    "role": "Backend Developer",
+    "organization": "Webline Studio",
+    "period": {
+      "start": "2022-07",
+      "end": "2024-03"
+    },
+    "technologies": [
+      "Node.js",
+      "JavaScript",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Socket.IO",
+      "Bull",
+      "Redis",
+      "node-cron",
+      "Passport.js",
+      "express-session",
+      "connect-mongo",
+      "bcryptjs",
+      "jsonwebtoken",
+      "Winston",
+      "express-validator / yup",
+      "Multer",
+      "Nodemailer",
+      "Swagger / OpenAPI",
+      "Helmet",
+      "EJS",
+      "Gulp"
+    ],
+    "card": {
+      "image": "/images/projects/akocoin/cover.webp",
+      "imageAlt": "Akocoin crypto exchange backend portfolio cover (screenshot placeholder)"
+    },
+    "details": {
+      "overview": "The backend is an Express-based MVC monolith structured around modular domains for public/auth, user, and admin operations. Application startup configures environment and middleware, connects to MongoDB, initializes core collections/settings/wallets/commissions, and wires routes, cron-driven services, queues, Socket.IO handlers, and supporting runtime concerns. Core backend areas include authentication and access control, trading/order and price-alarm flows, user/system wallets and financial turnovers, payment gateway handling, referrals/commissions, support ticketing and notices, and administrative management for users, trades, turnovers, roles/vaults, and system data. Real-time features deliver market/crypto and order-related updates over Socket.IO, while Bull and scheduled routines support asynchronous and periodic processing. The implementation focuses on server-side architecture and business logic rather than frontend/UI work.",
+      "responsibilities": [
+        "Designed and implemented core backend domains and APIs for authentication, user accounts/security, trading, wallets, turnovers, deposits/withdrawals/payments, notices, support tickets, referrals/commissions, and price alarms.",
+        "Built and maintained trading-related backend logic, including order placement/validation flows, trade history and open-order handling, trade processing support, limits, stop-loss-related fixes, and commission/payment-record integration.",
+        "Developed financial and asset-management workflows for user and system wallets/vaults, daily vault asset tracking, balance updates, turnover logging, deposit/withdrawal processing, and asset transfer/change logging.",
+        "Implemented real-time backend behavior with Socket.IO for market/crypto data and order-related emissions, including request/handler structure, interval/lifecycle management, and related controller/service updates.",
+        "Added asynchronous and scheduled processing using Bull queues and cron-based routines for tasks such as trading/robot-related processing, alarms, commissions, and other periodic system operations.",
+        "Created and evolved MongoDB/Mongoose models, constants, transforms, and utilities for exchange entities (users, wallets, trades, payments, turnovers, commissions, notices, tickets/messages, alarms, referrals, logs, and system settings).",
+        "Integrated and maintained runtime and operational backend concerns including payment gateway handling (e.g. Vandar-related fixes/activation), SMS/email verification and notification flows, Passport/session-based auth flows, file upload handling, and Swagger-related setup.",
+        "Hardened and refactored the backend through controller/router restructuring, input validation and request handling improvements, bug fixes for calculation/precision and state issues, query/index/data-model adjustments, and production stability/maintenance updates."
+      ],
+      "features": [
+        {
+          "title": "Authentication & Account Security",
+          "description": "Registration/login and verification flows (phone/email/SMS-related), password reset, session/passport integration, access control middleware, and user security/profile management APIs."
+        },
+        {
+          "title": "Trading & Market Operations",
+          "description": "Backend support for order creation and validation, trade history/open orders, trade limits and processing workflows, stop-loss/price-alarm interactions, and trade/payment-related records."
+        },
+        {
+          "title": "Wallets, Turnovers & Financial Processing",
+          "description": "User and system wallet/vault management, deposits and withdrawals, turnover/payment logging, balance and asset tracking, commissions/referrals, and gateway-backed transaction handling."
+        },
+        {
+          "title": "Real-Time Exchange Data",
+          "description": "Socket.IO handlers and services for live crypto/market information and order-related updates, enabling real-time data delivery to clients."
+        },
+        {
+          "title": "Background Jobs & Scheduled Services",
+          "description": "Bull queue initialization/processing and cron-driven service routines for asynchronous and periodic exchange tasks such as alarms, trading/system jobs, and maintenance workflows."
+        },
+        {
+          "title": "Admin & Operational Backend Modules",
+          "description": "Server-side modules for managing users, trades, turnovers, notices/notifications, support, roles/vault-related data, and other administrative/operational concerns, including later controller refactors."
+        },
+        {
+          "title": "Notifications, Support & Auxiliary Domains",
+          "description": "Ticket/message-based support flows, notices/notifications, price alarms, referral logging, and related models/controllers/routes supporting user communication and engagement."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Correctness in financial and trading state",
+          "problem": "Exchange operations depend on precise balance updates, commissions, order/trade state, and turnover/payment records where calculation errors, precision issues (including numeric/scientific notation cases), or ordering bugs can corrupt financial data.",
+          "approach": "Implemented and iteratively fixed trading, wallet, and turnover logic across controllers/services/models/utilities; added safeguards and logging for asset changes and transaction paths; and refined validation and processing flows for critical money/state transitions."
+        },
+        {
+          "title": "Coordinating synchronous APIs with asynchronous processing",
+          "problem": "User-facing requests must respond promptly while parts of exchange processing, alarms, and system routines need reliable background or scheduled execution.",
+          "approach": "Introduced and maintained Bull-based queue processing and cron-driven services, separating deferred/periodic work from request paths and evolving handlers/processors as backend workflows grew."
+        },
+        {
+          "title": "Real-time data delivery and connection lifecycle",
+          "problem": "Live market and order data require continuous updates over Socket.IO, which can lead to stale streams, duplicated work, or resource issues if emission intervals and disconnect behavior are not managed carefully.",
+          "approach": "Structured Socket.IO controllers/handlers and request flows, adjusted emission/update behavior, and maintained connection/interval logic to keep real-time updates consistent and controllable."
+        },
+        {
+          "title": "Evolving a large MVC monolith safely",
+          "problem": "The backend spans many domains (auth, trading, wallets, admin, support, notifications, gateways) and underwent structural changes/refactors over time, increasing regression risk.",
+          "approach": "Applied incremental refactoring of controllers/routes/services and data structures, consolidated/updated modules where needed, and delivered targeted fixes and maintenance guided by production and feature requirements in commit history."
+        },
+        {
+          "title": "External integrations and operational reliability",
+          "problem": "Payment gateways, verification/notification channels, and runtime configuration introduce failure modes outside core application logic.",
+          "approach": "Implemented and maintained gateway and verification/notification integrations, improved runtime/error handling paths, and performed configuration and compatibility fixes (including gateway activation/URL and processing adjustments) to keep operations stable."
+        }
+      ],
+      "architecture": {
+        "description": "Akocoin is built as a Node.js/Express MVC monolith with server-rendered EJS views and backend API/web routes. The `app/` layer organizes business logic into controllers (auth/public/user/admin/services and later HTTP/web controllers), Mongoose models, route modules (`router/api` and `router/web`), middlewares, initializers/feeds, Socket.IO handlers, queue processors, transforms, and utilities. MongoDB (via Mongoose) stores exchange entities, Redis/Bull support background processing, and scheduled routines run periodic system tasks. A detailed backend diagram prompt is provided in `ARCHITECTURE_IMAGE_PROMPT.md` at the repository root.",
+        "image": "/images/projects/akocoin/architecture.webp",
+        "imageAlt": "Akocoin backend architecture diagram (placeholder — generate using ARCHITECTURE_IMAGE_PROMPT.md)"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/features.webp",
+          "alt": "Akocoin cryptocurrency exchange features",
+          "caption": "Overview of the exchange’s features."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/user-landing.webp",
+          "alt": "Akocoin exchange user landing page",
+          "caption": "Landing page for exchange users."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/trading-view.webp",
+          "alt": "Akocoin cryptocurrency trading view",
+          "caption": "Trading interface for viewing cryptocurrency markets."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/referral.webp",
+          "alt": "Akocoin referral page",
+          "caption": "Referral program information and tools."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/guide-page.webp",
+          "alt": "Akocoin user guide page",
+          "caption": "Guide explaining how to use the exchange."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/deposit.webp",
+          "alt": "Akocoin deposit page",
+          "caption": "Interface for depositing funds."
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/akocoin/withdra.webp",
+          "alt": "Akocoin withdrawal page",
+          "caption": "Interface for withdrawing funds."
         }
       ]
     },
@@ -1588,7 +1757,7 @@
     "details": {
       "overview": "Nest Craft is a globally installable CLI (`nest-craft`) that helps developers bootstrap real-world NestJS projects and retrofit features into existing repositories. The interactive workflow supports multiple package managers (npm, yarn, pnpm), optional Git initialization, Docker service selection, and feature toggles. Under the hood it shells out to `@nestjs/cli` for base project creation, copies curated templates/configs into the target app, installs required dependencies, and patches `src/main.ts` and project configuration to enable selected capabilities (API prefix/versioning, validation, security, Swagger, logging, pagination, uploads, and more). An `--add-feature` mode re-runs feature injection against an existing NestJS project, while `--list-features`, `--help`, and `--version` provide discoverability and CLI ergonomics.",
       "responsibilities": [
-        "Designed and implemented the Nest Craft CLI from the initial release (v1.0.0) through subsequent feature releases, based on commit history for saeednorouzi98@gmail.com",
+        "Designed and implemented the Nest Craft CLI from the initial release (v1.0.0) through subsequent feature releases.",
         "Built the command-line entrypoint and argument routing (`init`, `--add-feature`, `--list-features`, `--help`, `--version`) and the interactive initialization/add-feature workflows.",
         "Implemented project scaffolding orchestration around `@nestjs/cli` and shell execution, including package-manager support, directory setup, app module handling, and non-sudo/permission/error-handling guard rails.",
         "Created the Docker Compose generator with selectable services, service-specific config drops (e.g., Dockerfile/nginx.conf), custom network validation, and dynamic `depends_on` wiring for the Node service.",
