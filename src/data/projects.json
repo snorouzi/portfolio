@@ -2081,5 +2081,152 @@
       "liveProject": "https://www.npmjs.com/package/nest-craft",
       "documentation": "https://github.com/snorouzi/nest-craft#readme"
     }
+  },
+  {
+    "id": "hide-element",
+    "slug": "hide-element-right-click",
+    "title": "Hide Element (Right-click)",
+    "tagline": "Manifest V3 browser extension to hide any page element via right-click, with Jira-aware card targeting, native menu integration, and persistent hidden cards per board.",
+    "description": "Hide Element (Right-click) is a lightweight Manifest V3 browser extension that lets users remove unwanted DOM elements with a single context-menu action on any website. It combines a background service worker, an injected content script, and Chrome extension APIs to track the last right-clicked element, determine the best hide target, and apply hides through a dedicated runtime stylesheet. For Jira boards it adds domain-specific behavior: it can target surrounding Jira card containers, extract stable issue keys, inject a native-looking \"Hide this card\" action into Jira's own context menu, and persist hidden issue keys so cards remain hidden across reloads and soft navigation for the same origin and path. The project focuses on practical in-page element suppression, storage-backed persistence, and careful DOM/CSS handling without requiring a build step.",
+    "featured": false,
+    "category": "personal",
+    "visibility": "public",
+    "role": "Developer",
+    "organization": "Personal",
+    "period": {
+      "start": "2025-11",
+      "end": "2025-11"
+    },
+    "technologies": [
+      "JavaScript",
+      "Chrome Extension APIs",
+      "Manifest V3",
+      "Service Workers",
+      "Content Scripts",
+      "chrome.contextMenus",
+      "chrome.tabs",
+      "chrome.runtime",
+      "chrome.storage.session",
+      "chrome.storage.local",
+      "DOM APIs",
+      "MutationObserver",
+      "CSSOM",
+      "CSS.escape",
+      "SVG"
+    ],
+    "card": {
+      "image": "/images/projects/hide-element/cover.webp",
+      "imageAlt": "Hide Element browser extension portfolio cover (screenshot placeholder)"
+    },
+    "details": {
+      "overview": "The extension is implemented as a small, buildless Manifest V3 project with two runtime components. `background.js` runs as a service worker that registers a global browser context-menu item (\"Hide this element\") on install and forwards click events to the active tab via `chrome.tabs.sendMessage`. `content.js` is injected into all frames at `document_start` and contains the core behavior: it tracks the last right-clicked element, chooses an appropriate hide target (preferring Jira card containers such as `[data-issue-key]`, `.ghx-issue`, and `.ghx-issue-content`), and hides elements either ephemerally or persistently. For Jira cards, it derives a stable issue key from `data-issue-key` or from issue-key text patterns, stores the key in `chrome.storage.session` when available (falling back to `chrome.storage.local`) under a namespace scoped to `origin + pathname`, and rebuilds CSS rules on load and `popstate` so hidden cards stay suppressed. Hiding is applied through a dedicated injected stylesheet and indexed rule management rather than mutating site stylesheets. The content script also observes Jira's DOM to inject a native-looking \"Hide this card\" item into Jira's context menu and implements a hard-close routine for Jira's menu layer after the action runs.",
+      "responsibilities": [
+        "Designed and implemented a Manifest V3 browser extension architecture with a background service worker, all-frame content script injection, and minimal required permissions.",
+        "Built the global context-menu flow: menu registration on install, click handling, and message dispatch to the active tab.",
+        "Implemented in-page right-click tracking and target resolution to identify the element a user intends to hide.",
+        "Added Jira-aware card detection and stable issue-key extraction using DOM attributes and text-pattern fallback.",
+        "Implemented persistent Jira card hiding with storage-backed key sets, per-page namespacing, and stylesheet rule rebuild on load and soft navigation.",
+        "Developed dynamic CSS rule management via a dedicated injected stylesheet, rule indexing, and drag/placeholder-safe selectors.",
+        "Integrated a custom action into Jira's native context menu using DOM observation and provided a reliable menu close routine.",
+        "Documented installation, usage, storage behavior, and development notes in the project README."
+      ],
+      "features": [
+        {
+          "title": "Global Right-Click Hide Action",
+          "description": "Adds a browser context-menu item (\"Hide this element\") on any page and forwards the action from the background service worker to the active tab to hide the last right-clicked element."
+        },
+        {
+          "title": "Last Right-Clicked Element Tracking",
+          "description": "Captures right-click targets via `mousedown` (button 2) and `contextmenu` listeners so the extension can act on the element the user actually invoked the menu on."
+        },
+        {
+          "title": "Smart Hide Target Selection",
+          "description": "Chooses the best element to hide by preferring Jira card containers (`[data-issue-key]`, `.ghx-issue`, `.ghx-issue-content`) when present, with a fallback to the clicked element."
+        },
+        {
+          "title": "Jira Issue Key Detection",
+          "description": "Extracts a stable Jira issue key from a card's `data-issue-key` attribute or, as a fallback, from visible text matching patterns like `ABC-123`."
+        },
+        {
+          "title": "Persistent Jira Card Hiding",
+          "description": "Stores hidden Jira issue keys per origin/path namespace so the same cards remain hidden across page reloads and `popstate` soft navigations for that board/page."
+        },
+        {
+          "title": "Session-First Storage with Fallback",
+          "description": "Prefers `chrome.storage.session` for per-browsing-session persistence and automatically falls back to `chrome.storage.local` when session storage is unavailable."
+        },
+        {
+          "title": "Dedicated Runtime Stylesheet & Rule Rebuild",
+          "description": "Injects a dedicated `<style>` element at runtime, appends and indexes CSS hide rules per issue key, and rebuilds all rules from storage on initialization or navigation changes."
+        },
+        {
+          "title": "Drag-and-Drop Safe CSS Selectors",
+          "description": "Generates hide rules that exclude Jira dragging/ghost/placeholder states (`.ghx-dragging`, `.ghx-ghost`, `.ghx-placeholder`) to avoid interfering with board drag-and-drop UX."
+        },
+        {
+          "title": "Native Jira Context Menu Integration",
+          "description": "Uses a `MutationObserver` to detect Jira's active context menu and injects a native-looking \"Hide this card\" action that triggers the same persistent hide flow."
+        },
+        {
+          "title": "Reliable Jira Menu Close Behavior",
+          "description": "Implements a hard-close helper that dismisses Jira's menu layer via Escape events, aria/class/style updates, and synthetic mouse events after hiding a card."
+        },
+        {
+          "title": "Ephemeral Hiding for Non-Jira Elements",
+          "description": "Falls back to immediate `display: none` hiding for elements without a stable Jira key, providing quick one-off removal on generic pages (non-persistent across reload)."
+        },
+        {
+          "title": "Buildless Manifest V3 Setup",
+          "description": "Runs as plain JavaScript files with no build step, declared via `manifest.json` with service worker background, all-frame content script injection at `document_start`, and required extension permissions."
+        }
+      ],
+      "technicalChallenges": [
+        {
+          "title": "Persisting hides without mutating page-specific markup",
+          "problem": "Hiding elements directly in the DOM is lost on reload, while mutating site stylesheets is brittle; Jira cards also need to be re-hidden reliably after navigation within the same board.",
+          "approach": "Used a dedicated injected stylesheet managed via CSSOM (`insertRule`/`deleteRule`) with a per-issue-key rule index, stored issue keys in extension storage namespaced by origin/path, and rebuilt the full rule set on load and `popstate` to restore hidden state consistently."
+        },
+        {
+          "title": "Identifying a stable target for Jira cards",
+          "problem": "A right-click may occur on nested card content rather than a stable container, and not every page provides a reliable identifier for persistent hiding.",
+          "approach": "Implemented target climbing to prefer known Jira card selectors (`[data-issue-key]`, `.ghx-issue`, `.ghx-issue-content`), extracted a stable key from `data-issue-key` or a text regex fallback, and limited persistence to cases where a stable key exists while keeping generic hides ephemeral."
+        },
+        {
+          "title": "Integrating with Jira's dynamic native context menu",
+          "problem": "Jira renders its own context menu dynamically and manages its open/close state, so adding a custom action requires detecting visibility and ensuring the menu closes cleanly after use.",
+          "approach": "Observed document mutations to detect when Jira's menu layer/content is active, injected a styled list item matching Jira's menu structure, wired it to the shared hide-and-persist flow, and implemented a hard-close routine combining Escape dispatch, attribute/class/style changes, and synthetic mouse events."
+        },
+        {
+          "title": "Avoiding interference with Jira drag-and-drop interactions",
+          "problem": "Applying blanket hide rules to elements sharing issue keys can affect drag previews or placeholders and degrade board interaction behavior.",
+          "approach": "Scoped generated selectors to exclude Jira drag-related states (`:not(.ghx-dragging):not(.ghx-ghost):not(.ghx-placeholder)`) while still hiding the actual card instances."
+        }
+      ],
+      "architecture": {
+        "description": "The project uses a minimal Manifest V3 browser-extension architecture. `manifest.json` declares permissions (`contextMenus`, `activeTab`, `scripting`, `storage`), host access for all URLs, a background service worker (`background.js`), and a content script (`content.js`) injected at `document_start` into all frames. `background.js` creates the global \"Hide this element\" context-menu entry and sends a `HIDE_LAST_RIGHT_CLICKED` runtime message to the active tab when clicked. `content.js` runs in-page to track the last right-clicked element, resolve Jira-aware hide targets and issue keys, manage a dedicated injected stylesheet with indexed CSS rules, read/write hidden key sets via `chrome.storage.session` or `chrome.storage.local` (namespaced by origin/path), rebuild rules on load and `popstate`, hide elements immediately when needed, and integrate with Jira's native context menu through a `MutationObserver` plus a menu-close helper. A detailed architecture diagram prompt is provided in `ARCHITECTURE_IMAGE_PROMPT.md` at the repository root.",
+        "image": "/images/projects/hide-element/architecture.webp",
+        "imageAlt": "Hide Element extension architecture diagram (placeholder — generate using ARCHITECTURE_IMAGE_PROMPT.md)"
+      },
+      "gallery": [
+        {
+          "type": "screenshot",
+          "src": "/images/projects/hide-element/context-menu.webp",
+          "alt": "Hide Element context menu",
+          "caption": null
+        },
+        {
+          "type": "screenshot",
+          "src": "/images/projects/hide-element/result.webp",
+          "alt": "Persisted hidden item across reload",
+          "caption": null
+        }
+      ]
+    },
+    "links": {
+      "repository": "https://github.com/snorouzi/hide-element",
+      "demo": null,
+      "liveProject": null,
+      "documentation": "https://github.com/snorouzi/hide-element#readme"
+    }
   }
 ]
