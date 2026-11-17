@@ -38,6 +38,7 @@ jobs:
         env:
           VITE_APP_NAME: Saeed Norouzi — Portfolio
           VITE_APP_URL: https://snorouzi.ir
+          VITE_BASE: /
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
