@@ -21,6 +21,14 @@ const baseHtml = fs.readFileSync(path.join(staticDir, 'index.html'), 'utf-8');
 const bodyMatch = baseHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
 if (!bodyMatch) throw new Error('Could not find body in dist/index.html');
 const bodyContent = bodyMatch[1];
+const builtAssets = [
+  ...baseHtml.matchAll(
+    /<(?:script\b[^>]*\bsrc="[^"]+"[^>]*><\/script>|link\b[^>]*\brel="stylesheet"[^>]*>)\s*/gi
+  ),
+]
+  .map(([tag]) => tag.trim())
+  .join('\n    ');
+if (!builtAssets) throw new Error('No built JavaScript or CSS assets found in dist/index.html');
 
 // Base metadata that's common to all pages
 const baseMetadata = {
@@ -155,6 +163,7 @@ function generateHtml(route) {
       root.setAttribute('data-theme', theme);
       root.style.colorScheme = theme;
     </script>
+    ${builtAssets}
   </head>`;
 
   return `<!doctype html>
