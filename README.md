@@ -41,11 +41,11 @@ The app is served at <http://localhost:3000> by default. Vite uses a strict port
 
 ## Configuration
 
-| Variable | Required | Default | Purpose |
-| --- | --- | --- | --- |
-| `VITE_APP_NAME` | Yes | — | App name used in page titles. |
-| `VITE_APP_URL` | Yes | — | Canonical application URL; must be a valid URL. |
-| `VITE_PORT` | No | `3000` | Port used by the Vite development and preview servers. |
+| Variable        | Required | Default | Purpose                                                |
+| --------------- | -------- | ------- | ------------------------------------------------------ |
+| `VITE_APP_NAME` | Yes      | —       | App name used in page titles.                          |
+| `VITE_APP_URL`  | Yes      | —       | Canonical application URL; must be a valid URL.        |
+| `VITE_PORT`     | No       | `3000`  | Port used by the Vite development and preview servers. |
 
 Vite reads local values from `.env.local` (start from `.env.example`). Restart the server after changing them. `VITE_*` values are embedded in the browser bundle and are public; do not put secrets, API keys, credentials, or private keys in them. Configuration is validated in `src/config/env.js`.
 

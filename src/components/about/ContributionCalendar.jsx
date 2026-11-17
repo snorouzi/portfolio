@@ -50,12 +50,7 @@ export default function ContributionCalendar({
 
       {description && <p className="contribution-description">{description}</p>}
 
-      <div
-        className="contribution-calendar-scroll"
-        role="region"
-        aria-label={caption}
-        tabIndex={0}
-      >
+      <div className="contribution-calendar-scroll" role="region" aria-label={caption} tabIndex={0}>
         <table className="contribution-calendar">
           <caption className="visually-hidden">{caption}</caption>
           <thead>
@@ -122,12 +117,16 @@ export default function ContributionCalendar({
                     onClick={() => onYearSelect(year)}
                   >
                     <span className="contribution-total-year">{year}</span>
-                    <span className="contribution-total-value">{value.toLocaleString('en-US')}</span>
+                    <span className="contribution-total-value">
+                      {value.toLocaleString('en-US')}
+                    </span>
                   </button>
                 ) : (
                   <>
                     <span className="contribution-total-year">{year}</span>
-                    <span className="contribution-total-value">{value.toLocaleString('en-US')}</span>
+                    <span className="contribution-total-value">
+                      {value.toLocaleString('en-US')}
+                    </span>
                   </>
                 )}
               </li>

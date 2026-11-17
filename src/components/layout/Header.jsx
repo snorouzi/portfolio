@@ -144,7 +144,6 @@ export default function Header() {
               )}
             </svg>
           </button>
-
         </div>
 
         {isMobile && (

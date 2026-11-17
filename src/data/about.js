@@ -101,8 +101,7 @@ export const focusAreas = [
     id: 'distributed-systems',
     index: '02',
     title: 'Distributed Systems & Asynchronous Processing',
-    description:
-      'Exploring how services communicate, coordinate, and process work reliably.',
+    description: 'Exploring how services communicate, coordinate, and process work reliably.',
   },
   {
     id: 'financial-workflows',

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "generate-static": "node generate-static.mjs",
+    "build:all": "npm run build && npm run generate-static",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",

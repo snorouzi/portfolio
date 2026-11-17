@@ -10,7 +10,20 @@ const MS_PER_DAY = 86400000;
 const DAYS_PER_WEEK = 7;
 
 const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONTH_LABELS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -60,7 +73,9 @@ function quantile(sortedValues, q) {
   const rest = position - lower;
   const upper = sortedValues[lower + 1];
 
-  return upper === undefined ? sortedValues[lower] : sortedValues[lower] + rest * (upper - sortedValues[lower]);
+  return upper === undefined
+    ? sortedValues[lower]
+    : sortedValues[lower] + rest * (upper - sortedValues[lower]);
 }
 
 /**
@@ -80,11 +95,7 @@ export function computeIntensityScale(counts) {
   }
 
   return {
-    thresholds: [
-      quantile(nonZero, 0.25),
-      quantile(nonZero, 0.5),
-      quantile(nonZero, 0.75),
-    ],
+    thresholds: [quantile(nonZero, 0.25), quantile(nonZero, 0.5), quantile(nonZero, 0.75)],
     max: nonZero[nonZero.length - 1],
   };
 }
@@ -206,9 +217,9 @@ export function buildCalendarWeeks(days, startDate, endDate) {
   const startTimestamp = toTimestamp(startDate);
   const endTimestamp = toTimestamp(endDate);
 
-  const gridStart =
-    startTimestamp - new Date(startTimestamp).getUTCDay() * MS_PER_DAY;
-  const gridEnd = endTimestamp + (DAYS_PER_WEEK - 1 - new Date(endTimestamp).getUTCDay()) * MS_PER_DAY;
+  const gridStart = startTimestamp - new Date(startTimestamp).getUTCDay() * MS_PER_DAY;
+  const gridEnd =
+    endTimestamp + (DAYS_PER_WEEK - 1 - new Date(endTimestamp).getUTCDay()) * MS_PER_DAY;
 
   const weeks = [];
   let lastLabeledMonth = null;
@@ -257,4 +268,4 @@ export function activeDayCount(days) {
   return days.reduce((total, day) => (day.count > 0 ? total + 1 : total), 0);
 }
 
-export { WEEKDAY_LABELS, MONTH_LABELS, formatIsoDate };
+export { formatIsoDate, MONTH_LABELS, WEEKDAY_LABELS };

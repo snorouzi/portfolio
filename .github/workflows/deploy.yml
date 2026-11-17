@@ -34,16 +34,13 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: npm run build
+        run: npm run build:all
         env:
           VITE_APP_NAME: Saeed Norouzi — Portfolio
           VITE_APP_URL: https://snorouzi.ir
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-
-      - name: Support client-side routes
-        run: cp dist/index.html dist/404.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
