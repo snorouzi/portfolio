@@ -16,8 +16,11 @@ const staticDir = path.join(__dirname, 'dist');
 const baseHtml = fs.readFileSync(path.join(staticDir, 'index.html'), 'utf-8');
 
 // Extract the body content (everything between <body> and </body>)
-const bodyMatch = baseHtml.match(/<body>([\s\S]*)<\/body>/);
-const bodyContent = bodyMatch ? bodyMatch[1] : '';
+// Vite's built body contains the single React mount point and bundled entry script.
+// Keep it intact for each generated route; rebuilding only the mount point drops the app.
+const bodyMatch = baseHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+if (!bodyMatch) throw new Error('Could not find body in dist/index.html');
+const bodyContent = bodyMatch[1];
 
 // Base metadata that's common to all pages
 const baseMetadata = {
@@ -158,8 +161,7 @@ function generateHtml(route) {
 <html lang="en">
 ${head}
   <body>
-    <div id="root"></div>
-${bodyContent}
+    ${bodyContent.trim()}
   </body>
 </html>`;
 }

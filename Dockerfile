@@ -13,7 +13,7 @@ ARG VITE_APP_URL
 ENV VITE_APP_NAME=${VITE_APP_NAME} \
     VITE_APP_URL=${VITE_APP_URL}
 
-RUN npm run build
+RUN npm run build:all
 
 FROM nginx:1.27-alpine AS production
 
